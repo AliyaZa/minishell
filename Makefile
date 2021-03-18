@@ -1,19 +1,20 @@
 NAME = minishell
 
-
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c
+CC = gcc
+
+SRC = main.c parser.c
 
 OBJ = $(SRC:.c=.o)
 
-objects: $(SRC)
-	gcc $(CFLAGS) -c $(SRC)
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
-all: $(objects) $(NAME)
+all: $(NAME)
 
-$(NAME): $(SRC) minishell.h
-	gcc $(OBJ) -o $(NAME)
+$(NAME): $(OBJ) minishell.h
+	gcc $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
@@ -21,4 +22,4 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-.PHONY: all re clean fclean objects
+.PHONY: all re clean fclean
