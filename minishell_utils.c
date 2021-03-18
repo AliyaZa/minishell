@@ -22,3 +22,15 @@ char	*ft_strnew(unsigned int size)
 	string[size] = 0;
 	return (string);
 }
+
+size_t	command_len(const char *command)
+{
+	size_t	i;
+
+	i = 0;
+	while (command[i] != ' ')
+	{
+		i++;
+	}
+	return (i);
+}

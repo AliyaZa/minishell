@@ -12,6 +12,26 @@
 
 #include "minishell.h"
 
+char			*determine_command(char *string)
+{
+	char	*command;
+	int		i;
+
+	i = 0;
+	while (!(ft_isalpha(*string)))
+	{
+		string++;
+	}
+	while (ft_isalpha(string[i]))
+	{
+		i++;
+	}
+	command = malloc((sizeof(char) * i) + 1);
+	ft_strlcpy(command, string, i + 1);
+	printf("%s\n", command);
+	return (command);
+}
+
 t_parsed_data	*parser()
 {
 	t_parsed_data	*parsed_data;
@@ -30,6 +50,6 @@ t_parsed_data	*parser()
 			break ;
 		parsed_data->raw_string = ft_strjoin(parsed_data->raw_string, buf);
 	}
-	printf("%s\n", parsed_data->raw_string);
+	parsed_data->command = determine_command(parsed_data->raw_string);
 	return (parsed_data);
 }
