@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 18:10:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/18 12:14:46 by mismene          ###   ########.fr       */
+/*   Created: 2020/12/04 20:37:21 by mismene           #+#    #+#             */
+/*   Updated: 2020/12/04 22:28:20 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-// parser allocate memory, free it after usage
-int		main()
+int	ft_isalpha(int c)
 {
-	t_parsed_data	*parsed_data;
-
-	parsed_data = parser();
-	return (0);
+	return ((c >= 65 && c < 91) || (c >= 97 && c < 123));
 }

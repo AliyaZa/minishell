@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 18:10:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/18 12:14:46 by mismene          ###   ########.fr       */
+/*   Created: 2020/12/04 20:38:07 by mismene           #+#    #+#             */
+/*   Updated: 2020/12/04 22:20:23 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-// parser allocate memory, free it after usage
-int		main()
+/*
+** find first c in s and return pointer to it
+*/
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_parsed_data	*parsed_data;
+	unsigned char *p;
 
-	parsed_data = parser();
-	return (0);
+	p = (unsigned char *)s;
+	while (n--)
+		if (*p++ == (unsigned char)c)
+			return ((void *)--p);
+	return (NULL);
 }

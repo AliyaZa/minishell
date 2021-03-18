@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 18:10:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/18 12:14:46 by mismene          ###   ########.fr       */
+/*   Created: 2020/12/04 20:39:27 by mismene           #+#    #+#             */
+/*   Updated: 2020/12/04 21:12:38 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-// parser allocate memory, free it after usage
-int		main()
+size_t	ft_strlen(const char *s)
 {
-	t_parsed_data	*parsed_data;
+	size_t i;
 
-	parsed_data = parser();
-	return (0);
+	i = 0;
+	while (*s++)
+		i++;
+	return (i);
 }

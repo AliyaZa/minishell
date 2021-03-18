@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 18:10:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/18 12:14:46 by mismene          ###   ########.fr       */
+/*   Created: 2020/12/04 20:38:25 by mismene           #+#    #+#             */
+/*   Updated: 2020/12/04 21:12:59 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-// parser allocate memory, free it after usage
-int		main()
+/*
+** fill b using c bu len size
+*/
+
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_parsed_data	*parsed_data;
+	char *p;
 
-	parsed_data = parser();
-	return (0);
+	p = b;
+	while (len--)
+		*(char *)p++ = c;
+	return (b);
 }
