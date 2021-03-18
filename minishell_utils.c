@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 18:10:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/18 12:14:46 by mismene          ###   ########.fr       */
+/*   Created: 2021/03/18 12:21:10 by mismene           #+#    #+#             */
+/*   Updated: 2021/03/18 12:24:18 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// parser allocate memory, free it after usage
-int		main()
+char	*ft_strnew(unsigned int size)
 {
-	t_parsed_data	*parsed_data;
+	char	*string;
 
-	parsed_data = parser();
-	return (0);
+	string = malloc((sizeof(char) * size) + 1);
+	if (string == NULL)
+		return (NULL);
+	string[size] = 0;
+	return (string);
 }
