@@ -8,9 +8,12 @@
 typedef struct	s_parsed_data
 {
 	char 		*raw_string;
+	char		*command;
 }				t_parsed_data;
 
 t_parsed_data	*parser();
+
 char			*ft_strnew(unsigned int size);
+size_t			command_len(const char *command);
 
 #endif
