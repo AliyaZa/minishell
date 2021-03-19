@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 20:40:17 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/25 11:42:05 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 10:24:08 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 /*
 ** mandatory

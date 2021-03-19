@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/18 14:32:29 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 11:00:49 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char			*determine_command(char *string)
 		i++;
 	}
 	command = malloc((sizeof(char) * i) + 1);
-	ft_strlcpy(command, string, i + 1);
+	ft_strlcpy(command, string, i);
+	string_tolower(command);
 	printf("%s\n", command);
 	return (command);
 }
