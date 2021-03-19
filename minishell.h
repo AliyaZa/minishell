@@ -10,10 +10,12 @@ typedef struct	s_parsed_data
 	char 		*raw_string;
 	char		*command;
 	char		option;
+	char		*argument;
 }				t_parsed_data;
 
 t_parsed_data	*parser();
 
+void			validate_quotes(char *string);
 void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);

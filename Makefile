@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRC = main.c parser.c minishell_utils.c
+SRC = main.c parser.c minishell_utils.c validator.c
 
 OBJ = $(SRC:.c=.o)
 

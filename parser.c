@@ -6,39 +6,42 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 11:36:05 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 14:24:42 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char			determine_options(char *string)
+char	*determine_argument(char *string)
 {
-	size_t	i;
-	char	f;
+	char	*argument;
 
-	i = 0;
-	f = 0;
+	argument = NULL;
+	validate_quotes(string);
+	return (argument);
+}
+
+char	determine_options(char *string)
+{
+	char	option;
+
+	option = 0;
 	while (*string)
 	{
-		if (*string == '-' && i == 1)
+		if (*string == '-')
 		{
 			string++;
 			if (ft_isalpha(*string))
 			{
-				f = 'n';
+				option = *string;
 			}
-		}
-		if (*string == ' ')
-		{
-			i = i + 1;
 		}
 		string++;
 	}
-	return (f);	
+	return (option);
 }
 
-char			*determine_command(char *string)
+char	*determine_command(char *string)
 {
 	char	*command;
 	int		i;
@@ -58,7 +61,7 @@ char			*determine_command(char *string)
 	return (command);
 }
 
-t_parsed_data	*parser()
+t_parsed_data	*parser(void)
 {
 	t_parsed_data	*parsed_data;
 	char			*buf;
@@ -78,6 +81,7 @@ t_parsed_data	*parser()
 	}
 	parsed_data->command = determine_command(parsed_data->raw_string);
 	parsed_data->option = determine_options(parsed_data->raw_string);
+	parsed_data->argument = determine_argument(parsed_data->raw_string);
 	printf("command - %s\n", parsed_data->command);
 	printf("flag - %c\n", parsed_data->option);
 	return (parsed_data);
