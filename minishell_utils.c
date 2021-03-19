@@ -6,11 +6,23 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:21:10 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/18 12:24:18 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 11:01:07 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	string_tolower(char *string)
+{
+	size_t	i;
+	
+	i = 0;
+	while (string[i] != 0)
+	{
+		string[i] = ft_tolower(string[i]);
+		i++;
+	}
+}
 
 char	*ft_strnew(unsigned int size)
 {

@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 20:39:22 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/29 15:10:34 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 10:56:30 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		return (0);
 	if (n != 0)
 	{
-		while (src[i] && i < (n - 1))
+		while (src[i] && i < n)
 		{
 			d[i] = s[i];
 			i++;
 		}
 		dst[i] = '\0';
 	}
-	return (ft_strlen(src));
+	return (ft_strlen(dst));
 }
