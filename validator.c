@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:04:00 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 14:44:58 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 14:45:58 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,4 @@ void	validate_quotes(char *string)
 		printf("close quote\n");
 	if ((quotes_counter % 2) && main_quotes == '\'')
 		printf("close single quotes\n");
-	printf("double quotes: %zu\n", double_quotes_counter);
-	printf("quotes: %zu\n", quotes_counter);
 }
