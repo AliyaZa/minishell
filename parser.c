@@ -6,25 +6,26 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 12:48:52 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/19 14:24:42 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 char	*determine_argument(char *string)
 {
 	char	*argument;
 
-	
+	argument = NULL;
+	validate_quotes(string);
 	return (argument);
 }
-*/
+
 char	determine_options(char *string)
 {
-	char	f;
+	char	option;
 
-	f = 0;
+	option = 0;
 	while (*string)
 	{
 		if (*string == '-')
@@ -32,12 +33,12 @@ char	determine_options(char *string)
 			string++;
 			if (ft_isalpha(*string))
 			{
-				f = *string;
+				option = *string;
 			}
 		}
 		string++;
 	}
-	return (f);
+	return (option);
 }
 
 char	*determine_command(char *string)
@@ -80,7 +81,7 @@ t_parsed_data	*parser(void)
 	}
 	parsed_data->command = determine_command(parsed_data->raw_string);
 	parsed_data->option = determine_options(parsed_data->raw_string);
-	//parsed_data->argument = determine_argument(parsed_data->raw_string);
+	parsed_data->argument = determine_argument(parsed_data->raw_string);
 	printf("command - %s\n", parsed_data->command);
 	printf("flag - %c\n", parsed_data->option);
 	return (parsed_data);
