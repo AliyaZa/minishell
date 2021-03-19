@@ -10,6 +10,7 @@ typedef struct	s_parsed_data
 	char 		*raw_string;
 	char		*command;
 	char		option;
+	char		*argument;
 }				t_parsed_data;
 
 t_parsed_data	*parser();
