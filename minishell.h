@@ -16,6 +16,7 @@ typedef struct	s_parsed_data
 
 t_parsed_data	*parser();
 
+t_env			*parse_env(char **env);
 void			validate_quotes(char *string);
 void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);

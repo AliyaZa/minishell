@@ -6,7 +6,7 @@
 /*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:07:15 by nhill             #+#    #+#             */
-/*   Updated: 2020/11/04 13:37:54 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/20 15:22:32 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-
 typedef struct		s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+typedef struct		s_env
+{
+	void			*key;
+	void			*value;
+	struct s_env	*next;
+}					t_env;
 
 void				*ft_memset(void *dest, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -63,7 +68,7 @@ t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_list **lst, t_list *new);
+void				ft_lstadd_back(t_env **lst, t_env *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
