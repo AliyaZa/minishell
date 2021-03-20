@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRC = main.c parser.c minishell_utils.c validator.c
+SRC = main.c parser.c minishell_utils.c validator.c parse_env.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -16,6 +16,7 @@ OBJ = $(SRC:.c=.o)
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
+	make bonus -C libft
 	make -C libft
 
 $(NAME): $(OBJ) minishell.h
