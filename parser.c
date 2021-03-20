@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 14:24:42 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/20 13:51:49 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ char	*determine_argument(char *string)
 
 	argument = NULL;
 	validate_quotes(string);
+	while (*string)
+	{
+		if (*string == '\'' || *string == '"')
+		{
+			argument = ft_strdup(string);
+			break ;
+		}
+		string++;
+	}
 	return (argument);
 }
 
@@ -41,24 +50,26 @@ char	determine_options(char *string)
 	return (option);
 }
 
-char	*determine_command(char *string)
+char	*determine_command(t_parsed_data *parsed_data)
 {
-	char	*command;
 	int		i;
+	char	*p;
 
+	p = parsed_data->raw_string;
 	i = 0;
-	while (!(ft_isalpha(*string)))
+	while (!(ft_isalpha(*p)))
 	{
-		string++;
+		p++;
 	}
-	while (ft_isalpha(string[i]))
+	while (ft_isalpha(*p))
 	{
+		p++;
 		i++;
 	}
-	command = malloc((sizeof(char) * i) + 1);
-	ft_strlcpy(command, string, i);
-	string_tolower(command);
-	return (command);
+	parsed_data->command = malloc((sizeof(char) * i) + 1);
+	ft_strlcpy(parsed_data->command, parsed_data->raw_string, i);
+	string_tolower(parsed_data->command);
+	return (p);
 }
 
 t_parsed_data	*parser(void)
@@ -79,10 +90,10 @@ t_parsed_data	*parser(void)
 			break ;
 		parsed_data->raw_string = ft_strjoin(parsed_data->raw_string, buf);
 	}
-	parsed_data->command = determine_command(parsed_data->raw_string);
-	parsed_data->option = determine_options(parsed_data->raw_string);
-	parsed_data->argument = determine_argument(parsed_data->raw_string);
-	printf("command - %s\n", parsed_data->command);
-	printf("flag - %c\n", parsed_data->option);
+	parsed_data->rest_string = determine_command(parsed_data);
+	//parsed_data->option = determine_options(parsed_data->raw_string);
+	//parsed_data->argument = determine_argument(parsed_data->raw_string);
+	//printf("flag - %c\n", parsed_data->option);
+	//printf("argument - %s\n", parsed_data->argument);
 	return (parsed_data);
 }
