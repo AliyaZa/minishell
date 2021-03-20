@@ -3,34 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:38:22 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/11 14:37:09 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/29 12:19:18 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/06 16:53:24 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *destination, const void *source, size_t n)
 {
-	const unsigned char	*s;
-	unsigned char		*d;
-	unsigned char		*last_d;
-	const unsigned char	*last_s;
+	unsigned char	*b;
+	unsigned char	*a;
+	size_t			i;
 
-	d = dst;
-	s = src;
-	if (!dst && !src)
+	a = (unsigned char*)destination;
+	b = (unsigned char*)source;
+	i = 0;
+	if (destination == NULL && source == NULL)
 		return (NULL);
-	if (d < s)
-		ft_memcpy(dst, src, len);
+	i = n;
+	if (a > b)
+	{
+		while (i > 0)
+		{
+			i--;
+			a[i] = b[i];
+		}
+	}
 	else
 	{
-		last_d = &d[len - 1];
-		last_s = &s[len - 1];
-		while (len--)
-			*last_d-- = *last_s--;
+		i = 0;
+		ft_memcpy(a, b, n);
 	}
-	return (dst);
+	return (destination);
 }

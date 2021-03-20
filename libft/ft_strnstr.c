@@ -3,42 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:39:47 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/04 20:54:10 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/28 16:14:25 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/10 21:23:15 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** find the first including needle in haystach and return it
-*/
-
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
-	int		j;
-	char	*exit;
+	size_t	j;
 
+	if (!s1 || !s2)
+		return (NULL);
 	i = 0;
-	j = 0;
-	exit = (char *)haystack;
-	while (haystack[i] && i < len)
+	if (s2[0] == '\0')
+		return ((char *)s1);
+	while (i < n && s1[i] != '\0')
 	{
-		if (needle[j] == '\0')
-			return (exit + i - j);
-		if (haystack[i] == needle[j])
-			++j;
-		else
-		{
-			i -= j;
-			j = 0;
-		}
-		++i;
+		j = 0;
+		while ((i + j < n) && s2[j] != '\0' && s1[i + j] == s2[j])
+			j++;
+		if (s2[j] == '\0')
+			return ((char *)s1 + i);
+		i++;
 	}
-	if (needle[j] == '\0')
-		return (exit + i - j);
 	return (NULL);
 }

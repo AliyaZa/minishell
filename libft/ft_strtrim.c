@@ -3,49 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:39:57 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/04 20:53:22 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/29 15:50:36 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/06 16:59:30 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	if_s_in_set(char c, char const *set)
+int		ft_find(char s, char *set)
 {
-	int	i;
+	size_t		i;
 
 	i = 0;
-	while (set[i])
+	while (i < ft_strlen(set))
 	{
-		if (set[i] == c)
+		if (s == set[i])
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*string;
-	int		i;
-	int		start;
-	int		end;
+	char	*rez;
+	size_t	i;
+	size_t	j;
+	size_t	l;
 
-	start = 0;
-	if (!s1)
-		return (NULL);
-	while (s1[start] && if_s_in_set(s1[start], set))
-		start++;
-	end = ft_strlen(s1);
-	while (end > start && if_s_in_set(s1[end - 1], set))
-		end--;
-	if (!(string = malloc(sizeof(*s1) * (end - start + 1))))
-		return (NULL);
 	i = 0;
-	while (start < end)
-		string[i++] = s1[start++];
-	string[i] = 0;
-	return (string);
+	j = 0;
+	if (!s1)
+		return (rez = ft_calloc(1, 1));
+	while (s1[i] && (ft_find(s1[i], (char *)set) == 1))
+		i++;
+	l = ft_strlen(s1) - 1;
+	while (l > 0 && (ft_find(s1[l], (char *)set) == 1))
+		l--;
+	if (!s1[i])
+		return (rez = ft_calloc(1, 1));
+	if (!(rez = (char *)malloc((l - i + 2) * sizeof(char))))
+		return (NULL);
+	while (i < l + 1)
+		rez[j++] = s1[i++];
+	rez[j] = '\0';
+	return (rez);
 }

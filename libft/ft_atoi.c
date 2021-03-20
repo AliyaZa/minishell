@@ -3,31 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:36:55 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/10 20:54:28 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/28 14:31:43 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/09 19:03:22 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+static int	ft_isspace(int c)
 {
-	int		i;
-	long	integer;
-	char	sign;
+	if (c && ((c == 32) || ((c >= 9) && (c <= 13))))
+		return (1);
+	return (0);
+}
 
+int			ft_atoi(const char *str)
+{
+	unsigned int	ch;
+	unsigned int	l_ch;
+	int				i;
+	int				zn;
+
+	ch = 0;
 	i = 0;
-	while (('\t' <= str[i] && str[i] <= '\r') || str[i] == ' ')
-		++i;
-	sign = 1;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '+' || str[i] == '-')
-		++i;
-	integer = 0;
-	while ('0' <= str[i] && str[i] <= '9')
-		integer = integer * 10 + (str[i++] - '0');
-	return (integer * sign);
+	zn = 1;
+	while (str[i] && (ft_isspace(str[i])))
+		i++;
+	if ((str[i] == '+') || (str[i] == '-'))
+	{
+		if (str[i] == '-')
+			zn = -zn;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		l_ch = ch;
+		ch = ch * 10 + (unsigned int)(str[i++] - '0');
+		if (l_ch > ch)
+			return (zn > 0 ? -1 : 0);
+	}
+	return (ch * zn);
 }

@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:40:12 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/04 21:12:13 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/28 14:23:44 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/06 16:56:00 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+int		ft_toupper(int ch)
 {
-	return ((c >= 97 && c < 123l) ? (c - 32) : (c));
+	if (ch >= 'a' && ch <= 'z')
+		return (ch - 'a' + 'A');
+	else
+		return (ch);
 }
