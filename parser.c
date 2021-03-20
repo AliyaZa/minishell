@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 14:24:42 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/20 12:23:15 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ char	*determine_argument(char *string)
 
 	argument = NULL;
 	validate_quotes(string);
+	while (*string)
+	{
+		if (*string == '\'' || *string == '"')
+		{
+			argument = ft_strdup(string);
+			break ;
+		}
+		string++;
+	}
+	printf("%zu\n", ft_strlen(argument));
+	printf("argument - %s\n", argument);
 	return (argument);
 }
 
