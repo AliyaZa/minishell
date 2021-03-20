@@ -11,6 +11,7 @@ typedef struct	s_parsed_data
 	char		*command;
 	char		option;
 	char		*argument;
+	char		*rest_string;
 }				t_parsed_data;
 
 t_parsed_data	*parser();
