@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/20 17:27:40 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/20 17:47:45 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,18 @@ int			fn_search(char *s1, char *s2)
 	return (0);
 }
 
-void		fn_echo(char	*parsed_data)
+void        fn_echo(char    *parsed_data)
 {
-	int		index;
-	int		flag;
+    int        flag;
 
-	index = 0;
-	while (parsed_data[index])
-	{
-		if (fn_search(&parsed_data[index], "-n"))
-			flag = 1;
-		else
-			printf("%c", parsed_data[index]);
-		index++;
-	}
-	if (flag)
-		printf("\n");
+    flag = 0;
+   // parsed_data++;
+    if (fn_search(" -n" ,parsed_data))
+    {
+        parsed_data += 4;
+        flag = 1;
+    }
+    printf("%s", parsed_data);
+    if (flag)
+        printf("\n");
 }
