@@ -3,38 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:39:16 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/25 11:21:49 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/28 19:28:58 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/10 15:15:23 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** copyes size symbols from src to dst. returns count of copyed chars
-*/
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
-	size_t	j;
-	char	*d;
-	char	*s;
+	size_t	lens;
+	size_t	lend;
 
 	i = 0;
-	j = 0;
-	d = dst;
-	s = (char *)src;
-	while (d[i] && i < size)
+	lens = 0;
+	while (dst[i])
 		i++;
-	while (s[j] && size > i + j + 1)
-	{
-		d[i + j] = s[j];
-		j++;
-	}
-	if (i < size)
-		d[j + i] = '\0';
-	return (ft_strlen(src) + i);
+	lend = i;
+	if (dstsize > i)
+		while (src[lens] && dstsize - i > 1)
+			dst[i++] = src[lens++];
+	dst[i] = '\0';
+	while (src[lens])
+		lens++;
+	return ((lend < dstsize ? lend : dstsize) + lens);
 }

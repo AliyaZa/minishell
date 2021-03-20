@@ -3,113 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:36:41 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/11 14:40:14 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/29 16:20:54 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/15 16:56:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-/*
-** counts how many words in a row
-*/
-
-static size_t	how_many_words(char const *s, char c)
+static int	ft_count_str(char const *s, char c)
 {
-	size_t	count;
-	char	was_sep;
+	int		count;
+	int		i;
 
 	count = 0;
-	was_sep = 1;
-	while (*s)
+	i = 0;
+	if (s[0] != c)
+		count++;
+	while (s[i])
 	{
-		if (*s != c && was_sep)
+		if (s[i] == c)
 		{
-			was_sep = 0;
-			++count;
+			while (s[i] == c)
+				i++;
+			if (s[i])
+				count++;
 		}
-		else if (*s == c)
-			was_sep = 1;
-		++s;
+		if (s[i])
+			i++;
 	}
 	return (count);
 }
 
-/*
-** figure out where to separate, return len of word
-*/
-
-static size_t	to_terminate(char const *s, char c)
+static int	ft_count_len(char const *s, char c)
 {
-	size_t	len;
-
-	len = 0;
-	while (*s && *s != c)
-	{
-		++s;
-		++len;
-	}
-	return (len);
-}
-
-/*
-** allocates memory for each word and return it to record it to matrix
-*/
-
-static char		*record_word(char const *s, size_t len)
-{
-	char	*str;
-
-	if ((str = (char*)malloc(len + 1)) == NULL)
-		return (NULL);
-	ft_memcpy(str, s, len);
-	str[len] = '\0';
-	return (str);
-}
-
-/*
-** clean matrix
-*/
-
-static char		**matrix_clean(char **matrix, int length)
-{
-	int	i;
+	int		i;
+	int		count;
 
 	i = 0;
-	while (i < length)
-		free(matrix[i++]);
-	free(matrix);
+	count = 0;
+	while (s[i] != c && s[i])
+	{
+		count++;
+		i++;
+	}
+	return (count);
+}
+
+static char	**ft_clean(char **arr, int c1)
+{
+	int		i;
+
+	if (arr)
+	{
+		i = 0;
+		while (i < c1)
+			if (arr[i])
+				free(arr[i++]);
+		free(arr);
+	}
 	return (NULL);
 }
 
-char			**ft_split(char const *s, char c)
+char		**ft_split(char const *s, char c)
 {
-	char	**matrix;
-	size_t	words;
+	char	**ptr;
 	int		i;
-	size_t	length;
+	int		count[2];
+	int		j;
 
-	if (s == NULL)
-		return (NULL);
-	words = how_many_words(s, c);
-	if (!(matrix = (char**)malloc(sizeof(char*) * (words + 1))))
-		return (NULL);
 	i = 0;
-	while (*s)
+	if (!s)
+		return (0);
+	count[0] = ft_count_str(s, c);
+	if (!(ptr = (char **)malloc((count[0] + 1) * sizeof(char *))))
+		return (0);
+	while (i < count[0] && *s)
 	{
-		length = to_terminate(s, c);
-		if (length != 0)
-		{
-			if (!(matrix[i++] = record_word(s, length)))
-				return (matrix_clean(matrix, i - 1));
-			s += length;
-		}
-		else
-			++s;
+		while (*s == c)
+			s++;
+		count[1] = ft_count_len(s, c);
+		if (!(ptr[i] = (char *)malloc((count[1] + 1) * sizeof(char))))
+			return (ft_clean(ptr, i));
+		j = 0;
+		while (j < count[1] && *s)
+			ptr[i][j++] = *(s++);
+		ptr[i++][j] = '\0';
 	}
-	matrix[i] = NULL;
-	return (matrix);
+	ptr[i] = 0;
+	return (ptr);
 }

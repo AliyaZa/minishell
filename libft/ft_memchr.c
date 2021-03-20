@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:38:07 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/04 22:20:23 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/29 12:38:31 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/06 16:53:42 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** find first c in s and return pointer to it
-*/
-
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *arr, int c, size_t n)
 {
-	unsigned char *p;
+	unsigned char	*a;
 
-	p = (unsigned char *)s;
-	while (n--)
-		if (*p++ == (unsigned char)c)
-			return ((void *)--p);
+	a = (unsigned char*)arr;
+	while (n > 0)
+	{
+		if (*a == (unsigned char)c)
+			return (a);
+		n--;
+		a++;
+	}
 	return (NULL);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:37:36 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/04 22:13:36 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/28 13:02:49 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/06 16:55:46 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+int		ft_isprint(int ch)
 {
-	return (c >= 32 && c < 127);
+	return (ch >= 32 && ch <= 126);
 }

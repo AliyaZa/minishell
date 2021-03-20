@@ -3,49 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 20:37:42 by mismene           #+#    #+#             */
-/*   Updated: 2020/12/25 15:34:36 by mismene          ###   ########.fr       */
+/*   Created: 2020/10/29 16:29:59 by nhill             #+#    #+#             */
+/*   Updated: 2020/11/06 17:00:33 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	count_size(int num)
+static int	ft_len(long ch)
 {
-	int counter;
+	int		i;
 
-	counter = 0;
-	while (num /= 10)
-		counter++;
-	return (++counter);
+	i = 0;
+	while (ch > 0)
+	{
+		i++;
+		ch = ch / 10;
+	}
+	return (i);
+}
+
+static char	*ft_create_str(char *str, int i, long nn, int zn)
+{
+	str[--i] = '\0';
+	if (nn == 0)
+	{
+		str[--i] = '0';
+		return (str);
+	}
+	while (i > 0)
+	{
+		str[--i] = nn % 10 + '0';
+		nn = nn / 10;
+	}
+	if (zn < 0)
+		str[i] = '-';
+	return (str);
 }
 
 char		*ft_itoa(int n)
 {
-	int		sign;
-	char	*number;
+	char	*str;
+	int		zn;
+	int		i;
+	long	ch;
+	long	nn;
 
-	sign = n < 0 ? 1 : 0;
-	if (n == 0)
+	zn = 1;
+	i = 0;
+	nn = n;
+	if (nn <= 0)
 	{
-		number = (char *)malloc(2);
-		number[0] = '0';
-		number[1] = '\0';
-		return (number);
+		i++;
+		zn = -zn;
+		nn = -nn;
 	}
-	if (!(number = malloc(count_size(n) + 1 + sign)))
+	ch = nn;
+	i = i + ft_len(ch);
+	if (!(str = (char *)malloc((++i) * sizeof(char))))
 		return (NULL);
-	if (sign)
-		*number++ = '-';
-	number += count_size(n);
-	*number-- = '\0';
-	while (n)
-	{
-		*number-- = (n % 10) * (sign ? -1 : 1) + '0';
-		n /= 10;
-	}
-	return (number + 1 - sign);
+	return (str = ft_create_str(str, i, nn, zn));
 }
