@@ -16,6 +16,8 @@ typedef struct	s_parsed_data
 
 t_parsed_data	*parser();
 
+void			fn_echo(char *parsed_data);
+int				fn_search(char *s1, char *s2);
 t_env			*parse_env(char **env);
 void			validate_quotes(char *string);
 void			string_tolower(char *string);

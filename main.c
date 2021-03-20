@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:10:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/20 16:38:56 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/20 17:30:35 by mismene          ###   ########.fr       */
 /*                                                                            */
 /*                                                                            */
 /* ************************************************************************** */
@@ -21,10 +21,10 @@ int		main(int argc, char **argv, char **env)
 
 	env_data = parse_env(env);
 	parsed_data = parser();
-	for (; env_data->next!=0; env_data = env_data->next)
+	if (fn_search(parsed_data->command, "echo"))
 	{
-		printf("%s=%s\n", env_data->key, env_data->value);
+		fn_echo(parsed_data->rest_string);
 	}
-	printf("%s %d\n", argv[0], argc);
+	printf("first argument - %s\n argc - %d\n", argv[0], argc);
 	return (0);
 }
