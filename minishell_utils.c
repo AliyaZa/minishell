@@ -12,6 +12,29 @@
 
 #include "minishell.h"
 
+int			fn_search(char *s1, char *s2)
+{
+	if (s1 && s2)
+	{
+		if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0)
+			return (1);
+	}
+	return (0);
+}
+
+char	*take_value_by_key(t_env *env_data, char *key)
+{
+	while (env_data->next != NULL)
+	{
+		if (fn_search(key, env_data->key))
+		{
+			return (env_data->value);
+		}
+		env_data = env_data->next;
+	}
+	return (NULL);
+}
+
 void	string_tolower(char *string)
 {
 	size_t	i;

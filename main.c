@@ -25,6 +25,15 @@ int		main(int argc, char **argv, char **env)
 	{
 		fn_echo(parsed_data->rest_string);
 	}
-	printf("first argument - %s\n argc - %d\n", argv[0], argc);
+	else if (fn_search(parsed_data->command, "pwd"))
+	{
+		printf("%s\n", take_value_by_key(env_data, "PWD"));
+	}
+	else if (fn_search(parsed_data->command, "env"))
+	{
+		print_env(env_data);
+	}
+	//print_env(env_data);
+	printf("first argument - %s\nargc - %d\n", argv[0], argc);
 	return (0);
 }
