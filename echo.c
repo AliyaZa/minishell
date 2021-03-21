@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-int			fn_search(char *s1, char *s2)
-{
-	if (s1 && s2)
-	{
-		if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0)
-			return (1);
-	}
-	return (0);
-}
-
 void        fn_echo(char    *parsed_data)
 {
     int        flag;
