@@ -13,11 +13,9 @@
 
 #include "minishell.h"
 
-// parser allocate memory, free it after usage
 int		main(int argc, char **argv, char **env)
 {
 	main_cycle(env);
-	//print_env(env_data);
 	printf("first argument - %s\nargc - %d\n", argv[0], argc);
 	return (0);
 }

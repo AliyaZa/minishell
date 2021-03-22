@@ -21,5 +21,9 @@ void	main_cycle(char **env)
 		{
 			print_env(env_data);
 		}
+		else if (fn_search(parsed_data->command, "cd"))
+		{
+			chdir("..");
+		}
 	}
 }
