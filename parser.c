@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/22 19:29:52 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/22 19:32:02 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	parser(t_parsed_data **parsed_data)
 		return ;
 	if (parsed_data == NULL)
 		return ;
-	printf("hello world\n");
 	while (read(0, buf, 1))
 	{
 		if (buf[0] == '\n')

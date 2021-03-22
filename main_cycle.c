@@ -30,7 +30,6 @@ void	main_cycle(char **env)
 			chdir("..");
 		}
 		save_history(&parsed_data);
-		printf("%s\n", parsed_data->user_commands[0]);
 		free_str(&parsed_data->raw_string);
 		free_str(&parsed_data->command);
 	}
