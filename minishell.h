@@ -16,6 +16,7 @@ typedef struct	s_parsed_data
 
 t_parsed_data	*parser();
 
+void			main_cycle(char **env);
 void			print_env(t_env *env_data);
 char			*take_value_by_key(t_env *env_data, char *key);
 void			fn_echo(char *parsed_data);
