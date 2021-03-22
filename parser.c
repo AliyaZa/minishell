@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/20 14:23:18 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/22 15:12:45 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,13 @@ t_parsed_data	*parser(void)
 			break ;
 		parsed_data->raw_string = ft_strjoin(parsed_data->raw_string, buf);
 	}
-	parsed_data->rest_string = determine_command(parsed_data);
-	//parsed_data->option = determine_options(parsed_data->raw_string);
-	//parsed_data->argument = determine_argument(parsed_data->raw_string);
-	//printf("flag - %c\n", parsed_data->option);
-	//printf("argument - %s\n", parsed_data->argument);
+	if (parsed_data->raw_string)
+	{
+		parsed_data->rest_string = determine_command(parsed_data);
+	}
+	else
+	{
+		printf("hello bro\n");
+	}
 	return (parsed_data);
 }

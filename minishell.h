@@ -5,6 +5,9 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
+# define VIOLET "\033[25m"
+# define COLOUR_END "\033[m"
+
 typedef struct	s_parsed_data
 {
 	char 		*raw_string;
@@ -15,7 +18,7 @@ typedef struct	s_parsed_data
 }				t_parsed_data;
 
 t_parsed_data	*parser();
-
+void			free_str(char **s);
 void			main_cycle(char **env);
 void			print_env(t_env *env_data);
 char			*take_value_by_key(t_env *env_data, char *key);
