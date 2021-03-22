@@ -5,12 +5,14 @@ void	main_cycle(char **env)
 	t_parsed_data	*parsed_data;
 	t_env			*env_data;
 
+	parsed_data = malloc(sizeof(t_parsed_data));
+	parsed_data->user_commands = (char **)malloc(sizeof(char *) * 500);
+	if (!parsed_data->user_commands)
+		return ;
 	while (1)
 	{
-		printf("minishell>");
-	
 		env_data = parse_env(env);
-		parsed_data = parser();
+		parser(&parsed_data);
 		if (fn_search("echo", parsed_data->command))
 		{
 			fn_echo(parsed_data->rest_string);
@@ -27,6 +29,8 @@ void	main_cycle(char **env)
 		{
 			chdir("..");
 		}
+		save_history(&parsed_data);
+		printf("%s\n", parsed_data->user_commands[0]);
 		free_str(&parsed_data->raw_string);
 		free_str(&parsed_data->command);
 	}
