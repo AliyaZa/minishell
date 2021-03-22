@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/20 14:23:18 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/22 19:29:52 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ char	determine_options(char *string)
 	return (option);
 }
 
-char	*determine_command(t_parsed_data *parsed_data)
+char	*determine_command(t_parsed_data **parsed_data)
 {
 	int		i;
 	char	*p;
 
-	p = parsed_data->raw_string;
+	p = (*parsed_data)->raw_string;
 	i = 0;
 	while (!(ft_isalpha(*p)))
 	{
@@ -66,34 +66,35 @@ char	*determine_command(t_parsed_data *parsed_data)
 		p++;
 		i++;
 	}
-	parsed_data->command = malloc((sizeof(char) * i) + 1);
-	ft_strlcpy(parsed_data->command, parsed_data->raw_string, i);
-	string_tolower(parsed_data->command);
+	(*parsed_data)->command = malloc((sizeof(char) * i) + 1);
+	ft_strlcpy((*parsed_data)->command, (*parsed_data)->raw_string, i);
+	string_tolower((*parsed_data)->command);
 	return (p);
 }
 
-t_parsed_data	*parser(void)
+void	parser(t_parsed_data **parsed_data)
 {
-	t_parsed_data	*parsed_data;
 	char			*buf;
 
-	parsed_data = malloc(sizeof(t_parsed_data));
 	buf = ft_strnew(0);
-	parsed_data->raw_string = ft_strnew(0);
+	(*parsed_data)->raw_string = ft_strnew(0);
 	if (buf == NULL)
-		return (NULL);
+		return ;
 	if (parsed_data == NULL)
-		return (NULL);
+		return ;
+	printf("hello world\n");
 	while (read(0, buf, 1))
 	{
 		if (buf[0] == '\n')
 			break ;
-		parsed_data->raw_string = ft_strjoin(parsed_data->raw_string, buf);
+		(*parsed_data)->raw_string = ft_strjoin((*parsed_data)->raw_string, buf);
 	}
-	parsed_data->rest_string = determine_command(parsed_data);
-	//parsed_data->option = determine_options(parsed_data->raw_string);
-	//parsed_data->argument = determine_argument(parsed_data->raw_string);
-	//printf("flag - %c\n", parsed_data->option);
-	//printf("argument - %s\n", parsed_data->argument);
-	return (parsed_data);
+	if ((*parsed_data)->raw_string)
+	{
+		(*parsed_data)->rest_string = determine_command(parsed_data);
+	}
+	else
+	{
+		printf("hello bro\n");
+	}
 }
