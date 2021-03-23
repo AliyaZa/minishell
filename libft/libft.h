@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:07:15 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/20 15:22:32 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/22 16:10:35 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+
 typedef struct		s_list
 {
 	void			*content;
@@ -25,7 +26,6 @@ typedef struct		s_env
 	void			*value;
 	struct s_env	*next;
 }					t_env;
-
 void				*ft_memset(void *dest, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy (void *destination,
@@ -37,8 +37,8 @@ void				*ft_memmove (void *destination,
 void				*ft_memchr (const void *arr, int c, size_t n);
 int					ft_memcmp(const void *arr1, const void *arr2, size_t n);
 size_t				ft_strlen(const char *s);
-size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
+char				*ft_strlcpy(char *dst, const char *src);
+char				*ft_strlcat(char *dst, const char *src);
 char				*ft_strchr (const char *str, int ch);
 char				*ft_strrchr (const char *str, int ch);
 char				*ft_strnstr(const char *haystack,
@@ -68,7 +68,7 @@ t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_env **lst, t_env *new);
+void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));

@@ -6,15 +6,15 @@
 /*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:40:52 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/20 15:19:56 by mismene          ###   ########.fr       */
+/*   Updated: 2020/11/04 16:22:17 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_env **lst, t_env *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_env	*ls;
+	t_list	*ls;
 
 	if (!new)
 		return ;
