@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
 /*   Updated: 2021/03/23 14:30:02 by mismene          ###   ########.fr       */
@@ -67,7 +67,7 @@ char	*determine_command(t_parsed_data **parsed_data)
 		i++;
 	}
 	(*parsed_data)->command = malloc((sizeof(char) * i) + 1);
-	ft_strlcpy((*parsed_data)->command, (*parsed_data)->raw_string, i);
+	ft_strlcpy((*parsed_data)->command, (*parsed_data)->raw_string);
 	string_tolower((*parsed_data)->command);
 	return (p);
 }

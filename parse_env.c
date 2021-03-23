@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:36:22 by mismene           #+#    #+#             */
 /*   Updated: 2021/03/23 16:09:43 by mismene          ###   ########.fr       */
@@ -29,7 +29,7 @@ t_env	*parse_env(char **env)
 		matrix = ft_split(env[i], '=');
 		env_el->key = ft_strdup(matrix[0]);
 		env_el->value = ft_strdup(matrix[1]);
-		ft_lstadd_back(&our_env, env_el);
+		ft_lstadd_back2(&our_env, env_el);
 		free(matrix[0]);
 		free(matrix[1]);
 		free(matrix);
