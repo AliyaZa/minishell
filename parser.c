@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 18:53:42 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/23 19:30:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ char	*determine_command(t_parsed_data **parsed_data)
 		p++;
 		i++;
 	}
-	(*parsed_data)->command = malloc((sizeof(char) * i) + 1);
-	(*parsed_data)->raw_string[i] = '\0';
-	ft_strlcpy((*parsed_data)->command, (*parsed_data)->raw_string, i);
+	(*parsed_data)->command = (char *)malloc((sizeof(char) * i) + 1);
+	ft_strlcpy((*parsed_data)->command, (*parsed_data)->raw_string, (size_t)(i + 1));
 	string_tolower((*parsed_data)->command);
 	return (p);
 }
@@ -85,7 +84,7 @@ void	parser(t_parsed_data **parsed_data)
 		return ;
 	while (read(0, buf, 1))
 	{
-		if (buf[0] == '\n' || buf[0] == '\0')
+		if (buf[0] == '\n')
 			break ;
 		(*parsed_data)->raw_string = ft_strjoin((*parsed_data)->raw_string, buf);
 	}

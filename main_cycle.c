@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_cycle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:26:49 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 17:37:56 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/23 19:48:33 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	main_cycle(char **env)
 		return ;
 	while (1)
 	{
+		printf("minishell>");
 		env_data = parse_env(env);
 		parser(&parsed_data);
 		router(parsed_data, env_data);

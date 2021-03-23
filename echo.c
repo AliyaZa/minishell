@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 18:43:42 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/23 19:37:28 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void        fn_echo(char    *output)
         output += 4;
         flag = 1;
     }
+	else
+		output++;
     printf("%s", output);
     if (flag)
         printf("\n");
