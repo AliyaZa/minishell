@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 16:05:51 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/23 16:22:04 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	router(t_parsed_data *parsed_data, t_env *env_data)
 {
-	printf("hello\n");
 	if (fn_search("echo", parsed_data->command))
 	{
 		fn_echo(parsed_data->rest_string);

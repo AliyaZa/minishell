@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:26:49 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 16:07:58 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/23 16:17:25 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	main_cycle(char **env)
 		return ;
 	while (1)
 	{
-		env_data = parse_env(env_data);
+		env_data = parse_env(env);
 		parser(&parsed_data);
 		router(parsed_data, env_data);
 		save_history(&parsed_data);
