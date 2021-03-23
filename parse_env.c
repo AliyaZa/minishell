@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:36:22 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/20 16:36:47 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/23 16:09:43 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_env	*parse_env(char **env)
 
 	i = 0;
 	our_env = NULL;
+	printf("helloye\n");
 	while (env[i])
 	{
 		env_el = malloc(sizeof(t_env));
