@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/22 19:28:36 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/23 15:46:01 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	fn_set_env(t_env **our_env, char *parsed_data)
 		else
 		{
 			env = fn_create_el(parsed_data);
-			ft_lstadd_back(our_env, env);
+			ft_lstadd_back2(our_env, env);
 		}
 	}
 	else
