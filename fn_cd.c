@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 18:26:20 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/24 16:29:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char		*fn_strjoin3(char *str1, char *str2, char *str3)
 	else
 		ft_bzero(str,size);
 	if (ft_strncmp(str1, "/", 1))
-		str = ft_strlcpy(str, str1);
+		str = ft_strcpy(str, str1);
 	str = ft_strlcat(str, str2);
 	str = ft_strlcat(str, str3);
 	return(str);
