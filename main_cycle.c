@@ -23,7 +23,7 @@ void	main_cycle(char **env)
 		return ;
 	while (1)
 	{
-		printf("minishell>");
+		write(1, "minishell>", 10);
 		env_data = parse_env(env);
 		parser(&parsed_data);
 		router(parsed_data, env_data);
