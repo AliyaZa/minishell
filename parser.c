@@ -6,11 +6,29 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/24 18:41:30 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/24 19:33:20 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
+{
+	while ((*parsed_data)->option == 'n' && index > 0)
+	{
+		(*parsed_data)->rest_string++;
+		index--;
+		printf("1: %zu\n", index);
+	}
+	while (!(ft_isalpha(*(*parsed_data)->rest_string)))
+	{
+		if (*(*parsed_data)->rest_string == (*parsed_data)->option)
+			(*parsed_data)->rest_string++;
+		printf("2: %zu\n", index);
+		(*parsed_data)->rest_string++;
+	}
+	
+}
 
 void	determine_options(t_parsed_data **parsed_data)
 {
@@ -31,6 +49,7 @@ void	determine_options(t_parsed_data **parsed_data)
 		}
 		index++;
 	}
+	determine_rest_string(parsed_data, index);
 }
 
 char	*determine_command(t_parsed_data **parsed_data)
@@ -76,6 +95,4 @@ void	parser(t_parsed_data **parsed_data)
 		(*parsed_data)->rest_string = determine_command(parsed_data);
 		determine_options(parsed_data);
 	}
-	printf("command: %s\n", (*parsed_data)->command);
-	printf("flag: %c\n", (*parsed_data)->option);
 }
