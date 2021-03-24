@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   fn_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 19:37:28 by nhill            ###   ########.fr       */
+/*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
+/*   Updated: 2021/03/23 16:20:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell2/minishell.h"
 
-void        fn_echo(char    *output)
+void	fn_export(t_env **our_env, char **user_commands, int i)
 {
-    int        flag;
-
-    flag = 0;
-   // parsed_data++;
-    if (fn_search(" -n" ,output))
-    {
-        output += 4;
-        flag = 1;
-    }
-	else
-		output++;
-    printf("%s", output);
-    if (flag)
-        printf("\n");
+	fn_set_env(our_env, user_commands, i);
 }
