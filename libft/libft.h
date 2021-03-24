@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:07:15 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 19:13:05 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:31:29 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void				*ft_memchr (const void *arr, int c, size_t n);
 int					ft_memcmp(const void *arr1, const void *arr2, size_t n);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strlcat(char *dst, const char *src);
 char				*ft_strchr (const char *str, int ch);
 char				*ft_strrchr (const char *str, int ch);
