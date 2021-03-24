@@ -12,42 +12,26 @@
 
 #include "minishell.h"
 
-char	*determine_argument(char *string)
-{
-	char	*argument;
-
-	argument = NULL;
-	validate_quotes(string);
-	while (*string)
-	{
-		if (*string == '\'' || *string == '"')
-		{
-			argument = ft_strdup(string);
-			break ;
-		}
-		string++;
-	}
-	return (argument);
-}
-
-char	determine_options(char *string)
+void	determine_options(t_parsed_data **parsed_data)
 {
 	char	option;
+	size_t	index;
 
+	index = 0;
 	option = 0;
-	while (*string)
+	while ((*parsed_data)->rest_string[index])
 	{
-		if (*string == '-')
+		if ((*parsed_data)->rest_string[index] == '-')
 		{
-			string++;
-			if (ft_isalpha(*string))
+			if (ft_isalpha((*parsed_data)->rest_string[index + 1]))
 			{
-				option = *string;
+				(*parsed_data)->option = (*parsed_data)->rest_string[index + 1];
+				write(1, &(*parsed_data)->option, 1);
+				break ;
 			}
 		}
-		string++;
+		index++;
 	}
-	return (option);
 }
 
 char	*determine_command(t_parsed_data **parsed_data)
@@ -91,9 +75,8 @@ void	parser(t_parsed_data **parsed_data)
 	if ((*parsed_data)->raw_string)
 	{
 		(*parsed_data)->rest_string = determine_command(parsed_data);
+		determine_options(parsed_data);
 	}
-	else
-	{
-		printf("hello bro\n");
-	}
+	printf("command: %s\n", (*parsed_data)->command);
+	printf("flag: %c\n", (*parsed_data)->option);
 }
