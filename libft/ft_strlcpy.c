@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:15:52 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/24 16:32:31 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:34:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	if (dst == NULL || src == NULL)
 		return (0);
 	i = 0;
-	while (i < dstsize - 1 && src[i] != 0)
+	while (src[i] != 0)
 	{
 		dst[i] = src[i];
 		i++;
