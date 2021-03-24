@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 19:30:25 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 18:41:30 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	determine_options(t_parsed_data **parsed_data)
 			if (ft_isalpha((*parsed_data)->rest_string[index + 1]))
 			{
 				(*parsed_data)->option = (*parsed_data)->rest_string[index + 1];
-				write(1, &(*parsed_data)->option, 1);
 				break ;
 			}
 		}

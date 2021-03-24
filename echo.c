@@ -6,25 +6,18 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/24 16:24:21 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 18:49:56 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fn_echo(char *output)
+void	fn_echo(t_parsed_data *parsed_data)
 {
-	int		flag;
-
-	flag = 0;
-	if (fn_search(" -n" ,output))
+	write(1, parsed_data->rest_string, ft_strlen(parsed_data->rest_string));
+	if (parsed_data->option != 'n')
 	{
-		output += 4;
-		flag = 1;
-	}
-	else
-		output++;
-	write(1, output, ft_strlen(output));
-	if (!flag)
 		write(1, "\n", 1);
+		return ;
+	}
 }

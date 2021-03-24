@@ -28,7 +28,7 @@ void			free_str(char **s);
 void			main_cycle(char **env);
 void			print_env(t_env *env_data);
 char			*get_value_by_key(t_env *env_data, char *key);
-void			fn_echo(char *parsed_data);
+void			fn_echo(t_parsed_data *parsed_data);
 int				fn_search(char *s1, char *s2);
 t_env			*parse_env(char **env);
 void			validate_quotes(char *string);

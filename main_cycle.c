@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:26:49 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/24 15:14:45 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/24 18:46:54 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	main_cycle(char **env)
 		save_history(&parsed_data);
 		free_str(&parsed_data->raw_string);
 		free_str(&parsed_data->command);
+		parsed_data->option = 0;
 	}
 }
