@@ -4,6 +4,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "libft/libft.h"
+# include <dirent.h>
+# include <unistd.h>
+# include <sys/dir.h>
+# include <sys/syslimits.h>
 
 # define VIOLET "\033[25m"
 # define COLOUR_END "\033[m"
@@ -18,6 +22,7 @@ typedef struct	s_parsed_data
 	char		**user_commands;
 }				t_parsed_data;
 
+void			fn_cd(t_env **our_env, char *parsed_data);
 void			router(t_parsed_data *parsed_data, t_env *env_data);
 void			save_history(t_parsed_data **parsed_data);
 void			parser(t_parsed_data **parsed_data);

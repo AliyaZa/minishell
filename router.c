@@ -6,7 +6,7 @@
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 17:39:57 by mismene          ###   ########.fr       */
+/*   Updated: 2021/03/23 18:27:22 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@ void	router(t_parsed_data *parsed_data, t_env *env_data)
 	{
 		print_env(env_data);
 	}
+	/*
 	else if (fn_search(parsed_data->command, "cd"))
 	{
-		chdir("..");
+		fn_cd(&env_data, parsed_data->rest_string);
 	}
+
+	else if (fn_search(parsed_data->command, "unset"))
+	{
+		unset(parsed_data->);
+	}
+	*/
 }
