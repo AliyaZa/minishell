@@ -9,9 +9,6 @@
 # include <sys/dir.h>
 # include <sys/syslimits.h>
 
-# define VIOLET "\033[25m"
-# define COLOUR_END "\033[m"
-
 typedef struct	s_parsed_data
 {
 	char 		*raw_string;
@@ -22,6 +19,7 @@ typedef struct	s_parsed_data
 	char		**user_commands;
 }				t_parsed_data;
 
+void			pwd(t_env *env_data);
 void			fn_cd(t_env **our_env, char *parsed_data);
 void			router(t_parsed_data *parsed_data, t_env *env_data);
 void			save_history(t_parsed_data **parsed_data);
