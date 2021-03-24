@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 19:47:09 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:04:35 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,29 @@ void	router(t_parsed_data *parsed_data, t_env *env_data)
 {
 	if (fn_search("echo", parsed_data->command))
 	{
-		//printf("command = %s\necho = %s\n",parsed_data->command, parsed_data->rest_string);
 		fn_echo(parsed_data->rest_string);
 	}
 	else if (fn_search(parsed_data->command, "pwd") && *parsed_data->command)
 	{
-		printf("%s\n", get_value_by_key(env_data, "PWD"));
+		pwd(env_data);
 	}
 	else if (fn_search(parsed_data->command, "env") && *parsed_data->command)
 	{
 		print_env(env_data);
 	}
+	/*
 	else if (fn_search(parsed_data->command, "cd"))
 	{
-		chdir("..");
+		fn_cd(&env_data, parsed_data->rest_string);
+	}
+
+	else if (fn_search(parsed_data->command, "unset"))
+	{
+		unset(parsed_data->);
+	}
+	*/
+	else
+	{
+		write(1, "urecognized command\n", 20);
 	}
 }

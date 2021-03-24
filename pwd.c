@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/23 14:40:01 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 17:45:27 by mismene          ###   ########.fr       */
+/*   Created: 2021/03/24 15:01:33 by mismene           #+#    #+#             */
+/*   Updated: 2021/03/24 15:05:06 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset()
+void	pwd(t_env *env_data)
 {
-	free_str();
+	char	*pwd;
+
+	pwd = get_value_by_key(env_data, "PWD");
+	write(1, pwd, ft_strlen(pwd));
+	write(1, "\n", 1);
 }

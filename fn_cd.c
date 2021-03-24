@@ -6,15 +6,11 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 15:46:01 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/23 18:26:20 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2/minishell.h"
-#include <dirent.h>
-#include <unistd.h>
-#include <sys/dir.h>
-#include <sys/syslimits.h>
+#include "minishell.h"
 
 t_env		*fn_get_el(t_env *our_env, char *key)
 {

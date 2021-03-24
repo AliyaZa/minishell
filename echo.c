@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 19:37:28 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 14:51:46 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void        fn_echo(char    *output)
     }
 	else
 		output++;
-    printf("%s", output);
+    write(1, output, ft_strlen(output));
     if (flag)
-        printf("\n");
+        write(1, "\n", 1);
 }
