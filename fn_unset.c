@@ -26,7 +26,7 @@ void		fn_del_el(t_env **root)
 	}
 }
 
-void		fn_unset(t_env **our_env, char *user_commands)
+void		fn_unset(t_env **our_env, char *history)
 {
 	t_env	env;
 	t_env	*prev;
@@ -34,7 +34,7 @@ void		fn_unset(t_env **our_env, char *user_commands)
 
 	//env = 0;
 	root = *our_env;
-	if (fn_search((*our_env)->key, user_commands))
+	if (fn_search((*our_env)->key, history))
 		*our_env = (*our_env)->next;
 	else
 	{
@@ -42,7 +42,7 @@ void		fn_unset(t_env **our_env, char *user_commands)
 		{
 			prev = root;
 			root = root->next;
-			if (fn_search(root->key, user_commands))
+			if (fn_search(root->key, history))
 			{
 				prev->next = root->next;
 				fn_del_el(&root);

@@ -19,11 +19,11 @@ void	save_history(t_parsed_data **parsed_data)
 	i = 498;
 	while (i >= 0)
 	{
-		if ((*parsed_data)->user_commands[i])
+		if ((*parsed_data)->history[i])
 		{
-			(*parsed_data)->user_commands[i + 1] = ft_strdup((*parsed_data)->user_commands[i]);
+			(*parsed_data)->history[i + 1] = ft_strdup((*parsed_data)->history[i]);
 		}
 		i--;
 	}
-	(*parsed_data)->user_commands[0] = ft_strdup((*parsed_data)->raw_string);
+	(*parsed_data)->history[0] = ft_strdup((*parsed_data)->raw_string);
 }

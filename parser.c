@@ -6,48 +6,47 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 19:30:25 by nhill            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:33:20 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*determine_argument(char *string)
+void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
 {
-	char	*argument;
-
-	argument = NULL;
-	validate_quotes(string);
-	while (*string)
+	while ((*parsed_data)->option == 'n' && index > 0)
 	{
-		if (*string == '\'' || *string == '"')
-		{
-			argument = ft_strdup(string);
-			break ;
-		}
-		string++;
+		(*parsed_data)->rest_string++;
+		index--;
 	}
-	return (argument);
+	while (!(ft_isalpha(*(*parsed_data)->rest_string)))
+	{
+		if (*(*parsed_data)->rest_string == (*parsed_data)->option)
+			(*parsed_data)->rest_string++;
+		(*parsed_data)->rest_string++;
+	}
 }
 
-char	determine_options(char *string)
+void	determine_options(t_parsed_data **parsed_data)
 {
 	char	option;
+	size_t	index;
 
+	index = 0;
 	option = 0;
-	while (*string)
+	while ((*parsed_data)->rest_string[index])
 	{
-		if (*string == '-')
+		if ((*parsed_data)->rest_string[index] == '-')
 		{
-			string++;
-			if (ft_isalpha(*string))
+			if (ft_isalpha((*parsed_data)->rest_string[index + 1]))
 			{
-				option = *string;
+				(*parsed_data)->option = (*parsed_data)->rest_string[index + 1];
+				break ;
 			}
 		}
-		string++;
+		index++;
 	}
-	return (option);
+	determine_rest_string(parsed_data, index);
 }
 
 char	*determine_command(t_parsed_data **parsed_data)
@@ -77,9 +76,10 @@ void	parser(t_parsed_data **parsed_data)
 	char			*buf;
 
 	buf = ft_strnew(0);
-	(*parsed_data)->raw_string = ft_strnew(0);
 	if (buf == NULL)
 		return ;
+	if (!(*parsed_data)->raw_string)
+		(*parsed_data)->raw_string = ft_strnew(0);
 	if (parsed_data == NULL)
 		return ;
 	while (read(0, buf, 1))
@@ -90,10 +90,8 @@ void	parser(t_parsed_data **parsed_data)
 	}
 	if ((*parsed_data)->raw_string)
 	{
+		validate_quotes(parsed_data);
 		(*parsed_data)->rest_string = determine_command(parsed_data);
-	}
-	else
-	{
-		printf("hello bro\n");
+		determine_options(parsed_data);
 	}
 }

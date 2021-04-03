@@ -12,7 +12,7 @@
 
 #include "minishell2/minishell.h"
 
-void	fn_export(t_env **our_env, char **user_commands, int i)
+void	fn_export(t_env **our_env, char **history, int i)
 {
-	fn_set_env(our_env, user_commands, i);
+	fn_set_env(our_env, history, i);
 }
