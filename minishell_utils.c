@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int			fn_search(char *s1, char *s2)
+int		fn_search(char *s1, char *s2)
 {
 	if (s1 && s2)
 	{

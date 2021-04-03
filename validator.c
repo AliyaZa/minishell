@@ -12,35 +12,30 @@
 
 #include "minishell.h"
 
-void	validate_quotes(char *string)
+void	validate_quotes(t_parsed_data **parsed_data)
 {
 	size_t	quotes_counter;
-	size_t	double_quotes_counter;
 	char	main_quotes;
 	size_t	flag;
+	char	*string;
 
+	string = (*parsed_data)->raw_string;
 	flag = 0;
 	quotes_counter = 0;
-	double_quotes_counter = 0;
 	main_quotes = 0;
 	while (*string)
 	{
-		if ((*string == '"' || *string == '\'') && !flag)
-		{
-			main_quotes = *string;
-			flag = 1;
-		}
 		if (*string == '"' || *string == '\'')
 		{
-			if (*string == '"')
-				double_quotes_counter++;
-			else
+			main_quotes = *string;
+			if (*string == main_quotes)
 				quotes_counter++;
 		}
 		string++;
 	}
-	if ((double_quotes_counter % 2) && main_quotes == '"')
-		printf("close quote\n");
-	if ((quotes_counter % 2) && main_quotes == '\'')
-		printf("close single quotes\n");
+	if ((quotes_counter % 2) && main_quotes)
+	{
+		write(1, ">", 1);
+		parser(parsed_data);
+	}
 }

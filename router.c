@@ -26,18 +26,8 @@ void	router(t_parsed_data *parsed_data, t_env *env_data)
 	{
 		print_env(env_data);
 	}
-	/*
-	else if (fn_search(parsed_data->command, "cd"))
-	{
-		fn_cd(&env_data, parsed_data->rest_string);
-	}
-	else if (fn_search(parsed_data->command, "unset"))
-	{
-		unset(parsed_data->);
-	}
-	*/
 	else
 	{
-		write(1, "urecognized command\n", 20);
+		write(1, "command not found\n", 18);
 	}
 }

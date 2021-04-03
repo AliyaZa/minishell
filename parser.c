@@ -18,16 +18,13 @@ void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
 	{
 		(*parsed_data)->rest_string++;
 		index--;
-		printf("1: %zu\n", index);
 	}
 	while (!(ft_isalpha(*(*parsed_data)->rest_string)))
 	{
 		if (*(*parsed_data)->rest_string == (*parsed_data)->option)
 			(*parsed_data)->rest_string++;
-		printf("2: %zu\n", index);
 		(*parsed_data)->rest_string++;
 	}
-	
 }
 
 void	determine_options(t_parsed_data **parsed_data)
@@ -79,9 +76,10 @@ void	parser(t_parsed_data **parsed_data)
 	char			*buf;
 
 	buf = ft_strnew(0);
-	(*parsed_data)->raw_string = ft_strnew(0);
 	if (buf == NULL)
 		return ;
+	if (!(*parsed_data)->raw_string)
+		(*parsed_data)->raw_string = ft_strnew(0);
 	if (parsed_data == NULL)
 		return ;
 	while (read(0, buf, 1))
@@ -92,6 +90,7 @@ void	parser(t_parsed_data **parsed_data)
 	}
 	if ((*parsed_data)->raw_string)
 	{
+		validate_quotes(parsed_data);
 		(*parsed_data)->rest_string = determine_command(parsed_data);
 		determine_options(parsed_data);
 	}
