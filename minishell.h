@@ -19,6 +19,7 @@ typedef struct	s_parsed_data
 	char		**history;
 }				t_parsed_data;
 
+void			initialize_structure(t_parsed_data *parsed_data);
 void			pwd(t_env *env_data);
 void			fn_cd(t_env **our_env, char *parsed_data);
 void			router(t_parsed_data *parsed_data, t_env *env_data);

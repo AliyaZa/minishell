@@ -12,6 +12,22 @@
 
 #include "minishell.h"
 
+char	*determine_argument(t_parsed_data *parsed_data)
+{
+	char	*arg;
+
+	arg = parsed_data->rest_string;
+	
+	if (parsed_data->option)
+	{
+		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
+		arg++;
+	}
+	while(!(ft_isalpha(*arg)))
+		arg++;
+	return (arg);
+}
+
 void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
 {
 	while ((*parsed_data)->option == 'n' && index > 0)
@@ -93,5 +109,6 @@ void	parser(t_parsed_data **parsed_data)
 		validate_quotes(parsed_data);
 		(*parsed_data)->rest_string = determine_command(parsed_data);
 		determine_options(parsed_data);
+		(*parsed_data)->argument = determine_argument(*parsed_data);
 	}
 }
