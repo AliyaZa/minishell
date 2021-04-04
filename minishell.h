@@ -17,11 +17,15 @@ typedef struct	s_parsed_data
 	char		*argument;
 	char		*rest_string;
 	char		**history;
+	size_t		is_in_quotes;
+	t_env		*env_data;
 }				t_parsed_data;
 
+void			spec_symbol(char *buf, t_parsed_data **parsed_data);
+void			initialize_structure(t_parsed_data *parsed_data);
 void			pwd(t_env *env_data);
 void			fn_cd(t_env **our_env, char *parsed_data);
-void			router(t_parsed_data *parsed_data, t_env *env_data);
+void			router(t_parsed_data *parsed_data);
 void			save_history(t_parsed_data **parsed_data);
 void			parser(t_parsed_data **parsed_data);
 void			free_str(char **s);

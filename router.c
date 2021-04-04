@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	router(t_parsed_data *parsed_data, t_env *env_data)
+void	router(t_parsed_data *parsed_data)
 {
 	if (fn_search("echo", parsed_data->command))
 	{
@@ -20,11 +20,11 @@ void	router(t_parsed_data *parsed_data, t_env *env_data)
 	}
 	else if (fn_search(parsed_data->command, "pwd") && *parsed_data->command)
 	{
-		pwd(env_data);
+		pwd(parsed_data->env_data);
 	}
 	else if (fn_search(parsed_data->command, "env") && *parsed_data->command)
 	{
-		print_env(env_data);
+		print_env(parsed_data->env_data);
 	}
 	else
 	{

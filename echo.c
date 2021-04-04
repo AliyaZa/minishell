@@ -14,7 +14,7 @@
 
 void	fn_echo(t_parsed_data *parsed_data)
 {
-	write(1, parsed_data->rest_string, ft_strlen(parsed_data->rest_string));
+	write(1, parsed_data->argument, ft_strlen(parsed_data->argument));
 	if (parsed_data->option != 'n')
 	{
 		write(1, "\n", 1);
