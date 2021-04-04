@@ -15,16 +15,23 @@
 char	*determine_argument(t_parsed_data *parsed_data)
 {
 	char	*arg;
+	size_t	index;
 
 	arg = parsed_data->rest_string;
-	
+	index = 0;
 	if (parsed_data->option)
 	{
 		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
 		arg++;
 	}
-	while(!(ft_isalpha(*arg)))
+	while (!(ft_isalpha(*arg)))
 		arg++;
+	while ((arg[index] != '\"' && arg[index] != ';') && parsed_data->is_in_quotes)
+	{
+		index++;
+	}
+	if (parsed_data->is_in_quotes)
+		arg[index] = '\0';
 	return (arg);
 }
 
@@ -87,9 +94,18 @@ char	*determine_command(t_parsed_data **parsed_data)
 	return (p);
 }
 
+void	determine_struct(t_parsed_data **parsed_data)
+{
+	validate_quotes(parsed_data);
+	(*parsed_data)->rest_string = determine_command(parsed_data);
+	determine_options(parsed_data);
+	(*parsed_data)->argument = determine_argument(*parsed_data);
+}
+
 void	parser(t_parsed_data **parsed_data)
 {
-	char			*buf;
+	char	*buf;
+	char	*free_tmp;
 
 	buf = ft_strnew(0);
 	if (buf == NULL)
@@ -102,13 +118,13 @@ void	parser(t_parsed_data **parsed_data)
 	{
 		if (buf[0] == '\n')
 			break ;
+		spec_symbol(buf, parsed_data);
+		free_tmp = (*parsed_data)->raw_string;
 		(*parsed_data)->raw_string = ft_strjoin((*parsed_data)->raw_string, buf);
+		free_str(&free_tmp);
 	}
 	if ((*parsed_data)->raw_string)
 	{
-		validate_quotes(parsed_data);
-		(*parsed_data)->rest_string = determine_command(parsed_data);
-		determine_options(parsed_data);
-		(*parsed_data)->argument = determine_argument(*parsed_data);
+		determine_struct(parsed_data);
 	}
 }

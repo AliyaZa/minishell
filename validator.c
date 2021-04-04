@@ -25,6 +25,7 @@ void	validate_quotes(t_parsed_data **parsed_data)
 	{
 		if (*string == '"' || *string == '\'')
 		{
+			(*parsed_data)->is_in_quotes = 1;
 			main_quotes = *string;
 			if (*string == main_quotes)
 				quotes_counter++;
