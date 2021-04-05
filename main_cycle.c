@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:26:49 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/05 16:41:57 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/05 18:58:52 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	main_cycle(char **env)
 		write(1, "minishell> ", 11);
 		fn_termcap(&parsed_data);
 		write(1, parsed_data->raw_string, ft_strlen(parsed_data->raw_string));
-		// parser(&parsed_data);
+		parser(&parsed_data);
+//		write(1, parsed_data->command, ft_strlen(parsed_data->command));
+//		write(1, parsed_data->command, ft_strlen(parsed_data->command));
 		// save_history(&parsed_data);
 		router(parsed_data);
 		free_str(&parsed_data->raw_string);
