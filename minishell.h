@@ -8,10 +8,8 @@
 # include <unistd.h>
 # include <sys/dir.h>
 # include <sys/syslimits.h>
-
 # include <curses.h>
 # include <term.h>
-
 # include <termios.h>
 
 

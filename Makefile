@@ -21,7 +21,7 @@ $(LIBFT):
 	make bonus -C libft
 
 $(NAME): $(OBJ) minishell.h
-	gcc -g $(CFLAGS) $(SRC) libft/libft.a -o $(NAME) -ltermcap
+	gcc -g $(CFLAGS) $(SRC) libft/libft.a -ltermcap -o $(NAME) 
 
 clean:
 	rm -rf $(OBJ)
