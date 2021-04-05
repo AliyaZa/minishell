@@ -15,6 +15,8 @@
 
 int		main(int argc, char **argv, char **env)
 {
+	// return termcap_test(argc, argv);
+
 	main_cycle(env);
 	printf("first argument - %s\nargc - %d\n", argv[0], argc);
 	return (0);

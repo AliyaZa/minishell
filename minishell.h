@@ -8,6 +8,8 @@
 # include <unistd.h>
 # include <sys/dir.h>
 # include <sys/syslimits.h>
+# include <curses.h>
+# include <term.h>
 
 typedef struct	s_parsed_data
 {
@@ -21,6 +23,8 @@ typedef struct	s_parsed_data
 	t_env		*env_data;
 }				t_parsed_data;
 
+void			test_clean_screen(void);
+int				termcap_test(int argc, char **argv);
 void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_parsed_data *parsed_data);
 void			pwd(t_env *env_data);

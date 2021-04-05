@@ -8,7 +8,7 @@ CC = gcc
 
 SRC = main.c parser.c minishell_utils.c validator.c parse_env.c echo.c env.c \
 	main_cycle.c minishell_utils_part_2.c save_history.c router.c pwd.c init.c \
-	spec_symbol.c
+	spec_symbol.c termcap.c
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
@@ -21,7 +21,7 @@ $(LIBFT):
 	make bonus -C libft
 
 $(NAME): $(OBJ) minishell.h
-	gcc $(CFLAGS) $(SRC) libft/libft.a -o $(NAME) -g
+	gcc -g $(CFLAGS) $(SRC) libft/libft.a -o $(NAME) -ltermcap
 
 clean:
 	rm -rf $(OBJ)
