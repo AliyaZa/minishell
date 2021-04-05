@@ -25,7 +25,9 @@ void	main_cycle(char **env)
 	{
 		initialize_structure(parsed_data);
 		write(1, "minishell> ", 11);
-		parser(&parsed_data);
+		fn_termcap(&parsed_data);
+		write(1, parsed_data->raw_string, ft_strlen(parsed_data->raw_string));
+		// parser(&parsed_data);
 		// save_history(&parsed_data);
 		router(parsed_data);
 		free_str(&parsed_data->raw_string);

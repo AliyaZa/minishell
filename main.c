@@ -16,6 +16,6 @@
 int		main(int argc, char **argv, char **env)
 {
 	main_cycle(env);
-	printf("first argument - %s\nargc - %d\n", argv[0], argc);
+	printf("first argument - %s\nargc - %d env[1] - %s\n", argv[0], argc, env[1]);
 	return (0);
 }

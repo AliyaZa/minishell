@@ -105,7 +105,6 @@ void	determine_struct(t_parsed_data **parsed_data)
 void	parser(t_parsed_data **parsed_data)
 {
 	char	*buf;
-	char	*free_tmp;
 
 	buf = ft_strnew(0);
 	if (buf == NULL)
@@ -114,17 +113,6 @@ void	parser(t_parsed_data **parsed_data)
 		(*parsed_data)->raw_string = ft_strnew(0);
 	if (parsed_data == NULL)
 		return ;
-	while (read(0, buf, 1))
-	{
-		if (buf[0] == '\n')
-			break ;
-		spec_symbol(buf, parsed_data);
-		free_tmp = (*parsed_data)->raw_string;
-		(*parsed_data)->raw_string = ft_strjoin((*parsed_data)->raw_string, buf);
-		free_str(&free_tmp);
-	}
-	if ((*parsed_data)->raw_string)
-	{
-		determine_struct(parsed_data);
-	}
+	
+
 }
