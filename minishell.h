@@ -8,6 +8,7 @@
 # include <unistd.h>
 # include <sys/dir.h>
 # include <sys/syslimits.h>
+# include <termios.h>
 
 typedef struct	s_parsed_data
 {
