@@ -40,7 +40,7 @@ void			router(t_parsed_data *parsed_data);
 void			save_history(t_parsed_data **parsed_data);
 void			parser(t_parsed_data **parsed_data);
 void			free_str(char **s);
-void			main_cycle(char **env);
+int				main_cycle(char **env);
 void			print_env(t_env *env_data);
 char			*get_value_by_key(t_env *env_data, char *key);
 void			fn_echo(t_parsed_data *parsed_data);
