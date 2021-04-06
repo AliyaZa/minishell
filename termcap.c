@@ -13,9 +13,10 @@ void    fn_termcap(t_parsed_data **parsed_data)
 	tgetent(0, "xterm-256color");
 
 	tputs(save_cursor, 1, ft_putchar);
-	while (ft_strncmp(str, "\x04", 1))
+	while ((ft_strncmp(str, "\x04", 1)) && !(str[0] == '\n'))
 	{
 		l = read(0, str, 100);
+		//printf("%d\n", l);
 		if (!ft_strncmp(str, "\e[A", 3))
 		{
 			tputs(restore_cursor, 1, ft_putchar);
@@ -47,8 +48,4 @@ void    fn_termcap(t_parsed_data **parsed_data)
 		}
 		(*parsed_data)->raw_string = ft_strdup(str);
 	}
-	// if ((*parsed_data)->raw_string)
-	// {
-	// 	determine_struct(parsed_data);
-	// }
 }

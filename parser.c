@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/24 19:33:20 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/05 18:33:01 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,13 @@ void	determine_struct(t_parsed_data **parsed_data)
 
 void	parser(t_parsed_data **parsed_data)
 {
-	char	*buf;
-
-	buf = ft_strnew(0);
-	if (buf == NULL)
-		return ;
 	if (!(*parsed_data)->raw_string)
 		(*parsed_data)->raw_string = ft_strnew(0);
 	if (parsed_data == NULL)
 		return ;
-	
 
+	if ((*parsed_data)->raw_string)
+	{
+		determine_struct(parsed_data);
+	}
 }
