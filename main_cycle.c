@@ -21,14 +21,19 @@ int	main_cycle(char **env)
 	parsed_data = (t_parsed_data *)malloc(sizeof(t_parsed_data));
 	initialize_structure(parsed_data);
 	parsed_data->history = (char **)malloc(sizeof(char *) * 500);
-	parsed_data->raw_string = ft_strnew(1);
+	parsed_data->raw_string = ft_strnew(0);
 	if (!parsed_data || !parsed_data->raw_string || !parsed_data->history)
 		return 1;
 	parsed_data->env_data = parse_env(env);
 	while (1)
 	{
 		if (flag)
-			initialize_structure(parsed_data);
+		{
+			parsed_data->raw_string = ft_strnew(0);
+			parsed_data->option = 0;
+			parsed_data->argument = 0;
+			parsed_data->rest_string = 0;
+		}
 		write(1, "minishell> ", 11);
 		fn_termcap(&parsed_data);
 		parser(&parsed_data);
