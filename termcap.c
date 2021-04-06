@@ -1,34 +1,43 @@
 #include "minishell.h"
 
+void	write_history_command(char **history, int *current, char direction)
+{
+	int		next;
+
+	next = direction == 'u' ? 1 : -1;
+	if (history[*current + next])
+	{
+		*current += next;
+		tputs(restore_cursor, 1, ft_putchar);
+		tputs(tigetstr("ed"), 1, ft_putchar);
+		write(1, history[*current], ft_strlen(history[*current]));
+	}
+	if (*current == 0 && direction == 'd')
+	{
+		tputs(restore_cursor, 1, ft_putchar);
+		tputs(tigetstr("ed"), 1, ft_putchar);
+	}
+}
+
 void    fn_termcap(t_parsed_data **parsed_data)
 {
 	int		l;
+	static int	current;
 	char	str[2000];
-	struct	termios term;
 
-	tcgetattr(0, &term);
-	term.c_lflag &= ~(ECHO);
-	term.c_lflag &= ~(ICANON);
-	tcsetattr(0, TCSANOW, &term);
-	tgetent(0, "xterm-256color");
-
-	tputs(save_cursor, 1, ft_putchar);
-	ft_bzero(str, 2000);
+	current = -1;
+	str[0] = 0;
 	while ((ft_strncmp(str, "\x04", 1)) && !(str[0] == '\n'))
 	{
 		l = read(0, str, 100);
 		str[l] = 0;
 		if (!ft_strncmp(str, "\e[A", 3))
 		{
-			tputs(restore_cursor, 1, ft_putchar);
-			tputs(tigetstr("ed"), 1, ft_putchar);
-			write(1, "prev\n", 5);
+			write_history_command((*parsed_data)->history, &current, 'u');
 		}
 		else if (!ft_strncmp(str, "\e[B", 3))
 		{
-			tputs(restore_cursor, 1, ft_putchar);
-			tputs(tigetstr("ed"), 1, ft_putchar);
-			write(1, "next\n", 5);
+			write_history_command((*parsed_data)->history, &current, 'd');
 		}
 		else if (!ft_strncmp(str, "\e[D", 3))
 		{

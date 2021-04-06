@@ -16,11 +16,9 @@ char	*determine_argument(t_parsed_data *parsed_data)
 {
 	char	*arg;
 	size_t	index;
-	char	*p_n;
 
 	arg = parsed_data->rest_string;
 	index = 0;
-	p_n = ft_strnew(0);
 	if (parsed_data->option)
 	{
 		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
@@ -34,8 +32,6 @@ char	*determine_argument(t_parsed_data *parsed_data)
 	}
 	if (parsed_data->is_in_quotes)
 		arg[index] = 0;
-	if ((p_n = ft_strchr(arg, '\n')))
-		*p_n = '\0';
 	return (arg);
 }
 
@@ -108,6 +104,10 @@ void	determine_struct(t_parsed_data **parsed_data)
 
 void	parser(t_parsed_data **parsed_data)
 {
+	char	*p_n;
+
+	if ((p_n = ft_strchr((*parsed_data)->raw_string, '\n')))
+		*p_n = '\0';
 	if (!(*parsed_data)->raw_string)
 		(*parsed_data)->raw_string = ft_strnew(0);
 	if (parsed_data == NULL)

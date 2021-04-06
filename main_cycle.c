@@ -35,9 +35,10 @@ int	main_cycle(char **env)
 			parsed_data->rest_string = 0;
 		}
 		write(1, "minishell> ", 11);
+		tputs(save_cursor, 1, ft_putchar);
 		fn_termcap(&parsed_data);
 		parser(&parsed_data);
-		// save_history(&parsed_data);
+		save_history(&parsed_data);
 		router(parsed_data);
 		free_str(&parsed_data->raw_string);
 		free_str(&parsed_data->command);
