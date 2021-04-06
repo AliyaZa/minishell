@@ -35,7 +35,6 @@ int				termcap_test(int argc, char **argv);
 void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_parsed_data *parsed_data);
 void			pwd(t_env *env_data);
-void			fn_cd(t_env **our_env, char *parsed_data);
 void			router(t_parsed_data *parsed_data);
 void			save_history(t_parsed_data **parsed_data);
 void			parser(t_parsed_data **parsed_data);
@@ -50,5 +49,6 @@ void			validate_quotes(t_parsed_data **parsed_data);
 void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
+void			fn_cd(t_parsed_data *parsed_data);
 
 #endif
