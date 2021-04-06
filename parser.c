@@ -20,6 +20,7 @@ char	*determine_argument(t_parsed_data *parsed_data)
 
 	arg = parsed_data->rest_string;
 	index = 0;
+	p_n = ft_strnew(0);
 	if (parsed_data->option)
 	{
 		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
@@ -27,14 +28,14 @@ char	*determine_argument(t_parsed_data *parsed_data)
 	}
 	while (!(ft_isalpha(*arg)) && !(ft_isdigit(*arg)))
 		arg++;
-	while (((arg[index] != '\"' && arg[index] != ';') || arg[index] != '\n') && parsed_data->is_in_quotes)
+	while ((arg[index] != '\"' && arg[index] != ';' && arg[index] != '\n') && parsed_data->is_in_quotes)
 	{
 		index++;
 	}
 	if (parsed_data->is_in_quotes)
 		arg[index] = 0;
 	if ((p_n = ft_strchr(arg, '\n')))
-		*p_n = 0;
+		*p_n = '\0';
 	return (arg);
 }
 
