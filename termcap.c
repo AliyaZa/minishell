@@ -1,5 +1,31 @@
 #include "minishell.h"
 
+char	*ft_strjoin1(char const *s1, char const *s2)
+{
+	char	*p;
+	int		i;
+	int		j;
+
+	if ((s1 == NULL || s2 == NULL)
+		|| (!(p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1))))
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		p[i] = s2[j];
+		++i;
+		++j;
+	}
+	p[i] = '\0';
+	return (p);
+}
+
 void    fn_termcap(t_parsed_data **parsed_data)
 {
 	int		l;
@@ -13,10 +39,11 @@ void    fn_termcap(t_parsed_data **parsed_data)
 	tgetent(0, "xterm-256color");
 
 	tputs(save_cursor, 1, ft_putchar);
+	ft_bzero(str, 2000);
 	while ((ft_strncmp(str, "\x04", 1)) && !(str[0] == '\n'))
 	{
 		l = read(0, str, 100);
-		//printf("%d\n", l);
+		str[l] = 0;
 		if (!ft_strncmp(str, "\e[A", 3))
 		{
 			tputs(restore_cursor, 1, ft_putchar);
@@ -45,7 +72,7 @@ void    fn_termcap(t_parsed_data **parsed_data)
 		else
 		{
 			write(1, str, l);
+			(*parsed_data)->raw_string = ft_strjoin1((*parsed_data)->raw_string, str);
 		}
-		(*parsed_data)->raw_string = ft_strdup(str);
 	}
 }

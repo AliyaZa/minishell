@@ -108,7 +108,6 @@ void	parser(t_parsed_data **parsed_data)
 		(*parsed_data)->raw_string = ft_strnew(0);
 	if (parsed_data == NULL)
 		return ;
-
 	if ((*parsed_data)->raw_string)
 	{
 		determine_struct(parsed_data);

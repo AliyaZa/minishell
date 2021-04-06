@@ -15,7 +15,8 @@
 
 int		main(int argc, char **argv, char **env)
 {
-	main_cycle(env);
+	if ((main_cycle(env)) == 1)
+		write(1, "error\n", 6);
 	printf("first argument - %s\nargc - %d env[1] - %s\n", argv[0], argc, env[1]);
 	return (0);
 }
