@@ -19,6 +19,8 @@ int	main_cycle(char **env)
 
 	flag = 0;
 	parsed_data = (t_parsed_data *)malloc(sizeof(t_parsed_data));
+	if (parsed_data == NULL)
+		return 1;
 	initialize_structure(parsed_data);
 	parsed_data->history = (char **)malloc(sizeof(char *) * 500);
 	parsed_data->raw_string = ft_strnew(0);
