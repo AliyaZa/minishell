@@ -26,7 +26,7 @@ typedef struct	s_parsed_data
 	t_env		*env_data;
 }				t_parsed_data;
 
-void			navigate_history(char **history, int next, int *current);
+char			*navigate_history(char **history, char **str, int *current);
 void			determine_struct(t_parsed_data **parsed_data);
 void			fn_termcap(t_parsed_data **parsed_data);
 int				ft_putchar(int c);

@@ -3,22 +3,20 @@
 void    fn_termcap(t_parsed_data **parsed_data)
 {
 	int		l;
-	char	str[2000];
+	char	*str;
 	static int	current;
 
-	str[0] = 0;
 	current = -1;
+	str = calloc(2000, sizeof(char));
+	str[0] = 0;
 	while ((ft_strncmp(str, "\x04", 1)) && !(str[0] == '\n'))
 	{
 		l = read(0, str, 100);
 		str[l] = 0;
-		if (!ft_strncmp(str, "\e[A", 3))
+		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
-			navigate_history((*parsed_data)->history, 1, &current);
-		}
-		else if (!ft_strncmp(str, "\e[B", 3))
-		{
-			navigate_history((*parsed_data)->history, -1, &current);
+			free((*parsed_data)->raw_string);
+			(*parsed_data)->raw_string = navigate_history((*parsed_data)->history, &str, &current);
 		}
 		else if (!ft_strncmp(str, "\e[D", 3))
 		{
@@ -36,7 +34,10 @@ void    fn_termcap(t_parsed_data **parsed_data)
 		else
 		{
 			write(1, str, l);
+			if (!(*parsed_data)->raw_string)
+				(*parsed_data)->raw_string = ft_strnew(0);
 			(*parsed_data)->raw_string = ft_strjoin((*parsed_data)->raw_string, str);
+			current = -1;
 		}
 	}
 }

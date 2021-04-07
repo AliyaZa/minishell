@@ -6,8 +6,11 @@ void	clear_command_line()
 	tputs(tigetstr("ed"), 1, ft_putchar);
 }
 
-void	navigate_history(char **history, int next, int *current)
+char	*navigate_history(char **history, char **str, int *current)
 {
+	int next;
+
+	next = !ft_strncmp(*str, "\e[A", 3) ? 1 : -1;
 	if (*current == 0 && next == -1)
 	{
 		clear_command_line();
@@ -18,5 +21,7 @@ void	navigate_history(char **history, int next, int *current)
 		*current += next;
 		clear_command_line();
 		ft_putstr_fd(history[*current], 1);
+		return (ft_strdup(history[*current]));
 	}
+	return (NULL);
 }
