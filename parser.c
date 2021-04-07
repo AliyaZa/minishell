@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:25:06 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/05 18:33:01 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/07 18:23:35 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
 		(*parsed_data)->rest_string++;
 		index--;
 	}
-	while (!(ft_isalpha(*(*parsed_data)->rest_string)) && !(ft_isdigit(*(*parsed_data)->rest_string)))
+	while (!(ft_isalpha(*(*parsed_data)->rest_string)) && !(ft_isdigit(*(*parsed_data)->rest_string)) && !((*(*parsed_data)->rest_string) =='/'))
 	{
 		if (*(*parsed_data)->rest_string == (*parsed_data)->option)
 			(*parsed_data)->rest_string++;
