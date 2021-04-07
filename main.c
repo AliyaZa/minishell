@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int		main(int argc, char **argv, char **env)
+void	term_ini()
 {
 	struct	termios term;
 
@@ -22,8 +21,14 @@ int		main(int argc, char **argv, char **env)
 	term.c_lflag &= ~(ICANON);
 	tcsetattr(0, TCSANOW, &term);
 	tgetent(0, "xterm-256color");
+}
+
+int		main(int argc, char **argv, char **env)
+{
+	term_ini();
 	if ((main_cycle(env)) == 1)
-		write(1, "error\n", 6);
-	printf("first argument - %s\nargc - %d env[1] - %s\n", argv[0], argc, env[1]);
+		ft_putstr_fd("error during memory allocation!\n", 1);
+	(void)argc;
+	(void)argv[0][0];
 	return (0);
 }

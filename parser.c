@@ -102,18 +102,10 @@ void	determine_struct(t_parsed_data **parsed_data)
 	(*parsed_data)->argument = determine_argument(*parsed_data);
 }
 
+
+
 void	parser(t_parsed_data **parsed_data)
 {
-	char	*p_n;
-
-	if ((p_n = ft_strchr((*parsed_data)->raw_string, '\n')))
-		*p_n = '\0';
-	if (!(*parsed_data)->raw_string)
-		(*parsed_data)->raw_string = ft_strnew(0);
-	if (parsed_data == NULL)
-		return ;
-	if ((*parsed_data)->raw_string)
-	{
-		determine_struct(parsed_data);
-	}
+	replace_symbol(&(*parsed_data)->raw_string, '\n', '\0');
+	determine_struct(parsed_data);
 }

@@ -27,3 +27,19 @@ int		ft_putchar(int c)
 		return (0);
 	return (-1);
 }
+
+void	replace_symbol(char **string, char old, char new)
+{
+	char	*p_n;
+	if ((p_n = ft_strchr(*string, old)))
+		*p_n = new;
+}
+
+void	delete_last_charachter(t_parsed_data **parsed_data)
+{
+	size_t	strlen;
+
+	strlen = ft_strlen((*parsed_data)->raw_string);
+	strlen -= 1;
+	(*parsed_data)->raw_string[strlen] = '\0';
+}
