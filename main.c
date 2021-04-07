@@ -15,6 +15,13 @@
 
 int		main(int argc, char **argv, char **env)
 {
+	struct	termios term;
+
+	tcgetattr(0, &term);
+	term.c_lflag &= ~(ECHO);
+	term.c_lflag &= ~(ICANON);
+	tcsetattr(0, TCSANOW, &term);
+	tgetent(0, "xterm-256color");
 	if ((main_cycle(env)) == 1)
 		write(1, "error\n", 6);
 	printf("first argument - %s\nargc - %d env[1] - %s\n", argv[0], argc, env[1]);

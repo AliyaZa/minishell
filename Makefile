@@ -8,7 +8,8 @@ CC = gcc
 
 SRC = main.c parser.c minishell_utils.c validator.c parse_env.c echo.c env.c \
 	main_cycle.c minishell_utils_part_2.c save_history.c router.c pwd.c init.c \
-	spec_symbol.c termcap.c fn_cd.c
+	spec_symbol.c termcap.c fn_cd.c  navigate_history.c
+
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c

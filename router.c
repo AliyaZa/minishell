@@ -12,6 +12,14 @@
 
 #include "minishell.h"
 
+void	print_history(t_parsed_data *parsed_data)
+{
+	for (int i = 499; i; i--)
+	{
+		printf("%s %d\n", parsed_data->history[i], i);
+	}
+}
+
 void	router(t_parsed_data *parsed_data)
 {
 	if (fn_search("echo", parsed_data->command))
