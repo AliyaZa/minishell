@@ -6,18 +6,21 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/06 19:55:17 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/07 18:06:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_env		*fn_get_el(t_parsed_data **parsed_data, char *key)
+static t_env		*fn_get_el(t_parsed_data *parsed_data, char *key)
 {
-	while ((*parsed_data)->env_data && !(fn_search((*parsed_data)->env_data->key, key)))
-		(*parsed_data)->env_data = (*parsed_data)->env_data->next;
-	if ((*parsed_data)->env_data)
-		return ((*parsed_data)->env_data);
+	t_env	*tmp;
+
+	tmp = parsed_data->env_data;
+	while (tmp && !(fn_search(tmp->key, key)))
+		tmp = tmp->next;
+	if (tmp)
+		return (tmp);
 	return (NULL);
 }
 
@@ -25,15 +28,15 @@ static char		*fn_strjoin3(char *str1, char *str2, char *str3)
 {
 	char	*str;
 	size_t	size;
-	if (ft_strncmp(str1, "/", 1))
+	if (ft_strcmp(str1, "/"))
 		size = ft_strlen(str1) + ft_strlen(str2) + ft_strlen(str3);
 	else
 		size = ft_strlen(str2) + ft_strlen(str3);
-	if (!(str = malloc(size)))
+	if (!(str = malloc(sizeof(char) * (size + 1))))
 		return(NULL);
 	else
-		ft_bzero(str,size);
-	if (ft_strncmp(str1, "/", 1))
+		ft_bzero(str,size + 1);
+	if (ft_strcmp(str1, "/"))
 		str = ft_strcpy(str, str1);
 	str = ft_strlcat(str, str2);
 	str = ft_strlcat(str, str3);
@@ -57,7 +60,7 @@ static char	*fn_new_path(t_parsed_data *parsed_data, t_env *home)
 	return (new_path);
 }
 
-static char	*fn_get_path(t_parsed_data **parsed_data)
+static char	*fn_get_path(t_parsed_data *parsed_data)
 {
 	char	*new_path;
 	t_env	*home;
@@ -66,14 +69,14 @@ static char	*fn_get_path(t_parsed_data **parsed_data)
 	new_path = NULL;
 	home = NULL;
 	tmp = NULL;
-	if ((!(home = fn_get_el(parsed_data, "HOME")) && !((*parsed_data)->command)) ||
-		fn_search((*parsed_data)->argument, "~"))
+	if ((!(home = fn_get_el(parsed_data, "HOME")) && !(parsed_data->command)) ||
+		fn_search(parsed_data->argument, "~"))
 		return (NULL);
-	else if ((*parsed_data)->argument && (*parsed_data)->argument[0] == '/')
-		new_path = ft_strdup((*parsed_data)->argument);
-	else if (fn_search((*parsed_data)->argument, "-"))
+	else if (parsed_data->argument && parsed_data->argument[0] == '/')
+		new_path = ft_strdup(parsed_data->argument);
+	else if (fn_search(parsed_data->argument, "-"))
 	{
-		if (!fn_get_el((*parsed_data)->env_data->key, "OLDPWD"))
+		if (!fn_get_el(parsed_data->env_data->key, "OLDPWD"))
 			return (NULL);
 		else
 		{
@@ -82,7 +85,7 @@ static char	*fn_get_path(t_parsed_data **parsed_data)
 		}
 	}
 	else
-		new_path = fn_new_path((*parsed_data), home);
+		new_path = fn_new_path(parsed_data, home);
 	return (new_path);
 }
 
@@ -161,9 +164,10 @@ static void	fn_change_cd(t_parsed_data *parsed_data, char *path, char *env_key)
 
 	lst_name = NULL;
 	tmp = NULL;
-	if ((lst_name = fn_get_el(&parsed_data, env_key)))
+	if ((lst_name = fn_get_el(parsed_data, env_key)))
 	{
 		free(lst_name->value);
+		lst_name->value = NULL;
 		lst_name->value = ft_strdup(path);
 	}
 	else
@@ -180,15 +184,20 @@ void		fn_cd(t_parsed_data *parsed_data)
 
 	path = NULL;
 	new_path = NULL;
-	if ((new_path = fn_get_path(&parsed_data)))
+	if ((new_path = fn_get_path(parsed_data)))
 	{
+		path = getcwd(path, PATH_MAX);
 		if (!(chdir(new_path)))
 		{
 			fn_change_cd(parsed_data, path, "OLDPWD");
 			free(path);
+			path = NULL;
 			path = getcwd(path, PATH_MAX);
 			fn_change_cd(parsed_data, path, "PWD");
 		}
 		free(path);
+		path = NULL;
+		free(new_path);
+		new_path = NULL;
 	}
 }
