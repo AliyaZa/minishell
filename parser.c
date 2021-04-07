@@ -24,7 +24,7 @@ char	*determine_argument(t_parsed_data *parsed_data)
 		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
 		arg++;
 	}
-	while (!(ft_isalpha(*arg)) && !(ft_isdigit(*arg)))
+	while (!(ft_isprint(*arg)) && (*arg != ' ') && ft_strlen(arg))
 		arg++;
 	while ((arg[index] != '\"' && arg[index] != ';' && arg[index] != '\n') && parsed_data->is_in_quotes)
 	{
@@ -37,12 +37,15 @@ char	*determine_argument(t_parsed_data *parsed_data)
 
 void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
 {
+	size_t	strlen;
+	
+	strlen = ft_strlen((*parsed_data)->rest_string);
 	while ((*parsed_data)->option == 'n' && index > 0)
 	{
 		(*parsed_data)->rest_string++;
 		index--;
 	}
-	while (!(ft_isalpha(*(*parsed_data)->rest_string)) && !(ft_isdigit(*(*parsed_data)->rest_string)))
+	while (!(ft_isprint(*(*parsed_data)->rest_string)) && (*(*parsed_data)->rest_string != ' ') && strlen)
 	{
 		if (*(*parsed_data)->rest_string == (*parsed_data)->option)
 			(*parsed_data)->rest_string++;
