@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/06 17:34:34 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 16:19:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ void	print_history(t_parsed_data *parsed_data)
 	}
 }
 
-void	router(t_parsed_data *parsed_data)
+void	router(t_parsed_data *parsed_data, t_command *command)
 {
-	if (fn_search("echo", parsed_data->command))
+	if (fn_search(command->command, "echo"))
 	{
-		fn_echo(parsed_data);
+		fn_echo(command);
 	}
-	else if (fn_search(parsed_data->command, "pwd") && *parsed_data->command)
+	else if (fn_search(command->command, "pwd") && *command->command)
 	{
 		pwd(parsed_data->env_data);
 	}
-	else if (fn_search(parsed_data->command, "env") && *parsed_data->command)
+	else if (fn_search(command->command, "env") && *command->command)
 	{
 		print_env(parsed_data->env_data);
 	}
-	else if (fn_search(parsed_data->command, "cd") && *parsed_data->command)
+	else if (fn_search(command->command, "cd") && *command->command)
 	{
-		fn_cd(parsed_data);
+		fn_cd(command, parsed_data);
 	}
 	else
 	{

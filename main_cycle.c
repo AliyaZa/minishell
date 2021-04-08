@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:26:49 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/05 18:58:52 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 16:12:10 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main_cycle(char **env)
 		fn_termcap(&command, parsed_data->history);
 		parser(&command);
 		save_history(&parsed_data, command->raw_string);
-		// router(parsed_data);
+		router(parsed_data, command);
 		free_str(&command->raw_string);
 		free_str(&command->command);
 		flag = 1;

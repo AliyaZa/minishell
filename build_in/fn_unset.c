@@ -6,12 +6,12 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:38:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/23 17:00:15 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 16:27:26 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+/*
 void		fn_del_el(t_env **root)
 {
 	if((*root)->key)
@@ -55,3 +55,4 @@ void		fn_unset(t_env **our_env, char *history)
 	}
 	root = *our_env;
 }
+*/
