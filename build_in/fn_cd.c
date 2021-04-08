@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/08 17:08:42 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 17:20:18 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*fn_get_path(t_parsed_data *parsed_data, t_command *command)
 		new_path = ft_strdup(command->argument);
 	else if (fn_search(command->argument, "-"))
 	{
-		if (!fn_get_el(parsed_data, "OLDPWD"))
+		if (!(fn_get_el(parsed_data, "OLDPWD")))
 			return (NULL);
 		else
 		{
