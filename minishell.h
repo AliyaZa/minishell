@@ -26,6 +26,7 @@ typedef struct	s_parsed_data
 	t_env		*env_data;
 }				t_parsed_data;
 
+void			term_ini();
 void			delete_last_charachter(t_parsed_data **parsed_data);
 void			clear_command_line();
 void			replace_symbol(char **string, char old, char new);

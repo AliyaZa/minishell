@@ -12,17 +12,6 @@
 
 #include "minishell.h"
 
-void	term_ini()
-{
-	struct	termios term;
-
-	tcgetattr(0, &term);
-	term.c_lflag &= ~(ECHO);
-	term.c_lflag &= ~(ICANON);
-	tcsetattr(0, TCSANOW, &term);
-	tgetent(0, "xterm-256color");
-}
-
 int		main(int argc, char **argv, char **env)
 {
 	term_ini();
