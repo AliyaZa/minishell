@@ -24,9 +24,9 @@ char	*determine_argument(t_parsed_data *parsed_data)
 		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
 		arg++;
 	}
-	while (!(ft_isprint(*arg)) && (*arg != ' ') && ft_strlen(arg))
+	while ((!(ft_isprint(*arg)) && ft_strlen(arg)) || (*arg == ' '))
 		arg++;
-	while ((arg[index] != '\"' && arg[index] != ';' && arg[index] != '\n') && parsed_data->is_in_quotes)
+	while ((arg[index] != '\"' && arg[index] != '\n') && parsed_data->is_in_quotes)
 	{
 		index++;
 	}
@@ -105,10 +105,9 @@ void	determine_struct(t_parsed_data **parsed_data)
 	(*parsed_data)->argument = determine_argument(*parsed_data);
 }
 
-
-
 void	parser(t_parsed_data **parsed_data)
 {
 	replace_symbol(&(*parsed_data)->raw_string, '\n', '\0');
+	semicolon(&(*parsed_data)->raw_string);
 	determine_struct(parsed_data);
 }

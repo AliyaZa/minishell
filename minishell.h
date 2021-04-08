@@ -1,9 +1,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include "libft/libft.h"
+# include "structures.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "libft/libft.h"
 # include <dirent.h>
 # include <unistd.h>
 # include <sys/dir.h>
@@ -13,21 +14,9 @@
 # include <termios.h>
 # include <signal.h>
 
-
-typedef struct	s_parsed_data
-{
-	char 		*raw_string;
-	char		*command;
-	char		option;
-	char		*argument;
-	char		*rest_string;
-	char		**history;
-	size_t		is_in_quotes;
-	t_env		*env_data;
-}				t_parsed_data;
-
+void			semicolon(char **string);
 void			term_ini();
-void			delete_last_charachter(t_parsed_data **parsed_data);
+void			delete_last_charachter(char **string);
 void			clear_command_line();
 void			replace_symbol(char **string, char old, char new);
 char			*navigate_history(char **history, char **str, int *current);

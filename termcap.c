@@ -26,7 +26,7 @@ void    fn_termcap(t_parsed_data **parsed_data)
 		else if (!ft_strncmp(str, "\x7f", ft_strlen("\x7f")) || !ft_strncmp(str, "\177", 1))
 		{
 			if (cursor_position)
-				delete_last_charachter(parsed_data);
+				delete_last_charachter(&(*parsed_data)->raw_string);
 			cursor_position--;
 			clear_command_line();
 			ft_putstr_fd((*parsed_data)->raw_string, 1);
