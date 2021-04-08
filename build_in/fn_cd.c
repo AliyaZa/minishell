@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/08 17:20:18 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 20:06:19 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_env		*fn_get_el(t_parsed_data *parsed_data, char *key)
+t_env		*fn_get_el(t_parsed_data *parsed_data, char *key)
 {
 	t_env	*tmp;
 
@@ -88,14 +88,12 @@ static char	*fn_get_path(t_parsed_data *parsed_data, t_command *command)
 	return (new_path);
 }
 
-static char	*fn_strcreate(char *s, int start, char c)
+static char	*fn_strcreate(char *s, int start, int len)
 {
 	char	*str;
 	char	*tmp;
-	int		len;
 
 	str = NULL;
-	len = ft_strchr(s, c) - s;
 	if (s)
 	{
 		if ((str = (char *)malloc(sizeof(char) * (len + 1))))
@@ -119,12 +117,15 @@ static t_env	*fn_create_el(char *tmp)
 	new_el = malloc(sizeof(t_env));
 	len = ft_strchr(tmp, '=') - tmp;
 	new_el->key = fn_strcreate(tmp, 0, len);
-	new_el->value = fn_strcreate(tmp, len + 1, ft_strlen(tmp) - len);
+	if ((ft_strlen(tmp) - len) > 0)
+		new_el->value = fn_strcreate(tmp, len + 1, ft_strlen(tmp) - len);
+	else
+		new_el->value = NULL;
 	new_el->next = NULL;
 	return (new_el);
 }
 
-static void	fn_set_env(t_parsed_data *parsed_data, char *tmp)
+void	fn_set_env(t_parsed_data *parsed_data, char *tmp)
 {
 	t_env	*env;
 	char	*value;
@@ -135,12 +136,13 @@ static void	fn_set_env(t_parsed_data *parsed_data, char *tmp)
 	value = NULL;
 	if (ft_strchr(tmp, '='))
 	{
-		value = fn_strcreate(tmp, 0, '=');
+		value = fn_strcreate(tmp, 0, (ft_strchr(tmp, '=') - tmp));
 		while (env_copy && !fn_search(env_copy->value, value))
 		{
 			env_copy = env_copy->next;
 		}
 		free(value);
+		value = NULL;
 		if (env_copy)
 		{
 			free(env_copy->value);

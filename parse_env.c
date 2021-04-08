@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:36:22 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 16:17:57 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/08 19:54:37 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_env	*parse_env(char **env)
 		matrix = ft_split(env[i], '=');
 		env_el->key = ft_strdup(matrix[0]);
 		env_el->value = ft_strdup(matrix[1]);
+		env_el->equal = NULL;
 		ft_lstadd_back2(&our_env, env_el);
 		free(matrix[0]);
 		free(matrix[1]);

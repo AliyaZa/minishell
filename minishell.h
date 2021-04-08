@@ -46,5 +46,8 @@ void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
 void			fn_cd(t_command *command, t_parsed_data *parsed_data);
+void			fn_export(t_parsed_data *parsed_data, t_command *command);
+void			fn_set_env(t_parsed_data *parsed_data, char *tmp);
+t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
 
 #endif
