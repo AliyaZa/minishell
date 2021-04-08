@@ -9,8 +9,8 @@ CC = gcc
 SRC = main.c parser.c minishell_utils.c validator.c parse_env.c \
 	main_cycle.c minishell_utils_part_2.c save_history.c   \
 	termcap.c navigate_history.c termcap_utils.c \
-	structures_init.c
-#router.c build_in/echo build_in/env build_in/fn_cd build_in/fn_export build_in/fn_unset build_in/pwd \
+	structures_init.c \
+	router.c build_in/echo.c build_in/env.c build_in/fn_cd.c build_in/fn_export.c build_in/fn_unset.c build_in/pwd.c \
 
 OBJ = $(SRC:.c=.o)
 
