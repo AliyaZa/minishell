@@ -5,7 +5,7 @@ t_command		*initialize_command()
 	t_command	*command;
 
 	command = (t_command *)malloc(sizeof(t_command));
-	parsed_data->raw_string = ft_strnew(0);
+	command->raw_string = ft_strnew(0);
 	command->command = NULL;
 	command->option = 0;
 	command->argument = NULL;
@@ -14,7 +14,7 @@ t_command		*initialize_command()
 	return (command);
 }
 
-t_parsed_data	*initialize_parsed_data()
+t_parsed_data	*initialize_parsed_data(char **env)
 {
 	t_parsed_data	*parsed_data;
 
@@ -22,4 +22,15 @@ t_parsed_data	*initialize_parsed_data()
 	parsed_data->history = (char **)malloc(sizeof(char *) * 500);
 	parsed_data->env_data = parse_env(env);
 	return (parsed_data);
+}
+
+void	reset_(t_command **command, size_t flag)
+{
+	if (flag)
+	{
+		(*command)->raw_string = ft_strnew(0);
+		(*command)->option = 0;
+		(*command)->argument = 0;
+		(*command)->rest_string = 0;
+	}
 }
