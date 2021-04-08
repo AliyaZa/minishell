@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:21:10 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 15:02:52 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:52:14 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		fn_search(char *s1, char *s2)
 {
 	if (s1 && s2)
 	{
-		if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0)
+		if (ft_strcmp(s1, s2) == 0)
 			return (1);
 	}
 	return (0);
@@ -38,7 +38,7 @@ char	*get_value_by_key(t_env *env_data, char *key)
 void	string_tolower(char *string)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (string[i] != 0)
 	{
