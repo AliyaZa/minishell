@@ -108,6 +108,6 @@ void	determine_struct(t_command **command)
 void	parser(t_command **command)
 {
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
-	semicolon(&(*command)->raw_string);
+	// semicolon(&(*command)->raw_string);
 	determine_struct(command);
 }

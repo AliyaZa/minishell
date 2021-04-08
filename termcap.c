@@ -1,15 +1,15 @@
 #include "minishell.h"
 
-void	backspace(char *string, int *cursor_position)
+void	backspace(char **string, int *cursor_position)
 {
 	if (*cursor_position)
 		delete_last_charachter(string);
-	*cursor_position--;
+	*cursor_position = *cursor_position - 1;
 	clear_command_line();
-	ft_putstr_fd(string, 1);
+	ft_putstr_fd(*string, 1);
 }
 
-void    fn_termcap(t_command **command)
+void    fn_termcap(t_command **command, char **history)
 {
 	int			l;
 	char		*str;
@@ -28,7 +28,7 @@ void    fn_termcap(t_command **command)
 		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
 			free((*command)->raw_string);
-			(*command)->raw_string = navigate_history((*command)->history, &str, &current);
+			(*command)->raw_string = navigate_history(history, &str, &current);
 		}
 		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3))
 			;

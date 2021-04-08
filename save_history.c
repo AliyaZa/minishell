@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	save_history(t_parsed_data **parsed_data)
+void	save_history(t_parsed_data **parsed_data, char *line)
 {
 	int				i;
 	
@@ -25,5 +25,5 @@ void	save_history(t_parsed_data **parsed_data)
 		}
 		i--;
 	}
-	(*parsed_data)->history[0] = ft_strdup((*parsed_data)->raw_string);
+	(*parsed_data)->history[0] = ft_strdup(line);
 }
