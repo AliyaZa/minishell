@@ -40,7 +40,7 @@ int		main_cycle(char **env)
 		fn_termcap(&command);
 		parser(&command);
 		save_history(&parsed_data);
-		router(parsed_data);
+		// router(parsed_data);
 		free_str(&parsed_data->raw_string);
 		free_str(&parsed_data->command);
 		flag = 1;

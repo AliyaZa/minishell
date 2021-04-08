@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   fn_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/23 14:40:01 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/23 17:45:27 by mismene          ###   ########.fr       */
+/*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
+/*   Updated: 2021/03/23 16:20:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	unset()
+void	fn_export(t_env **our_env, char **history, int i)
 {
-	free_str();
+	fn_set_env(our_env, history, i);
 }

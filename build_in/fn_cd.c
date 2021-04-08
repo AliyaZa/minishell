@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static t_env		*fn_get_el(t_parsed_data *parsed_data, char *key)
 {
