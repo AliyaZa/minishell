@@ -35,11 +35,11 @@ void	replace_symbol(char **string, char old, char new)
 		*p_n = new;
 }
 
-void	delete_last_charachter(t_parsed_data **parsed_data)
+void	delete_last_charachter(char **string)
 {
 	size_t	strlen;
 
-	strlen = ft_strlen((*parsed_data)->raw_string);
+	strlen = ft_strlen(*string);
 	strlen -= 1;
-	(*parsed_data)->raw_string[strlen] = '\0';
+	(*string)[strlen] = '\0';
 }

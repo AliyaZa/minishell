@@ -12,75 +12,75 @@
 
 #include "minishell.h"
 
-char	*determine_argument(t_parsed_data *parsed_data)
+char	*determine_argument(t_command *command)
 {
 	char	*arg;
 	size_t	index;
 
-	arg = parsed_data->rest_string;
+	arg = command->rest_string;
 	index = 0;
-	if (parsed_data->option)
+	if (command->option)
 	{
-		arg = ft_strchr(parsed_data->rest_string, parsed_data->option);
+		arg = ft_strchr(command->rest_string, command->option);
 		arg++;
 	}
-	while (!(ft_isprint(*arg)) && (*arg != ' ') && ft_strlen(arg))
+	while ((!(ft_isprint(*arg)) && ft_strlen(arg)) || (*arg == ' '))
 		arg++;
-	while ((arg[index] != '\"' && arg[index] != ';' && arg[index] != '\n') && parsed_data->is_in_quotes)
+	while ((arg[index] != '\"' && arg[index] != '\n') && command->is_in_quotes)
 	{
 		index++;
 	}
-	if (parsed_data->is_in_quotes)
+	if (command->is_in_quotes)
 		arg[index] = 0;
 	return (arg);
 }
 
-void	determine_rest_string(t_parsed_data **parsed_data, size_t index)
+void	determine_rest_string(t_command **command, size_t index)
 {
 	size_t	strlen;
 	
-	strlen = ft_strlen((*parsed_data)->rest_string);
-	while ((*parsed_data)->option == 'n' && index > 0)
+	strlen = ft_strlen((*command)->rest_string);
+	while ((*command)->option == 'n' && index > 0)
 	{
-		(*parsed_data)->rest_string++;
+		(*command)->rest_string++;
 		index--;
 	}
-	while (!(ft_isprint(*(*parsed_data)->rest_string)) && (*(*parsed_data)->rest_string != ' ') && strlen)
+	while (!(ft_isprint(*(*command)->rest_string)) && (*(*command)->rest_string != ' ') && strlen)
 	{
-		if (*(*parsed_data)->rest_string == (*parsed_data)->option)
-			(*parsed_data)->rest_string++;
-		(*parsed_data)->rest_string++;
+		if (*(*command)->rest_string == (*command)->option)
+			(*command)->rest_string++;
+		(*command)->rest_string++;
 	}
 }
 
-void	determine_options(t_parsed_data **parsed_data)
+void	determine_options(t_command **command)
 {
 	char	option;
 	size_t	index;
 
 	index = 0;
 	option = 0;
-	while ((*parsed_data)->rest_string[index])
+	while ((*command)->rest_string[index])
 	{
-		if ((*parsed_data)->rest_string[index] == '-')
+		if ((*command)->rest_string[index] == '-')
 		{
-			if (ft_isalpha((*parsed_data)->rest_string[index + 1]))
+			if (ft_isalpha((*command)->rest_string[index + 1]))
 			{
-				(*parsed_data)->option = (*parsed_data)->rest_string[index + 1];
+				(*command)->option = (*command)->rest_string[index + 1];
 				break ;
 			}
 		}
 		index++;
 	}
-	determine_rest_string(parsed_data, index);
+	determine_rest_string(command, index);
 }
 
-char	*determine_command(t_parsed_data **parsed_data)
+char	*determine_command(t_command **command)
 {
 	int		i;
 	char	*p;
 
-	p = (*parsed_data)->raw_string;
+	p = (*command)->raw_string;
 	i = 0;
 	while (!(ft_isalpha(*p)))
 	{
@@ -91,24 +91,23 @@ char	*determine_command(t_parsed_data **parsed_data)
 		p++;
 		i++;
 	}
-	(*parsed_data)->command = (char *)malloc((sizeof(char) * i) + 1);
-	ft_strlcpy((*parsed_data)->command, (*parsed_data)->raw_string, (size_t)(i + 1));
-	string_tolower((*parsed_data)->command);
+	(*command)->command = (char *)malloc((sizeof(char) * i) + 1);
+	ft_strlcpy((*command)->command, (*command)->raw_string, (size_t)(i + 1));
+	string_tolower((*command)->command);
 	return (p);
 }
 
-void	determine_struct(t_parsed_data **parsed_data)
+void	determine_struct(t_command **command)
 {
-	validate_quotes(parsed_data);
-	(*parsed_data)->rest_string = determine_command(parsed_data);
-	determine_options(parsed_data);
-	(*parsed_data)->argument = determine_argument(*parsed_data);
+	validate_quotes(command);
+	(*command)->rest_string = determine_command(command);
+	determine_options(command);
+	(*command)->argument = determine_argument(*command);
 }
 
-
-
-void	parser(t_parsed_data **parsed_data)
+void	parser(t_command **command)
 {
-	replace_symbol(&(*parsed_data)->raw_string, '\n', '\0');
-	determine_struct(parsed_data);
+	replace_symbol(&(*command)->raw_string, '\n', '\0');
+	semicolon(&(*command)->raw_string);
+	determine_struct(command);
 }

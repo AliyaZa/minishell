@@ -12,34 +12,33 @@
 
 #include "minishell.h"
 
-int	main_cycle(char **env)
+void	reset_(t_command **command, size_t flag)
+{
+	if (flag)
+	{
+		(*command)->raw_string = ft_strnew(0);
+		(*command)->option = 0;
+		(*command)->argument = 0;
+		(*command)->rest_string = 0;
+	}
+}
+
+int		main_cycle(char **env)
 {
 	t_parsed_data	*parsed_data;
+	t_command		*command;
 	size_t			flag;
 
 	flag = 0;
-	parsed_data = (t_parsed_data *)malloc(sizeof(t_parsed_data));
-	if (parsed_data == NULL)
-		return 1;
-	initialize_structure(parsed_data);
-	parsed_data->history = (char **)malloc(sizeof(char *) * 500);
-	parsed_data->raw_string = ft_strnew(0);
-	if (!parsed_data || !parsed_data->raw_string || !parsed_data->history)
-		return 1;
-	parsed_data->env_data = parse_env(env);
+	command = initialize_command();
+	parsed_data = initialize_parsed_data();
 	while (1)
 	{
-		if (flag)
-		{
-			parsed_data->raw_string = ft_strnew(0);
-			parsed_data->option = 0;
-			parsed_data->argument = 0;
-			parsed_data->rest_string = 0;
-		}
+		reset_(&command, flag);
 		write(1, "minishell> ", 11);
 		tputs(save_cursor, 1, ft_putchar);
-		fn_termcap(&parsed_data);
-		parser(&parsed_data);
+		fn_termcap(&command);
+		parser(&command);
 		save_history(&parsed_data);
 		router(parsed_data);
 		free_str(&parsed_data->raw_string);
