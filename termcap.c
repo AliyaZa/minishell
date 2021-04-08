@@ -1,6 +1,15 @@
 #include "minishell.h"
 
-void    fn_termcap(t_parsed_data **parsed_data)
+void	backspace(char *string, int *cursor_position)
+{
+	if (*cursor_position)
+		delete_last_charachter(string);
+	*cursor_position--;
+	clear_command_line();
+	ft_putstr_fd(string, 1);
+}
+
+void    fn_termcap(t_command **command)
 {
 	int			l;
 	char		*str;
@@ -18,25 +27,21 @@ void    fn_termcap(t_parsed_data **parsed_data)
 		str[l] = 0;
 		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
-			free((*parsed_data)->raw_string);
-			(*parsed_data)->raw_string = navigate_history((*parsed_data)->history, &str, &current);
+			free((*command)->raw_string);
+			(*command)->raw_string = navigate_history((*command)->history, &str, &current);
 		}
 		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3))
 			;
 		else if (!ft_strncmp(str, "\x7f", ft_strlen("\x7f")) || !ft_strncmp(str, "\177", 1))
 		{
-			if (cursor_position)
-				delete_last_charachter(&(*parsed_data)->raw_string);
-			cursor_position--;
-			clear_command_line();
-			ft_putstr_fd((*parsed_data)->raw_string, 1);
+			backspace(&(*command)->raw_string, &cursor_position);
 		}
 		else
 		{
 			ft_putstr_fd(str, 1);
-			if (!(*parsed_data)->raw_string)
-				(*parsed_data)->raw_string = ft_strnew(0);
-			(*parsed_data)->raw_string = ft_strjoin((*parsed_data)->raw_string, str);
+			if (!(*command)->raw_string)
+				(*command)->raw_string = ft_strnew(0);
+			(*command)->raw_string = ft_strjoin((*command)->raw_string, str);
 			current = -1;
 		}
 	}
