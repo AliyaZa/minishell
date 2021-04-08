@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2/minishell.h"
+#include "../minishell.h"
 
 void		fn_del_el(t_env **root)
 {

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/24 18:49:56 by mismene          ###   ########.fr       */
+/*   Created: 2021/03/24 15:01:33 by mismene           #+#    #+#             */
+/*   Updated: 2021/03/24 15:05:06 by mismene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	fn_echo(t_parsed_data *parsed_data)
+void	pwd(t_env *env_data)
 {
-	write(1, parsed_data->argument, ft_strlen(parsed_data->argument));
-	if (parsed_data->option != 'n')
-	{
-		write(1, "\n", 1);
-		return ;
-	}
+	char	*pwd;
+
+	pwd = get_value_by_key(env_data, "PWD");
+	write(1, pwd, ft_strlen(pwd));
+	write(1, "\n", 1);
 }

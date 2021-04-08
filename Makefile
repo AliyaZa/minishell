@@ -6,10 +6,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRC = main.c parser.c minishell_utils.c validator.c parse_env.c echo.c env.c \
-	main_cycle.c minishell_utils_part_2.c save_history.c router.c pwd.c \
-	spec_symbol.c termcap.c fn_cd.c  navigate_history.c termcap_utils.c semicolon.c \
+SRC = main.c parser.c minishell_utils.c validator.c parse_env.c \
+	main_cycle.c minishell_utils_part_2.c save_history.c router.c  \
+	spec_symbol.c termcap.c navigate_history.c termcap_utils.c semicolon.c \
 	libft_modified.c structures_init.c
+#build_in/echo build_in/env build_in/fn_cd build_in/fn_export build_in/fn_unset build_in/pwd \
 
 OBJ = $(SRC:.c=.o)
 
