@@ -6,16 +6,16 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:59:28 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/24 18:49:56 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/08 15:47:56 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	fn_echo(t_parsed_data *parsed_data)
+void	fn_echo(t_command *command)
 {
-	write(1, parsed_data->argument, ft_strlen(parsed_data->argument));
-	if (parsed_data->option != 'n')
+	write(1, command->argument, ft_strlen(command->argument));
+	if (command->option != 'n')
 	{
 		write(1, "\n", 1);
 		return ;
