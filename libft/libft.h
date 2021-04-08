@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:07:15 by nhill             #+#    #+#             */
-/*   Updated: 2021/03/24 16:31:29 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/07 17:04:32 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
+int					ft_strcmp(const char *str1, const char *str2);
 
 #endif
