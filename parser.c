@@ -105,9 +105,32 @@ void	determine_struct(t_command **command)
 	(*command)->argument = determine_argument(*command);
 }
 
+void	semicolon(t_command ***command)
+{
+	char	*string;
+	int		index;
+	int		counter;
+
+	string = (**command)->raw_string;
+	index = 0;
+	counter = 0;
+	while (string[index])
+	{
+		if (string[index] == ';')
+			counter++;
+		index++;
+	}
+	index = 0;
+	while (counter + 1)
+	{
+		(*command)[index] = (t_command *)malloc(sizeof(t_command));
+		counter--;
+	}
+}
+
 void	parser(t_command **command)
 {
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
-	// semicolon(&(*command)->raw_string);
+	semicolon(&command);
 	determine_struct(command);
 }
