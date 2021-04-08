@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/08 16:40:46 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 17:08:42 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*fn_new_path(t_env *home, t_command *command)
 	path = NULL;
 	new_path = NULL;
 	path = getcwd(path, PATH_MAX);
-	if (command->argument)
+	if (command->argument && !(fn_search(command->argument, "~")))
 		new_path = fn_strjoin3(path, "/", command->argument);
 	else
 		new_path = ft_strdup(home->value);
@@ -69,14 +69,13 @@ static char	*fn_get_path(t_parsed_data *parsed_data, t_command *command)
 	new_path = NULL;
 	home = NULL;
 	tmp = NULL;
-	if ((!(home = fn_get_el(parsed_data, "HOME")) && !(command->command)) ||
-		fn_search(command->argument, "~"))
+	if ((!(home = fn_get_el(parsed_data, "HOME")) && !command->command))
 		return (NULL);
 	else if (command->argument && command->argument[0] == '/')
 		new_path = ft_strdup(command->argument);
 	else if (fn_search(command->argument, "-"))
 	{
-		if (!fn_get_el(parsed_data->env_data->key, "OLDPWD"))
+		if (!fn_get_el(parsed_data, "OLDPWD"))
 			return (NULL);
 		else
 		{
