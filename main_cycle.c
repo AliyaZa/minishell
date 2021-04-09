@@ -31,7 +31,7 @@ int		main_cycle(char **env)
 			fn_termcap(&command, parsed_data->history);
 			save_history(&parsed_data, command->raw_string);
 		}
-		parser(&command);
+		parser(&command, parsed_data->env_data);
 		router(parsed_data, command);
 		flag = 1;
 	}

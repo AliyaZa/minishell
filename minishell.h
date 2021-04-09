@@ -32,7 +32,7 @@ void			initialize_structure(t_command *command);
 void			pwd();
 void			router(t_parsed_data *parsed_data, t_command *command);
 void			save_history(t_parsed_data **parsed_data, char *line);
-void			parser(t_command **command);
+void			parser(t_command **command, t_env *env);
 void			free_str(char **s);
 int				main_cycle(char **env);
 void			print_env(t_env *env_data);

@@ -6,12 +6,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRC = main.c parser.c minishell_utils.c validator.c parse_env.c \
+SRC = main.c parser.c minishell_utils.c parse_env.c \
 	main_cycle.c minishell_utils_part_2.c save_history.c   \
 	termcap.c navigate_history.c termcap_utils.c \
 	structures_init.c router.c build_in/echo.c build_in/env.c \
 	build_in/fn_cd.c build_in/fn_export.c build_in/fn_unset.c build_in/pwd.c \
-
+	# validator.c 
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c

@@ -101,7 +101,7 @@ char	*determine_command(t_command **command)
 
 void	determine_struct(t_command **command)
 {
-	validate_quotes(command);
+	// validate_quotes(command);
 	(*command)->rest_string = determine_command(command);
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
@@ -133,7 +133,35 @@ void	semicolon(t_command **command)
 	}
 }
 
-void	parser(t_command **command)
+void	substitution(char **dst, t_env *env)
+{
+	int		index;
+	char	*key;
+	char	*string;
+
+	index = 0;
+	string = *dst;
+	key = NULL;
+	while (*string)
+	{
+		if (*string == '$')
+		{
+			string++;
+			key = ft_strdup(string);
+			break ;
+		}
+		string++;
+	}
+	index = 0;
+	while (key[index] != ' ' && key[index])
+	{
+		index++;
+	}
+	key[index] = 0;
+	printf("\n-------------\nkey: %s\nvalue: %s\n----------\n", key, get_value_by_key(env, key));
+}
+
+void	parser(t_command **command, t_env *env)
 {
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
 	{
@@ -142,6 +170,7 @@ void	parser(t_command **command)
 	if (!ft_strncmp((*command)->raw_string, "\n", 1))
 		return ;
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
+	substitution(&(*command)->raw_string, env);
 	semicolon(command);
 	determine_struct(command);
 }
