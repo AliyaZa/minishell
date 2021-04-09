@@ -17,7 +17,6 @@
 void			reset_(t_command **command, size_t flag);
 t_command		*initialize_command();
 t_parsed_data	*initialize_parsed_data(char **env);
-void			semicolon(char **string);
 void			term_ini();
 void			delete_last_charachter(char **string);
 void			clear_command_line();

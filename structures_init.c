@@ -11,6 +11,7 @@ t_command		*initialize_command()
 	command->argument = NULL;
 	command->is_in_quotes = 0;
 	command->rest_string = 0;
+	command->queue = NULL;
 	return (command);
 }
 
@@ -28,6 +29,8 @@ void	reset_(t_command **command, size_t flag)
 {
 	if (flag)
 	{
+		free_str(&(*command)->raw_string);
+		free_str(&(*command)->command);
 		(*command)->raw_string = ft_strnew(0);
 		(*command)->option = 0;
 		(*command)->argument = 0;

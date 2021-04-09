@@ -79,6 +79,7 @@ char	*determine_command(t_command **command)
 {
 	int		i;
 	char	*p;
+	char	*command_p;
 
 	p = (*command)->raw_string;
 	i = 0;
@@ -86,13 +87,14 @@ char	*determine_command(t_command **command)
 	{
 		p++;
 	}
+	command_p = p;
 	while (ft_isalpha(*p))
 	{
 		p++;
 		i++;
 	}
 	(*command)->command = (char *)malloc((sizeof(char) * i) + 1);
-	ft_strlcpy((*command)->command, (*command)->raw_string, (size_t)(i + 1));
+	ft_strlcpy((*command)->command, command_p, (size_t)(i + 1));
 	string_tolower((*command)->command);
 	return (p);
 }
@@ -105,32 +107,39 @@ void	determine_struct(t_command **command)
 	(*command)->argument = determine_argument(*command);
 }
 
-void	semicolon(t_command ***command)
+void	semicolon(t_command **command)
 {
 	char	*string;
 	int		index;
 	int		counter;
 
-	string = (**command)->raw_string;
+	string = (*command)->raw_string;
 	index = 0;
 	counter = 0;
 	while (string[index])
 	{
 		if (string[index] == ';')
+		{
 			counter++;
+			string[index] = 0;
+			(*command)->queue= &string[index + 1];
+			break ;
+		}
 		index++;
 	}
-	index = 0;
-	while (counter + 1)
+	if (!counter)
 	{
-		(*command)[index] = (t_command *)malloc(sizeof(t_command));
-		counter--;
+		(*command)->queue = NULL;
 	}
 }
 
 void	parser(t_command **command)
 {
+	if (!ft_strlen((*command)->raw_string))
+	{
+		(*command)->raw_string = ft_strdup((*command)->queue);
+	}
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
-	semicolon(&command);
+	semicolon(command);
 	determine_struct(command);
 }

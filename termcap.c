@@ -39,8 +39,6 @@ void    fn_termcap(t_command **command, char **history)
 		else
 		{
 			ft_putstr_fd(str, 1);
-			if (!(*command)->raw_string)
-				(*command)->raw_string = ft_strnew(0);
 			(*command)->raw_string = ft_strjoin((*command)->raw_string, str);
 			current = -1;
 		}
