@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:50 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/09 18:48:18 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 	}
 	else
 	{
-		write(1, "command not found\n", 18);
+		write(1, "minishell: ", 11);
+		ft_putstr_fd(command->raw_string, 1);
+		write(1, ": command not found\n", 20);
 	}
 }
