@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:07:15 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/07 17:04:32 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/08 19:57:13 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_env
 {
 	void			*key;
 	void			*value;
+	void			*equal;
 	struct s_env	*next;
 }					t_env;
 void				*ft_memset(void *dest, int c, size_t n);

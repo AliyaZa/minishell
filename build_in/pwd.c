@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:01:33 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/24 15:05:06 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/08 17:36:53 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pwd(t_env *env_data)
+void	pwd()
 {
 	char	*pwd;
 
-	pwd = get_value_by_key(env_data, "PWD");
+	pwd = NULL;
+	pwd = getcwd(pwd, PATH_MAX);
 	write(1, pwd, ft_strlen(pwd));
 	write(1, "\n", 1);
 }

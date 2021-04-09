@@ -29,7 +29,7 @@ void			test_clean_screen(void);
 int				termcap_test(int argc, char **argv);
 void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_command *command);
-void			pwd(t_env *env_data);
+void			pwd();
 void			router(t_parsed_data *parsed_data, t_command *command);
 void			save_history(t_parsed_data **parsed_data, char *line);
 void			parser(t_command **command);
@@ -45,5 +45,8 @@ void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
 void			fn_cd(t_command *command, t_parsed_data *parsed_data);
+void			fn_export(t_parsed_data *parsed_data, t_command *command);
+void			fn_set_env(t_parsed_data *parsed_data, char *tmp);
+t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
 
 #endif
