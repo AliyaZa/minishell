@@ -11,6 +11,7 @@ SRC = main.c parser.c minishell_utils.c validator.c parse_env.c \
 	termcap.c navigate_history.c termcap_utils.c \
 	structures_init.c router.c build_in/echo.c build_in/env.c \
 	build_in/fn_cd.c build_in/fn_export.c build_in/fn_unset.c build_in/pwd.c \
+	build_in/fn_fork.c build_in/fn_errors.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/09 18:00:42 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/09 19:06:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_env		*fn_get_el(t_parsed_data *parsed_data, char *key)
 	return (NULL);
 }
 
-static char		*fn_strjoin3(char *str1, char *str2, char *str3)
+char		*fn_strjoin3(char *str1, char *str2, char *str3)
 {
 	char	*str;
 	size_t	size;
