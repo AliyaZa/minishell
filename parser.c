@@ -135,10 +135,12 @@ void	semicolon(t_command **command)
 
 void	parser(t_command **command)
 {
-	if (!ft_strlen((*command)->raw_string))
+	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
 	{
 		(*command)->raw_string = ft_strdup((*command)->queue);
 	}
+	if (!ft_strncmp((*command)->raw_string, "\n", 1))
+		return ;
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
 	semicolon(command);
 	determine_struct(command);

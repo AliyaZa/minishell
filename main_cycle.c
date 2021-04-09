@@ -38,4 +38,5 @@ int		main_cycle(char **env)
 	free(parsed_data->history);
 	free(parsed_data->env_data);
 	free(parsed_data);
+	free(command);
 }
