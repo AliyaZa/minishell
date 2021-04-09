@@ -2,7 +2,8 @@
 
 char	*navigate_history(char **history, char **str, int *current)
 {
-	int next;
+	int		next;
+	char	*string;
 
 	next = !ft_strncmp(*str, "\e[A", 3) ? 1 : -1;
 	if (*current == 0 && next == -1)
@@ -14,7 +15,9 @@ char	*navigate_history(char **history, char **str, int *current)
 	{
 		*current += next;
 		clear_command_line();
-		ft_putstr_fd(history[*current], 1);
+		string = history[*current];
+		replace_symbol(&string, '\n', '\0');
+		ft_putstr_fd(string, 1);
 		return (ft_strdup(history[*current]));
 	}
 	return (NULL);

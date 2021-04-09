@@ -24,14 +24,15 @@ int		main_cycle(char **env)
 	while (1)
 	{
 		reset_(&command, flag);
-		write(1, "minishell> ", 11);
-		tputs(save_cursor, 1, ft_putchar);
-		fn_termcap(&command, parsed_data->history);
+		if (!command->queue)
+		{
+			write(1, "minishell> ", 11);
+			tputs(save_cursor, 1, ft_putchar);
+			fn_termcap(&command, parsed_data->history);
+			save_history(&parsed_data, command->raw_string);
+		}
 		parser(&command);
-		save_history(&parsed_data, command->raw_string);
 		router(parsed_data, command);
-		free_str(&command->raw_string);
-		free_str(&command->command);
 		flag = 1;
 	}
 	free(parsed_data->history);

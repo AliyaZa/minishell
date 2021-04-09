@@ -30,7 +30,7 @@ void    fn_termcap(t_command **command, char **history)
 			free((*command)->raw_string);
 			(*command)->raw_string = navigate_history(history, &str, &current);
 		}
-		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3))
+		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3) || !ft_strncmp(str, "\t", 1))
 			;
 		else if (!ft_strncmp(str, "\x7f", ft_strlen("\x7f")) || !ft_strncmp(str, "\177", 1))
 		{
@@ -39,8 +39,6 @@ void    fn_termcap(t_command **command, char **history)
 		else
 		{
 			ft_putstr_fd(str, 1);
-			if (!(*command)->raw_string)
-				(*command)->raw_string = ft_strnew(0);
 			(*command)->raw_string = ft_strjoin((*command)->raw_string, str);
 			current = -1;
 		}
