@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/08 18:49:13 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/09 17:32:36 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 	else if (fn_search(command->command, "export") && *command->command)
 	{
 		fn_export(parsed_data, command);
+	}
+	else if (fn_search(command->command, "unset") && *command->command)
+	{
+		fn_unset(parsed_data, command);
 	}
 	else
 	{

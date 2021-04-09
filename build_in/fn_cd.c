@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/08 20:06:19 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/09 18:00:42 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static char	*fn_get_path(t_parsed_data *parsed_data, t_command *command)
 	return (new_path);
 }
 
-static char	*fn_strcreate(char *s, int start, int len)
+char	*fn_strcreate(char *s, int start, int len)
 {
 	char	*str;
 	char	*tmp;
