@@ -43,3 +43,19 @@ void	delete_last_charachter(char **string)
 	strlen -= 1;
 	(*string)[strlen] = '\0';
 }
+
+int		count_req_chars(char *string, char req)
+{
+	int	counter;
+	int	index;
+
+	counter = 0;
+	index = 0;
+	while (string[index])
+	{
+		if (string[index] == req)
+			counter++;
+		index++;
+	}
+	return (counter);
+}

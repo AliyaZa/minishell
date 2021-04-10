@@ -29,3 +29,21 @@ char	*ft_strdup(const char *str)
 	ptr[i] = '\0';
 	return (ptr);
 }
+
+char	*ft_strdup2(const char *str, char c)
+{
+	char	*ptr;
+	int		i;
+
+	ptr = NULL;
+	i = 0;
+	if (!(ptr = (char *)malloc(sizeof(*ptr) * (ft_strlen(str) + 1))))
+		return (NULL);
+	while (str[i] != c)
+	{
+		ptr[i] = str[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
