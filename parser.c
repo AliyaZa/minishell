@@ -138,27 +138,38 @@ void	substitution(char **dst, t_env *env)
 	int		index;
 	char	*key;
 	char	*string;
+	char	*value;
+	char	*rest;
 
 	index = 0;
 	string = *dst;
 	key = NULL;
+	value = NULL;
+	rest = NULL;
 	while (*string)
 	{
 		if (*string == '$')
 		{
-			string++;
+			--string = 0;
+			string+=2;
 			key = ft_strdup(string);
 			break ;
 		}
 		string++;
 	}
-	index = 0;
-	while (key[index] != ' ' && key[index])
+
+	if (key)
 	{
-		index++;
+		while (key[index] != ' ' && key[index])
+		{
+			index++;
+		}
+		rest = ft_strdup(&key[++index]);
+		key[--index] = 0;
+		value = get_value_by_key(env, key);
 	}
-	key[index] = 0;
-	printf("\n-------------\nkey: %s\nvalue: %s\n----------\n", key, get_value_by_key(env, key));
+	*dst = ft_strjoin2(*dst, value);
+	*dst = ft_strjoin2(*dst, rest);
 }
 
 void	parser(t_command **command, t_env *env)
