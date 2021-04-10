@@ -140,18 +140,20 @@ void	substitution(char **dst, t_env *env)
 	char	*string;
 	char	*value;
 	char	*rest;
+	char	*start;
 
 	index = 0;
 	string = *dst;
 	key = NULL;
 	value = NULL;
 	rest = NULL;
+	if (ft_strchr(string, '$'))
+		start = ft_strdup2(string, '$');
 	while (*string)
 	{
 		if (*string == '$')
 		{
-			--string = 0;
-			string+=2;
+			string++;
 			key = ft_strdup(string);
 			break ;
 		}
@@ -164,12 +166,17 @@ void	substitution(char **dst, t_env *env)
 		{
 			index++;
 		}
-		rest = ft_strdup(&key[++index]);
-		key[--index] = 0;
+		rest = ft_strdup(&key[index]);
+		key[index] = 0;
 		value = get_value_by_key(env, key);
 	}
-	*dst = ft_strjoin2(*dst, value);
-	*dst = ft_strjoin2(*dst, rest);
+	start = ft_strjoin2(start, value);
+	start = ft_strjoin2(start, rest);
+	if (start && ft_strchr(start, '$'))
+		substitution(&start, env);
+	free_str(dst);
+	*dst = ft_strdup(start);
+	free(start);
 }
 
 void	parser(t_command **command, t_env *env)
