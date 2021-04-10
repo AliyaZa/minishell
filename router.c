@@ -37,6 +37,10 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 		exit(0);
 	else
 	{
+		if (!command->command)
+			return ;
+		write(1, "command not found\n", 18);
+
 		child = fork();
 		if (child == 0)
 			fn_fork(parsed_data, command);

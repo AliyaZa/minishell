@@ -35,7 +35,7 @@ void	validate_quotes(t_command **command)
 	if ((quotes_counter % 2) && main_quotes)
 	{
 		write(1, ">", 1);
-		(*command)->raw_string = ft_strjoin((*command)->raw_string, "\n");
+		(*command)->raw_string = ft_strjoin2((*command)->raw_string, "\n");
 		parser(command);
 	}
 }
