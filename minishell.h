@@ -13,6 +13,8 @@
 # include <term.h>
 # include <termios.h>
 # include <signal.h>
+# define COMMAND_NOT_FOUND 1
+# define NOT_AN_EXECUTABLE_FILE 2
 
 void			reset_(t_command **command, size_t flag);
 t_command		*initialize_command();
@@ -48,5 +50,10 @@ void			fn_cd(t_command *command, t_parsed_data *parsed_data);
 void			fn_export(t_parsed_data *parsed_data, t_command *command);
 void			fn_set_env(t_parsed_data *parsed_data, char *tmp);
 t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
+void			fn_unset(t_parsed_data *parsed_data, t_command *command);
+char			*fn_strcreate(char *s, int start, int len);
+char			*fn_strjoin3(char *str1, char *str2, char *str3);
+void			fn_errors(t_command *command, int error);
+void			fn_fork(t_parsed_data *parsed_data, t_command *command);
 
 #endif

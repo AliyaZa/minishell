@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:38:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/08 16:27:26 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/09 17:34:01 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
-void		fn_del_el(t_env **root)
+
+static void		fn_del_el(t_env **root)
 {
 	if((*root)->key)
 	{
@@ -26,23 +26,21 @@ void		fn_del_el(t_env **root)
 	}
 }
 
-void		fn_unset(t_env **our_env, char *history)
+void		fn_unset(t_parsed_data *parsed_data, t_command *command)
 {
-	t_env	env;
 	t_env	*prev;
 	t_env	*root;
 
-	//env = 0;
-	root = *our_env;
-	if (fn_search((*our_env)->key, history))
-		*our_env = (*our_env)->next;
+	root = parsed_data->env_data;
+	if (fn_search(parsed_data->env_data->key, command->argument))
+		parsed_data->env_data = parsed_data->env_data->next;
 	else
 	{
 		while (root->next)
 		{
 			prev = root;
 			root = root->next;
-			if (fn_search(root->key, history))
+			if (fn_search(root->key, command->argument))
 			{
 				prev->next = root->next;
 				fn_del_el(&root);
@@ -53,6 +51,5 @@ void		fn_unset(t_env **our_env, char *history)
 			}
 		}
 	}
-	root = *our_env;
+	root = parsed_data->env_data;
 }
-*/
