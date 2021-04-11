@@ -52,19 +52,29 @@ void	validator(char **string, t_env *env)
 	int		flag;
 	char	*rest_string;
 	char	*key;
-	char	*value;
 
 	key = NULL;
-	p = *string;
 	index = 0;
 	quot_type = 0;
 	flag = 0;
-	(void)env->key;
-	while (p[index])
+	p = *string;
+	rest_string = *string;
+	while (*rest_string)
 	{
+		p = rest_string;
 		if (p[index] == '"' || p[index] == '\'')
 		{
-			quot_type = p[index];
+			if (!quot_type)
+				quot_type = p[index];
+			else
+			{
+				if (quot_type == p[index])
+				{
+					quot_type = 0;
+					p[index] = 0;
+				}
+				quot_type = 0;
+			}
 			*string += 1;
 			p++;
 		}
@@ -74,9 +84,8 @@ void	validator(char **string, t_env *env)
 			p += index + 1;
 			rest_string = ft_strdup(p);
 			key = determine_key(&p[index]);
-			value = get_value_by_key(env, key);
 			rest_string = determine_rest_string(rest_string);
-			*string = ft_strjoin(*string, value);
+			*string = ft_strjoin(*string, get_value_by_key(env, key));
 			*string = ft_strjoin2(*string, rest_string);
 		}
 		index++;
