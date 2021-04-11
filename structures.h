@@ -14,7 +14,7 @@ typedef struct	s_command
 	char		option;
 	char		*argument;
 	char		*rest_string;
-	size_t		is_in_quotes;
+	char		quotes_type;
 	char		*queue;
 }				t_command;
 

@@ -29,7 +29,7 @@ void	substitution(char **dst, t_env *env)
 
 	if (key)
 	{
-		while (key[index] != ' ' && key[index])
+		while (ft_isalpha(key[index]) && key[index] != ' ' && key[index])
 		{
 			index++;
 		}

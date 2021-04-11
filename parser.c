@@ -26,26 +26,25 @@ static char	*determine_argument(t_command *command)
 	}
 	while ((!(ft_isprint(*arg)) && ft_strlen(arg)) || (*arg == ' '))
 		arg++;
-	while ((arg[index] != '\"' && arg[index] != '\n') && command->is_in_quotes)
+	while (arg[index] != '\"' && arg[index] != '\n')
 	{
 		index++;
 	}
-	if (command->is_in_quotes)
-		arg[index] = 0;
 	return (arg);
 }
 
 static void	determine_rest_string(t_command **command, size_t index)
 {
 	size_t	strlen;
-	
+
 	strlen = ft_strlen((*command)->rest_string);
 	while ((*command)->option == 'n' && index > 0)
 	{
 		(*command)->rest_string++;
 		index--;
 	}
-	while (!(ft_isprint(*(*command)->rest_string)) && (*(*command)->rest_string != ' ') && strlen)
+	while (!(ft_isprint(*(*command)->rest_string))
+		&& (*(*command)->rest_string != ' ') && strlen)
 	{
 		if (*(*command)->rest_string == (*command)->option)
 			(*command)->rest_string++;
@@ -99,14 +98,6 @@ static char	*determine_command(t_command **command)
 	return (p);
 }
 
-static void	determine_struct(t_command **command)
-{
-	validate_quotes(command);
-	(*command)->rest_string = determine_command(command);
-	determine_options(command);
-	(*command)->argument = determine_argument(*command);
-}
-
 void	parser(t_command **command, t_env *env)
 {
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
@@ -119,5 +110,8 @@ void	parser(t_command **command, t_env *env)
 	if (ft_strchr((*command)->raw_string, '$'))
 		substitution(&(*command)->raw_string, env);
 	semicolon(command);
-	determine_struct(command);
+	validate_quotes((*command)->raw_string);
+	(*command)->rest_string = determine_command(command);
+	determine_options(command);
+	(*command)->argument = determine_argument(*command);
 }

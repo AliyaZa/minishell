@@ -12,28 +12,29 @@
 
 #include "minishell.h"
 
-void	validate_quotes(t_command **command)
-{
-	size_t	quotes_counter;
+void	quotes_stack(char *string)
+{	
 	char	main_quotes;
-	char	*string;
 
-	string = (*command)->raw_string;
-	quotes_counter = 0;
 	main_quotes = 0;
 	while (*string)
 	{
 		if (*string == '"' || *string == '\'')
 		{
-			(*command)->is_in_quotes = 1;
 			main_quotes = *string;
-			if (*string == main_quotes)
-				quotes_counter++;
 		}
 		string++;
 	}
-	if ((quotes_counter % 2) && main_quotes)
-	{
+}
+
+void	validate_quotes(char *string)
+{
+	size_t	d_quotes;
+	size_t	quotes;
+
+	d_quotes = count_req_chars(string, '"');
+	quotes = count_req_chars(string, '\'');
+	if ((quotes % 2) || (d_quotes % 2))
 		ft_putstr_fd("minishell: syntax error: unexpected end of file", 1);
-	}
+	quotes_stack(string);
 }
