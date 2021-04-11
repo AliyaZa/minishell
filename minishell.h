@@ -16,6 +16,8 @@
 # define COMMAND_NOT_FOUND 1
 # define NOT_AN_EXECUTABLE_FILE 2
 
+void			substitution(char **dst, t_env *env);
+void			semicolon(t_command **command);
 size_t			matrixlen(char **matrix);
 int				count_req_chars(char *string, char req);
 void			reset_(t_command **command, size_t flag);
