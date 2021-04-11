@@ -46,7 +46,7 @@ char			*get_value_by_key(t_env *env_data, char *key);
 void			fn_echo(t_command *command);
 int				fn_search(char *s1, char *s2);
 t_env			*parse_env(char **env);
-void			validate_quotes(char *string);
+void			validator(char **string, t_env *env);
 void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);

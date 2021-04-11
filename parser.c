@@ -107,11 +107,9 @@ void	parser(t_command **command, t_env *env)
 	if (!ft_strncmp((*command)->raw_string, "\n", 1))
 		return ;
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
-	if (ft_strchr((*command)->raw_string, '$'))
-		substitution(&(*command)->raw_string, env);
 	semicolon(command);
-	validate_quotes((*command)->raw_string);
 	(*command)->rest_string = determine_command(command);
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
+	validator(&(*command)->argument, env);
 }
