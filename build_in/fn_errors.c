@@ -26,5 +26,9 @@ void	fn_errors(t_command *command, int error)
 		ft_putstr_fd(command->raw_string, 2);
 		ft_putstr_fd(": not an executable file\n", 2);
 	}
+	else if (error == SYNTAX_ERROR)
+	{
+		ft_putstr_fd("minishell: syntax error: unexpected end of file", 2);
+	}
 	exit (1);
 }

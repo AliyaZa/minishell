@@ -111,5 +111,5 @@ void	parser(t_command **command, t_env *env)
 	(*command)->rest_string = determine_command(command);
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
-	validator(&(*command)->argument, env);
+	validator(&(*command)->argument, env, *command);
 }

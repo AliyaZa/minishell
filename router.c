@@ -40,8 +40,8 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 		if (!command->command)
 			return ;
 		child = fork();
-		if (child == 0)
-			fn_fork(parsed_data, command);
+		// if (child == 0)
+		// 	fn_fork(parsed_data, command);
 		while ((parent = wait(&status)) > 0)
 		;
 	}
