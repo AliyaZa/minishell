@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:51:26 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 16:37:17 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/12 19:17:56 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	fn_creator(t_env **env_copy, char **value, char *tmp)
 	return (flag);
 }
 
-void	fn_set_env(t_parsed_data *parsed_data, char *tmp)
+void	fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp)
 {
 	t_env	*env;
 	char	*value;
@@ -113,5 +113,5 @@ void	fn_set_env(t_parsed_data *parsed_data, char *tmp)
 		}
 	}
 	else
-		return ;
+		fn_errors(command, errno);
 }
