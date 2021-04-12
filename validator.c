@@ -12,82 +12,54 @@
 
 #include "minishell.h"
 
-char	*determine_rest_string(char *string)
-{
-	while (*string)
-	{
-		if (*string == ' ')
-		{
-			break ;
-		}
-		string++;
-	}
-	return (ft_strdup(string));
-}
-
-static char *determine_key(char *string)
-{
-	char	*key;
-	int		index;
-
-	index = 0;
-	key = string;
-	while (ft_isprint(string[index]))
-	{
-		if (string[index] == ' ' || string[index] == '\'' || string[index] == '"')
-		{
-			string[index] = 0;
-			break ;
-		}
-		index++;
-	}
-	return (key);
-}
-
 void	validator(char **string, t_env *env)
 {
+	char	*start;
 	int		index;
-	char	quot_type;
-	char	*p;
-	int		flag;
-	char	*rest_string;
-	char	*key;
+	char	*save;
+	char	flag;
+	int		k;
+	char	*value;
 
-	key = NULL;
 	index = 0;
-	quot_type = 0;
+	start = *string;
+	save = NULL;
 	flag = 0;
-	p = *string;
-	rest_string = *string;
-	while (*rest_string)
+	k = 0;
+	(void)env->key;
+	while (*start)
 	{
-		p = rest_string;
-		if (p[index] == '"' || p[index] == '\'')
+		if (*start == '"' || *start == '\'')
 		{
-			if (!quot_type)
-				quot_type = p[index];
+			if (!flag)
+				flag = *start;
 			else
 			{
-				if (quot_type == p[index])
+				if (flag == *start)
 				{
-					quot_type = 0;
-					p[index] = 0;
+					flag = 0;
 				}
-				quot_type = 0;
 			}
-			*string += 1;
-			p++;
+			*start = 0;
+			save = ft_strdup(start + 1);
+			*string = ft_strjoin(*string, save);
+			free_str(&save);
+			start = *string;
 		}
-		if (p[index] == '$' && quot_type == '"')
+		if (*start == '$' && (flag == 0 || flag == '"'))
 		{
-			p[index] = 0;
-			p += index + 1;
-			rest_string = ft_strdup(p);
-			key = determine_key(&p[index]);
-			rest_string = determine_rest_string(rest_string);
-			*string = ft_strjoin(*string, get_value_by_key(env, key));
-			*string = ft_strjoin2(*string, rest_string);
+			*start++ = 0;
+			value = get_value_by_key(env, ft_strdup_c(start, ' '));
+			save = ft_strdup(start + ft_strlen_c(start, ' '));
+			*string = ft_strjoin(*string, value);
+			*string = ft_strjoin(*string, save);
+			free_str(&save);
+			start = *string;
 		}
-		index++;
+		start++;
+	}
+	if (flag)
+	{
+		ft_putstr_fd("minishell: syntax error: unexpected end of file", 1);
 	}
 }
