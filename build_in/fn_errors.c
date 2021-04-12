@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:17:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 15:26:50 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/12 18:54:47 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ void	fn_errors(t_command *command, int error)
 		ft_putstr_fd(command->raw_string, 2);
 		ft_putstr_fd(": not an executable file\n", 2);
 	}
+	/*{
+		write(2, "minishell: ", 11);
+		ft_putstr_fd(command->raw_string, 2);
+		ft_putstr_fd(strerror(errno), 2);
+	}*/
 	exit (1);
 }
