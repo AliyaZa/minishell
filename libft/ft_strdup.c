@@ -30,7 +30,7 @@ char	*ft_strdup(const char *str)
 	return (ptr);
 }
 
-char	*ft_strdup2(const char *str, char c)
+char	*ft_strdup_c(const char *str, char c)
 {
 	char	*ptr;
 	int		i;
