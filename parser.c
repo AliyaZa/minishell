@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*determine_argument(t_command *command)
+static char	*determine_argument(t_command *command)
 {
 	char	*arg;
 	size_t	index;
@@ -26,26 +26,25 @@ char	*determine_argument(t_command *command)
 	}
 	while ((!(ft_isprint(*arg)) && ft_strlen(arg)) || (*arg == ' '))
 		arg++;
-	while ((arg[index] != '\"' && arg[index] != '\n') && command->is_in_quotes)
+	while (arg[index] != '\"' && arg[index] != '\n')
 	{
 		index++;
 	}
-	if (command->is_in_quotes)
-		arg[index] = 0;
 	return (arg);
 }
 
-void	determine_rest_string(t_command **command, size_t index)
+static void	determine_rest_string(t_command **command, size_t index)
 {
 	size_t	strlen;
-	
+
 	strlen = ft_strlen((*command)->rest_string);
 	while ((*command)->option == 'n' && index > 0)
 	{
 		(*command)->rest_string++;
 		index--;
 	}
-	while (!(ft_isprint(*(*command)->rest_string)) && (*(*command)->rest_string != ' ') && strlen)
+	while (!(ft_isprint(*(*command)->rest_string))
+		&& (*(*command)->rest_string != ' ') && strlen)
 	{
 		if (*(*command)->rest_string == (*command)->option)
 			(*command)->rest_string++;
@@ -53,7 +52,7 @@ void	determine_rest_string(t_command **command, size_t index)
 	}
 }
 
-void	determine_options(t_command **command)
+static void	determine_options(t_command **command)
 {
 	char	option;
 	size_t	index;
@@ -75,7 +74,7 @@ void	determine_options(t_command **command)
 	determine_rest_string(command, index);
 }
 
-char	*determine_command(t_command **command)
+static char	*determine_command(t_command **command)
 {
 	int		i;
 	char	*p;
@@ -99,86 +98,6 @@ char	*determine_command(t_command **command)
 	return (p);
 }
 
-void	determine_struct(t_command **command)
-{
-	// validate_quotes(command);
-	(*command)->rest_string = determine_command(command);
-	determine_options(command);
-	(*command)->argument = determine_argument(*command);
-}
-
-void	semicolon(t_command **command)
-{
-	char	*string;
-	int		index;
-	int		counter;
-
-	string = (*command)->raw_string;
-	index = 0;
-	counter = 0;
-	while (string[index])
-	{
-		if (string[index] == ';')
-		{
-			counter++;
-			string[index] = 0;
-			(*command)->queue= &string[index + 1];
-			break ;
-		}
-		index++;
-	}
-	if (!counter)
-	{
-		(*command)->queue = NULL;
-	}
-}
-
-void	substitution(char **dst, t_env *env)
-{
-	int		index;
-	char	*key;
-	char	*string;
-	char	*value;
-	char	*rest;
-	char	*start;
-
-	index = 0;
-	string = *dst;
-	key = NULL;
-	value = NULL;
-	rest = NULL;
-	if (ft_strchr(string, '$'))
-		start = ft_strdup2(string, '$');
-	while (*string)
-	{
-		if (*string == '$')
-		{
-			string++;
-			key = ft_strdup(string);
-			break ;
-		}
-		string++;
-	}
-
-	if (key)
-	{
-		while (key[index] != ' ' && key[index])
-		{
-			index++;
-		}
-		rest = ft_strdup(&key[index]);
-		key[index] = 0;
-		value = get_value_by_key(env, key);
-	}
-	start = ft_strjoin2(start, value);
-	start = ft_strjoin2(start, rest);
-	if (start && ft_strchr(start, '$'))
-		substitution(&start, env);
-	free_str(dst);
-	*dst = ft_strdup(start);
-	free(start);
-}
-
 void	parser(t_command **command, t_env *env)
 {
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
@@ -188,7 +107,9 @@ void	parser(t_command **command, t_env *env)
 	if (!ft_strncmp((*command)->raw_string, "\n", 1))
 		return ;
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
-	substitution(&(*command)->raw_string, env);
 	semicolon(command);
-	determine_struct(command);
+	(*command)->rest_string = determine_command(command);
+	determine_options(command);
+	(*command)->argument = determine_argument(*command);
+	validator(&(*command)->argument, env);
 }

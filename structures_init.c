@@ -9,7 +9,6 @@ t_command		*initialize_command()
 	command->command = NULL;
 	command->option = 0;
 	command->argument = NULL;
-	command->is_in_quotes = 0;
 	command->rest_string = 0;
 	command->queue = NULL;
 	return (command);
