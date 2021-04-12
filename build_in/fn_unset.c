@@ -6,27 +6,27 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:38:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/09 17:34:01 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/12 16:26:07 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void		fn_del_el(t_env **root)
+static void	fn_del_el(t_env **root)
 {
-	if((*root)->key)
+	if ((*root)->key)
 	{
 		free((*root)->key);
 		(*root)->key = NULL;
 	}
-	if((*root)->value)
+	if ((*root)->value)
 	{
 		free((*root)->value);
 		(*root)->value = NULL;
 	}
 }
 
-void		fn_unset(t_parsed_data *parsed_data, t_command *command)
+void	fn_unset(t_parsed_data *parsed_data, t_command *command)
 {
 	t_env	*prev;
 	t_env	*root;
@@ -47,7 +47,7 @@ void		fn_unset(t_parsed_data *parsed_data, t_command *command)
 				if (root)
 					free(root);
 				root = NULL;
-				break;
+				break ;
 			}
 		}
 	}

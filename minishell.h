@@ -36,7 +36,7 @@ void			test_clean_screen(void);
 int				termcap_test(int argc, char **argv);
 void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_command *command);
-void			pwd();
+void			pwd(void);
 void			router(t_parsed_data *parsed_data, t_command *command);
 void			save_history(t_parsed_data **parsed_data, char *line);
 void			parser(t_command **command, t_env *env);

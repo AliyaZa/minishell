@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:01:33 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/08 17:36:53 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/12 16:26:38 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pwd()
+void	pwd(void)
 {
 	char	*pwd;
 
