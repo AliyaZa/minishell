@@ -13,6 +13,7 @@
 # include <term.h>
 # include <termios.h>
 # include <signal.h>
+# include <errno.h>
 # define COMMAND_NOT_FOUND 1
 # define NOT_AN_EXECUTABLE_FILE 2
 
