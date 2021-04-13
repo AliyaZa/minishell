@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/13 16:24:55 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 16:59:13 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	fn_change_cd(t_parsed_data *parsed_data, t_command *command, char *p
 	else
 	{
 		tmp = ft_strjoin(env_key, "=");
-		fn_set_env(parsed_data, command, tmp);
+		fn_set_env(parsed_data, command, tmp, 0);
 	}
 }
 

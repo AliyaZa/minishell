@@ -55,7 +55,7 @@ char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
 void			fn_cd(t_command *command, t_parsed_data *parsed_data);
 void			fn_export(t_parsed_data *parsed_data, t_command *command);
-void			fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp);
+void			fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp, int fl);
 t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
 void			fn_unset(t_parsed_data *parsed_data, t_command *command);
 char			*fn_strcreate(char *s, int start, int len);

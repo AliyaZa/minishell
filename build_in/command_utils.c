@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:51:26 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 19:17:56 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 18:20:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_env	*fn_create_el(char *tmp)
+static t_env	*fn_create_el(char *tmp, int flag)
 {
 	t_env	*new_el;
 	int		len;
@@ -24,6 +24,10 @@ static t_env	*fn_create_el(char *tmp)
 		new_el->value = fn_strcreate(tmp, len + 1, ft_strlen(tmp) - len);
 	else
 		new_el->value = NULL;
+	if (flag == 1)
+		new_el->equal = ft_strdup("=");
+	else
+		new_el->equal = NULL;
 	new_el->next = NULL;
 	return (new_el);
 }
@@ -37,6 +41,7 @@ char	*fn_strcreate(char *s, int start, int len)
 	if (s)
 	{
 		str = (char *)malloc(sizeof(char) * (len + 1));
+		str[len+1] = '\0';
 		if (str)
 		{
 			tmp = str;
@@ -82,7 +87,7 @@ static int	fn_creator(t_env **env_copy, char **value, char *tmp)
 	}
 	free(*value);
 	*value = NULL;
-	if (env_copy)
+	if ((*env_copy) != NULL)
 	{
 		free((*env_copy)->value);
 		(*env_copy)->value = ft_strdup(
@@ -92,7 +97,7 @@ static int	fn_creator(t_env **env_copy, char **value, char *tmp)
 	return (flag);
 }
 
-void	fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp)
+void	fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp, int fl)
 {
 	t_env	*env;
 	char	*value;
@@ -108,7 +113,7 @@ void	fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp)
 		flag = fn_creator(&env_copy, &value, tmp);
 		if (flag == 0)
 		{
-			env = fn_create_el(tmp);
+			env = fn_create_el(tmp, fl);
 			ft_lstadd_back2(&parsed_data->env_data, env);
 		}
 	}

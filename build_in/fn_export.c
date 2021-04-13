@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/13 16:23:33 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 19:08:29 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ static void	print_export(t_env *parsed_data)
 	}
 }
 
-static void	fn_get_name(t_env **lst_name, char *value)
+static void	fn_get_name(t_env **lst_name, char *value, int flag)
 {
 	if ((*lst_name))
 	{
-		free_str((*lst_name)->value);
+		if ((*lst_name)->value != NULL)
+			(*lst_name)->value = NULL;
+		if ((*lst_name)->equal != NULL && (flag != 1))
+			(*lst_name)->equal = NULL;
 		(*lst_name)->value = ft_strdup(value);
 	}
 }
@@ -44,23 +47,37 @@ void	fn_export(t_parsed_data *parsed_data, t_command *command)
 	char	*tmp;
 	t_env	*lst_name;
 	char	*value;
+	t_env	*lst;
+	int		flag;
+	int		len;
+	char	*key;
 
 	lst_name = NULL;
 	tmp = NULL;
 	value = NULL;
+	lst = NULL;
+	flag = 0;
+	len = 0;
 	if (command->argument[0] != '\0')
 	{
 		if (!ft_strchr(command->argument, '='))
 		{
 			tmp = ft_strjoin(command->argument, "=");
-			fn_get_el(parsed_data, command->argument)->equal = ft_strdup("=");
+			lst = fn_get_el(parsed_data, command->argument);
+			if (lst)
+				lst->equal = ft_strdup("=");
+			flag = 1;
 		}
 		else
 			tmp = ft_strdup(command->argument);
-		value = fn_strcreate(tmp, 0, (ft_strchr(tmp, '=') - tmp));
-		lst_name = fn_get_el(parsed_data, value);
-		fn_get_name(&lst_name, value);
-		fn_set_env(parsed_data, command, tmp);
+		len = ft_strchr(tmp, '=') - tmp;
+		value = fn_strcreate(tmp, len + 1, ft_strlen(tmp) - len);
+		key = fn_strcreate(tmp, 0, len);
+		lst_name = fn_get_el(parsed_data, key);
+		if (lst_name != NULL)
+			fn_get_name(&lst_name, value, flag);
+		else
+			fn_set_env(parsed_data, command, tmp, flag);
 	}
 	else
 		print_export(parsed_data->env_data);
