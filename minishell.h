@@ -13,6 +13,8 @@
 # include <term.h>
 # include <termios.h>
 # include <signal.h>
+# include <errno.h>
+# include <string.h>
 # define COMMAND_NOT_FOUND 1
 # define NOT_AN_EXECUTABLE_FILE 2
 # define SYNTAX_ERROR 3
@@ -36,7 +38,7 @@ void			test_clean_screen(void);
 int				termcap_test(int argc, char **argv);
 void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_command *command);
-void			pwd();
+void			pwd(void);
 void			router(t_parsed_data *parsed_data, t_command *command);
 void			save_history(t_parsed_data **parsed_data, char *line);
 void			parser(t_command **command, t_env *env);
@@ -53,7 +55,7 @@ char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
 void			fn_cd(t_command *command, t_parsed_data *parsed_data);
 void			fn_export(t_parsed_data *parsed_data, t_command *command);
-void			fn_set_env(t_parsed_data *parsed_data, char *tmp);
+void			fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp);
 t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
 void			fn_unset(t_parsed_data *parsed_data, t_command *command);
 char			*fn_strcreate(char *s, int start, int len);
