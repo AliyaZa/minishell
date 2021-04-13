@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 16:33:11 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 16:23:33 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	fn_export(t_parsed_data *parsed_data, t_command *command)
 		value = fn_strcreate(tmp, 0, (ft_strchr(tmp, '=') - tmp));
 		lst_name = fn_get_el(parsed_data, value);
 		fn_get_name(&lst_name, value);
-		// fn_set_env(parsed_data, tmp);
+		fn_set_env(parsed_data, command, tmp);
 	}
 	else
 		print_export(parsed_data->env_data);

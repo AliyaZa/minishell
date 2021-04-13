@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 16:34:25 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 16:24:55 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*fn_get_path(t_parsed_data *parsed_data, t_command *command)
 	return (new_path);
 }
 
-static void	fn_change_cd(t_parsed_data *parsed_data, char *path, char *env_key)
+static void	fn_change_cd(t_parsed_data *parsed_data, t_command *command, char *path, char *env_key)
 {
 	t_env	*lst_name;
 	char	*tmp;
@@ -87,7 +87,7 @@ static void	fn_change_cd(t_parsed_data *parsed_data, char *path, char *env_key)
 	else
 	{
 		tmp = ft_strjoin(env_key, "=");
-		// fn_set_env(parsed_data, tmp);
+		fn_set_env(parsed_data, command, tmp);
 	}
 }
 
@@ -104,11 +104,11 @@ void	fn_cd(t_command *command, t_parsed_data *parsed_data)
 		path = getcwd(path, PATH_MAX);
 		if (!(chdir(new_path)))
 		{
-			fn_change_cd(parsed_data, path, "OLDPWD");
+			fn_change_cd(parsed_data, command, path, "OLDPWD");
 			free(path);
 			path = NULL;
 			path = getcwd(path, PATH_MAX);
-			fn_change_cd(parsed_data, path, "PWD");
+			fn_change_cd(parsed_data, command, path, "PWD");
 		}
 		free(path);
 		path = NULL;
