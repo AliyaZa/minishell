@@ -26,7 +26,7 @@ void	validator(char **string, t_env *env, t_command *command)
 	int		i;
 
 	index = 0;
-	p = *string;
+	p = ft_strdup(*string);
 	(void)(env->key);
 	(void)(command->command);
 	flag = 0;
@@ -41,7 +41,7 @@ void	validator(char **string, t_env *env, t_command *command)
 				else if (p[index] == flag)
 					flag = 0;
 				tmp = ft_substr(p, 0, index);
-				tmp1 = ft_substr(p, index + 1, ft_strlen(p));
+				tmp1 = ft_substr_free(p, index + 1, ft_strlen(p));
 				p = ft_strjoin(tmp, tmp1);
 				continue ;
 			}
