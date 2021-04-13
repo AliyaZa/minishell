@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+
 void	validator(char **string, t_env *env, t_command *command)
 {
 	char	*tmp;
@@ -19,10 +20,13 @@ void	validator(char **string, t_env *env, t_command *command)
 	char	*p;
 	int		index;
 	char	flag;
+	char	*value;
+	char	*key;
+	int		kc;
+	int		i;
 
 	index = 0;
 	p = *string;
-	tmp1 = NULL;
 	(void)(env->key);
 	(void)(command->command);
 	flag = 0;
@@ -42,6 +46,28 @@ void	validator(char **string, t_env *env, t_command *command)
 				continue ;
 			}
 		}
+		if (p[index] == '$' && (flag == 0 || flag == '"'))
+		{
+			tmp = ft_substr(p, 0, index);
+			tmp1 = ft_substr(p, (ft_strlen_c(&p[index], ' ')) + index, ft_strlen(p));
+			i = index;
+			kc = 0;
+			while (p[i] != ' ' && p[i] != flag)
+			{
+				kc++;
+				i++;
+			}
+			key = ft_substr(p, index +1, kc - 1);
+			value = get_value_by_key(env, key);
+			if (value)
+			{
+				tmp = ft_strjoin(tmp, value);
+			}
+			tmp = ft_strjoin(tmp, tmp1);
+			p = tmp;
+			continue ;
+		}
 		index++;
 	}
+	*string = ft_strdup(p);
 }
