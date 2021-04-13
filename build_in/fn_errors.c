@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:17:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 19:18:52 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 16:16:06 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	fn_errors(t_command *command, int error)
 		ft_putstr_fd(": not an executable file\n", 2);
 	else if (error == SYNTAX_ERROR)
 	{
-		ft_putstr_fd("minishell: syntax error: unexpected end of file", 2);
+		ft_putstr_fd("syntax error: unexpected end of file", 2);
 	}
 	else if (errno)
 		ft_putstr_fd(strerror(errno), 2);
