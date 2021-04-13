@@ -87,7 +87,7 @@ static void	fn_change_cd(t_parsed_data *parsed_data, char *path, char *env_key)
 	else
 	{
 		tmp = ft_strjoin(env_key, "=");
-		fn_set_env(parsed_data, tmp);
+		// fn_set_env(parsed_data, tmp);
 	}
 }
 
