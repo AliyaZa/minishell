@@ -15,6 +15,7 @@ SRC = main.c parser.c minishell_utils.c parse_env.c \
 	build_in/command_utils.c \
 	# validator.c
 
+
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c

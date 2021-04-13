@@ -23,6 +23,14 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 	parent = pid[1];
 	if (command->command != NULL)
 	{
+		if (!command->command)
+			return ;
+		child = fork();
+		// if (child == 0)
+		// 	fn_fork(parsed_data, command);
+		while ((parent = wait(&status)) > 0)
+		;
+
 		if (fn_search(command->command, "echo"))
 			fn_echo(command);
 		else if (fn_search(command->command, "pwd") && *command->command)

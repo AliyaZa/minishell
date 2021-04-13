@@ -26,7 +26,7 @@ char	*get_value_by_key(t_env *env_data, char *key)
 {
 	while (env_data->next != NULL)
 	{
-		if (fn_search(key, env_data->key))
+		if (!ft_strncmp(key, env_data->key, ft_strlen(key)))
 		{
 			return (env_data->value);
 		}

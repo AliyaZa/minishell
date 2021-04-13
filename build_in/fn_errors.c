@@ -20,6 +20,10 @@ void	fn_errors(t_command *command, int error)
 		write(2, ": command not found\n", 20);
 	else if (error == NOT_AN_EXECUTABLE_FILE)
 		ft_putstr_fd(": not an executable file\n", 2);
+	else if (error == SYNTAX_ERROR)
+	{
+		ft_putstr_fd("minishell: syntax error: unexpected end of file", 2);
+	}
 	else if (errno)
 		ft_putstr_fd(strerror(errno), 2);
 	exit (1);

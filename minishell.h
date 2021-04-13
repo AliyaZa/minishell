@@ -17,6 +17,7 @@
 # include <string.h>
 # define COMMAND_NOT_FOUND 1
 # define NOT_AN_EXECUTABLE_FILE 2
+# define SYNTAX_ERROR 3
 
 void			substitution(char **dst, t_env *env);
 void			semicolon(t_command **command);
@@ -48,7 +49,7 @@ char			*get_value_by_key(t_env *env_data, char *key);
 void			fn_echo(t_command *command);
 int				fn_search(char *s1, char *s2);
 t_env			*parse_env(char **env);
-void			validator(char **string, t_env *env);
+void			validator(char **string, t_env *env, t_command *command);
 void			string_tolower(char *string);
 char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
