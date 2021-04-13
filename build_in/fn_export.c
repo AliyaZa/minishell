@@ -60,7 +60,7 @@ void	fn_export(t_parsed_data *parsed_data, t_command *command)
 		value = fn_strcreate(tmp, 0, (ft_strchr(tmp, '=') - tmp));
 		lst_name = fn_get_el(parsed_data, value);
 		fn_get_name(&lst_name, value);
-		fn_set_env(parsed_data, tmp);
+		// fn_set_env(parsed_data, tmp);
 	}
 	else
 		print_export(parsed_data->env_data);

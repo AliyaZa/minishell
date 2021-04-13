@@ -34,6 +34,7 @@ int		main_cycle(char **env)
 		parser(&command, parsed_data->env_data);
 		router(parsed_data, command);
 		flag = 1;
+		free(command->raw_string);
 	}
 	free(parsed_data->history);
 	free(parsed_data->env_data);
