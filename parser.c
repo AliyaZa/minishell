@@ -112,4 +112,5 @@ void	parser(t_command **command, t_env *env)
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
 	validator(&(*command)->argument, env, *command);
+	(*command)->splited = ft_split((*command)->argument, ' ');
 }

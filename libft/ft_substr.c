@@ -38,3 +38,22 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
+
+char	*ft_substr_free(char *s, unsigned int start, size_t len)
+{
+	char	*str;
+	char	*st;
+
+	if (s == NULL || (len + 1 == 0))
+		return (NULL);
+	if ((str = (char*)malloc(len + 1)) == NULL)
+		return (NULL);
+	while (*s && start--)
+		s++;
+	st = str;
+	while (len-- && *s)
+		*str++ = *s++;
+	*str = '\0';
+	free(s);
+	return (st);
+}
