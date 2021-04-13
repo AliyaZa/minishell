@@ -39,7 +39,7 @@ int				termcap_test(int argc, char **argv);
 void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_command *command);
 void			pwd(void);
-void			router(t_parsed_data *parsed_data, t_command *command, char **env);
+void			router(t_parsed_data *parsed_data, t_command *command);
 void			save_history(t_parsed_data **parsed_data, char *line);
 void			parser(t_command **command, t_env *env);
 void			free_str(char **s);
@@ -61,6 +61,6 @@ void			fn_unset(t_parsed_data *parsed_data, t_command *command);
 char			*fn_strcreate(char *s, int start, int len);
 char			*fn_strjoin3(char *str1, char *str2, char *str3);
 void			fn_errors(t_command *command, int error);
-void			fn_fork(t_parsed_data *parsed_data, t_command *command, char **env);
+void			fn_fork(t_parsed_data *parsed_data, t_command *command);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/13 19:14:30 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 20:32:28 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	router(t_parsed_data *parsed_data, t_command *command, char **env)
+void	router(t_parsed_data *parsed_data, t_command *command)
 {
 	pid_t	pid[2];
 	pid_t	child;
@@ -23,14 +23,6 @@ void	router(t_parsed_data *parsed_data, t_command *command, char **env)
 	parent = pid[1];
 	if (command->command != NULL)
 	{
-		if (!command->command)
-			return ;
-		child = fork();
-		if (child == 0)
-			fn_fork(parsed_data, command, env);
-		while ((parent = wait(&status)) > 0)
-		;
-
 		if (fn_search(command->command, "echo"))
 			fn_echo(command);
 		else if (fn_search(command->command, "pwd") && *command->command)
@@ -49,8 +41,7 @@ void	router(t_parsed_data *parsed_data, t_command *command, char **env)
 		{
 			child = fork();
 			if (child == 0)
-				fn_fork(parsed_data, command, env);
-			//execve(command->argument, , parsed_data->env_data);
+				fn_fork(parsed_data, command);
 			while ((parent = wait(&status)) > 0)
 			;
 		}
