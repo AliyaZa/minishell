@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/12 18:54:17 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 19:16:15 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	return (COMMAND_NOT_FOUND);
 }
 
-void	fn_fork(t_parsed_data *parsed_data, t_command *command)
+void	fn_fork(t_parsed_data *parsed_data, t_command *command, char **env)
 {
 	int		error;
 
 	error = fn_path(parsed_data, command);
 	if (error != 0)
 	{
-//		execve(command->command, command->argument, parsed_data->env_data);
+		execve(command->command, command->splited, env);
 		if (error == COMMAND_NOT_FOUND)
 			fn_errors(command, COMMAND_NOT_FOUND);
 		else

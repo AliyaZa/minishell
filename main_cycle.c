@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:26:49 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/08 16:12:10 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/13 19:15:20 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		main_cycle(char **env)
 			save_history(&parsed_data, command->raw_string);
 		}
 		parser(&command, parsed_data->env_data);
-		router(parsed_data, command);
+		router(parsed_data, command, env);
 		flag = 1;
 	}
 	free(parsed_data->history);
