@@ -42,7 +42,7 @@ void	validator(char **string, t_env *env, t_command *command)
 					flag = 0;
 				tmp = ft_substr(p, 0, index);
 				tmp1 = ft_substr_free(p, index + 1, ft_strlen(p));
-				p = ft_strjoin(tmp, tmp1);
+				p = ft_strjoin_free(tmp, tmp1, 3);
 				continue ;
 			}
 		}
@@ -59,11 +59,12 @@ void	validator(char **string, t_env *env, t_command *command)
 			}
 			key = ft_substr(p, index +1, kc - 1);
 			value = get_value_by_key(env, key);
+			free(key);
 			if (value)
 			{
-				tmp = ft_strjoin(tmp, value);
+				tmp = ft_strjoin_free(tmp, value, 1);
 			}
-			tmp = ft_strjoin(tmp, tmp1);
+			tmp = ft_strjoin_free(tmp, tmp1, 3);
 			p = tmp;
 			continue ;
 		}

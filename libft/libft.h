@@ -63,7 +63,7 @@ char				*ft_strdup_c(const char *str, char c);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_substr_free(char *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strjoin2(char *s1, char *s2);
+char				*ft_strjoin_free(char *s1, char *s2, int flag);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);

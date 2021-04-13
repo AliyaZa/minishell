@@ -39,7 +39,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-char	*ft_strjoin2(char *s1, char *s2)
+char	*ft_strjoin_free(char *s1, char *s2, int flag)
 {
 	char	*p;
 	int		i;
@@ -56,12 +56,20 @@ char	*ft_strjoin2(char *s1, char *s2)
 		p[i] = s1[i];
 		++i;
 	}
-	free_str(&s1);
 	while (s2[j] != '\0')
 	{
 		p[i] = s2[j];
 		++i;
 		++j;
+	}
+	if (flag == 1)
+		free(s1);
+	else if (flag == 2)
+		free(s2);
+	else if (flag == 3)
+	{
+		free(s1);
+		free(s2);
 	}
 	p[i] = '\0';
 	return (p);

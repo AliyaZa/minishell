@@ -16,6 +16,7 @@ typedef struct	s_command
 	char		*rest_string;
 	char		quotes_type;
 	char		*queue;
+	char		**splited;
 }				t_command;
 
 #endif
