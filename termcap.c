@@ -39,7 +39,7 @@ void    fn_termcap(t_command **command, char **history)
 		else
 		{
 			ft_putstr_fd(str, 1);
-			(*command)->raw_string = ft_strjoin2((*command)->raw_string, str);
+			(*command)->raw_string = ft_strjoin_free((*command)->raw_string, str, 1);
 			current = -1;
 		}
 	}
