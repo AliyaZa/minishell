@@ -24,7 +24,6 @@ all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	make -C libft
-	make bonus -C libft
 
 $(NAME): $(OBJ) minishell.h
 	gcc -g $(CFLAGS) $(SRC) libft/libft.a -ltermcap -o $(NAME)
