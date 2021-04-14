@@ -24,15 +24,12 @@ SRC =    ft_strdup.c 		ft_bzero.c 			ft_isalpha.c  	ft_isdigit.c  \
    		ft_strdup.c 		ft_substr.c 		ft_strjoin.c 	ft_strtrim.c  \
    		ft_split.c 			ft_itoa.c 			ft_strmapi.c   	ft_putchar_fd.c\
    		ft_putstr_fd.c 		ft_putendl_fd.c 	ft_putnbr_fd.c	free_str.c
-
-BONSRC =   ft_lstnew.c \
+		ft_lstnew.c \
          ft_lstadd_front.c    ft_lstadd_front.c    ft_lstadd_back.c ft_lstsize.c\
          ft_lstlast.c         ft_lstdelone.c       ft_lstclear.c  ft_lstiter.c\
          ft_lstmap.c
 
 OBJ = $(SRC:.c=.o)
-
-BONUS_OBJ = $(BONSRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror -c
 
@@ -45,11 +42,8 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-bonus: $(BONUS_OBJ)
-	ar rcs $(NAME) $(BONUS_OBJ)
-
 clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJ)
 	@echo "$(F_GREEN)Cleaned! $(F_NONE)"
 
 fclean: clean
