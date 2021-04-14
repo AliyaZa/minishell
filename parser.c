@@ -26,7 +26,7 @@ static char	*determine_argument(t_command *command)
 	}
 	while ((!(ft_isprint(*arg)) && ft_strlen(arg)) || (*arg == ' '))
 		arg++;
-	while (arg[index] != '\"' && arg[index] != '\n')
+	while (arg[index] && arg[index] != '\"' && arg[index] != '\n')
 	{
 		index++;
 	}
@@ -112,5 +112,5 @@ void	parser(t_command **command, t_env *env)
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
 	validator(&(*command)->argument, env, *command);
-	(*command)->splited = ft_split((*command)->argument, ' ');
+	(*command)->splited = ft_split((*command)->raw_string, ' ');
 }

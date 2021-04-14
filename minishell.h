@@ -15,6 +15,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <string.h>
+# include <fcntl.h>
 # define COMMAND_NOT_FOUND 1
 # define NOT_AN_EXECUTABLE_FILE 2
 # define SYNTAX_ERROR 3

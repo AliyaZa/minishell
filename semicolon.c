@@ -15,7 +15,7 @@ void	semicolon(t_command **command)
 		{
 			counter++;
 			string[index] = 0;
-			(*command)->queue= &string[index + 1];
+			(*command)->queue= ft_strdup(&string[index + 1]);
 			break ;
 		}
 		index++;
