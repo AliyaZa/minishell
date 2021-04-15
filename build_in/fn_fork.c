@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/13 20:34:56 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 16:18:17 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	if (path)
 		places = ft_split(path->value, ':');
 	while (places && places[kol] && (access(fn_strjoin3(places[kol],
-					"/", command->argument), F_OK) == -1))
+					"/", command->command), F_OK) == -1))
 		kol++;
 	if ((places && places[kol] && access(fn_strjoin3(places[kol],
-					"/", command->argument), X_OK) == -1) || (!access
-			(command->argument, F_OK) && access(command->argument, X_OK) == -1))
+					"/", command->command), X_OK) == -1) || (!access
+			(command->command, F_OK) && access(command->command, X_OK) == -1))
 	return (NOT_AN_EXECUTABLE_FILE);
 	if (places && places[kol])
 		path_to = fn_strjoin3(places[kol], "/", command->command);
