@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 17:21:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/15 17:53:45 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 17:58:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int		fn_check(char *new_path, t_command *command)
 		return (fn_errors(command, errno));
 	if (!S_ISDIR(fl.st_mode))
 		return (fn_errors(command,IS_FILE));
+	if (accessn(new_path, X_OK))
+		return (fn_errors(command, errno));
 	return (1);
 }
