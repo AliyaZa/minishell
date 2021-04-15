@@ -21,7 +21,6 @@
 # define NOT_AN_EXECUTABLE_FILE 4
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
-# define TOO_MANY_ARGC 6
 
 void			substitution(char **dst, t_env *env);
 void			semicolon(t_command **command);
