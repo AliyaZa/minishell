@@ -19,7 +19,7 @@ t_parsed_data	*initialize_parsed_data(char **env)
 	t_parsed_data	*parsed_data;
 
 	parsed_data = (t_parsed_data *)malloc(sizeof(t_parsed_data));
-	parsed_data->history = (char **)malloc(sizeof(char *) * 500);
+	parsed_data->history = (char **)ft_calloc(500, sizeof(char *));
 	parsed_data->env_data = parse_env(env);
 	return (parsed_data);
 }
@@ -30,9 +30,9 @@ void	reset_(t_command **command, size_t flag)
 	{
 		free_str(&(*command)->raw_string);
 		free_str(&(*command)->command);
+		free_str(&(*command)->argument);
 		(*command)->raw_string = ft_strnew(0);
 		(*command)->option = 0;
-		(*command)->argument = 0;
 		(*command)->rest_string = 0;
 	}
 }

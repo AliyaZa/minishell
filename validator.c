@@ -41,8 +41,8 @@ void	validator(char **string, t_env *env, t_command *command)
 				else if (p[index] == flag)
 					flag = 0;
 				tmp = ft_substr(p, 0, index);
-				tmp1 = ft_substr_free(p, index + 1, ft_strlen(p));
-				p = ft_strjoin_free(tmp, tmp1, 3);
+				tmp1 = ft_substr(p, index + 1, ft_strlen(p));
+				p = ft_strjoin(tmp, tmp1);
 				continue ;
 			}
 		}
@@ -71,4 +71,5 @@ void	validator(char **string, t_env *env, t_command *command)
 		index++;
 	}
 	*string = ft_strdup(p);
+	free(p);
 }
