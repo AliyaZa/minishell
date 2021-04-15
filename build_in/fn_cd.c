@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/15 17:23:35 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 18:00:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,18 @@ void	fn_cd(t_command *command, t_parsed_data *parsed_data)
 	if (new_path)
 	{
 		if (fn_check(new_path, command))
-		path = getcwd(path, PATH_MAX);
-		if (!(chdir(new_path)))
 		{
-			fn_change_cd(parsed_data, command, path, "OLDPWD");
-			free(path);
-			path = NULL;
 			path = getcwd(path, PATH_MAX);
-			fn_change_cd(parsed_data, command, path, "PWD");
+			if (!(chdir(new_path)))
+			{
+				fn_change_cd(parsed_data, command, path, "OLDPWD");
+				free(path);
+				path = NULL;
+				path = getcwd(path, PATH_MAX);
+				fn_change_cd(parsed_data, command, path, "PWD");
+			}
+			free_str(&path);
 		}
-		free(path);
-		path = NULL;
-		free(new_path);
-		new_path = NULL;
+		free_str(&new_path);
 	}
 }
