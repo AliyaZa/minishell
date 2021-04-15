@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/15 16:30:46 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 17:23:35 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	fn_cd(t_command *command, t_parsed_data *parsed_data)
 	new_path = fn_get_path(parsed_data, command);
 	if (new_path)
 	{
+		if (fn_check(new_path, command))
 		path = getcwd(path, PATH_MAX);
 		if (!(chdir(new_path)))
 		{

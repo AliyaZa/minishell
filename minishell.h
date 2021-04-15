@@ -16,9 +16,11 @@
 # include <errno.h>
 # include <string.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # define COMMAND_NOT_FOUND 1
-# define NOT_AN_EXECUTABLE_FILE 2
+# define NOT_AN_EXECUTABLE_FILE 4
 # define SYNTAX_ERROR 3
+# define IS_FILE 5
 
 void			substitution(char **dst, t_env *env);
 void			semicolon(t_command **command);
@@ -61,8 +63,9 @@ t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
 void			fn_unset(t_parsed_data *parsed_data, t_command *command);
 char			*fn_strcreate(char *s, int start, int len);
 char			*fn_strjoin3(char *str1, char *str2, char *str3);
-void			fn_errors(t_command *command, int error);
+int				fn_errors(t_command *command, int error);
 void			fn_fork(t_parsed_data *parsed_data, t_command *command);
 void			fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name);
+int				fn_check(char *new_path, t_command *command);
 
 #endif
