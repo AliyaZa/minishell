@@ -12,37 +12,6 @@
 
 #include "minishell.h"
 
-void	redirect(t_command *command)
-{
-	int		fd;
-	int		index;
-
-	index = 0;
-	fd = -1;
-	while (command->splited[index])
-	{
-		if (!ft_strncmp(command->splited[index], ">>", 2))
-		{
-			fd = open(command->splited[index + 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-			if (fd == -1)
-				ft_putstr_fd("file can't be created\n", 1);
-			write(fd, command->splited[index - 1], ft_strlen(command->splited[index - 1]));
-			close(fd);
-			break ;
-		}
-		if (!ft_strncmp(command->splited[index], ">", 1))
-		{
-			fd = open(command->splited[index + 1], O_RDWR | O_CREAT, 0644);
-			if (fd == -1)
-				ft_putstr_fd("file can't be created\n", 1);
-			write(fd, command->splited[index - 1], ft_strlen(command->splited[index - 1]));
-			close(fd);
-			break ;
-		}
-		index++;
-	}
-}
-
 int		main_cycle(char **env)
 {
 	t_parsed_data	*parsed_data;
@@ -63,8 +32,6 @@ int		main_cycle(char **env)
 			save_history(&parsed_data, command->raw_string);
 		}
 		parser(&command, parsed_data->env_data);
-		redirect(command);
-
 		router(parsed_data, command);
 		flag = 1;
 	}
