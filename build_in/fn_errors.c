@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:17:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/15 18:13:45 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 18:21:21 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		fn_errors(t_command *command, int error)
+int	fn_errors(t_command *command, int error)
 {
 	write(2, "minishell: ", 11);
 	ft_putstr_fd(command->command, 2);
