@@ -63,5 +63,6 @@ char			*fn_strcreate(char *s, int start, int len);
 char			*fn_strjoin3(char *str1, char *str2, char *str3);
 void			fn_errors(t_command *command, int error);
 void			fn_fork(t_parsed_data *parsed_data, t_command *command);
+void			fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name);
 
 #endif
