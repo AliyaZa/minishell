@@ -20,7 +20,7 @@ void    fn_termcap(t_command **command, char **history)
 	str = ft_calloc(2000, sizeof(char));
 	str[0] = 0;
 	cursor_position = 0;
-	while ((ft_strncmp(str, "\x04", 1)) && !(str[0] == '\n'))
+	while (str[0] != '\n')
 	{
 		l = read(0, str, 100);
 		cursor_position += l;
