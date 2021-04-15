@@ -6,11 +6,19 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:17:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/13 16:19:05 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 17:04:41 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name)
+{
+	(*tmp) = NULL;
+	(*lst) = NULL;
+	(*value) = NULL;
+	(*lst_name) = NULL;
+}
 
 void	fn_errors(t_command *command, int error)
 {

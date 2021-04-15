@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/13 16:59:13 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 16:30:46 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static char	*fn_get_path(t_parsed_data *parsed_data, t_command *command)
 	return (new_path);
 }
 
-static void	fn_change_cd(t_parsed_data *parsed_data, t_command *command, char *path, char *env_key)
+static void	fn_change_cd(t_parsed_data *parsed_data, t_command *command,
+char *path, char *env_key)
 {
 	t_env	*lst_name;
 	char	*tmp;
