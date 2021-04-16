@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:31:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/16 17:12:54 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/16 18:02:37 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
-static void	for_norm(char *str, int *i, int *zn)
+static void	for_norm(const char *str, int *i, int *zn)
 {
 	if ((str[*i] == '+') || (str[*i] == '-'))
 	{
