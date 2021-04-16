@@ -18,5 +18,11 @@ typedef struct	s_command
 	char		*queue;
 	char		**splited;
 }				t_command;
-
+/*
+typedef struct	s_redir
+{
+	int			fdin;
+	int			fdout;
+}				t_redir;
+*/
 #endif
