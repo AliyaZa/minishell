@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:04:47 by nhill             #+#    #+#             */
-/*   Updated: 2020/11/04 16:12:31 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:19:21 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 
 	if (!lst)
 		return ;
-	if (!(ls = *lst))
+	ls = *lst;
+	if (!ls)
 		return ;
 	while (ls->next)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 16:20:54 by nhill             #+#    #+#             */
-/*   Updated: 2020/11/15 16:56:09 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:54:07 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	**ft_clean(char **arr, int c1)
 	return (NULL);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**ptr;
 	int		i;
@@ -77,14 +77,16 @@ char		**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	count[0] = ft_count_str(s, c);
-	if (!(ptr = (char **)malloc((count[0] + 1) * sizeof(char *))))
+	ptr = (char **)malloc((count[0] + 1) * sizeof(char *));
+	if (!ptr)
 		return (0);
 	while (i < count[0] && *s)
 	{
 		while (*s == c)
 			s++;
 		count[1] = ft_count_len(s, c);
-		if (!(ptr[i] = (char *)malloc((count[1] + 1) * sizeof(char))))
+		ptr[i] = (char *)malloc((count[1] + 1) * sizeof(char));
+		if (!ptr[i])
 			return (ft_clean(ptr, i));
 		j = 0;
 		while (j < count[1] && *s)

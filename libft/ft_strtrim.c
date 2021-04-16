@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 15:50:36 by nhill             #+#    #+#             */
-/*   Updated: 2020/11/06 16:59:30 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:23:11 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_find(char s, char *set)
+int	ft_find(char s, char *set)
 {
 	size_t		i;
 
@@ -44,7 +44,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 		l--;
 	if (!s1[i])
 		return (rez = ft_calloc(1, 1));
-	if (!(rez = (char *)malloc((l - i + 2) * sizeof(char))))
+	rez = (char *)malloc((l - i + 2) * sizeof(char));
+	if (!rez)
 		return (NULL);
 	while (i < l + 1)
 		rez[j++] = s1[i++];
