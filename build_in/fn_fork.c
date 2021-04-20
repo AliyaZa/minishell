@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/13 20:34:56 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/15 17:10:35 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_count_lst(t_env *env)
 	return (count);
 }
 
-static char	**fn_array(t_env *env)
+static char	**fn_arr(t_env *env)
 {
 	int		kol;
 	char	**res;
@@ -59,17 +59,17 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	if (path)
 		places = ft_split(path->value, ':');
 	while (places && places[kol] && (access(fn_strjoin3(places[kol],
-					"/", command->argument), F_OK) == -1))
+					"/", command->command), F_OK) == -1))
 		kol++;
 	if ((places && places[kol] && access(fn_strjoin3(places[kol],
-					"/", command->argument), X_OK) == -1) || (!access
-			(command->argument, F_OK) && access(command->argument, X_OK) == -1))
-	return (NOT_AN_EXECUTABLE_FILE);
+					"/", command->command), X_OK) == -1) || (!access
+			(command->command, F_OK) && access(command->command, X_OK) == -1))
+		return (NOT_AN_EXECUTABLE_FILE);
 	if (places && places[kol])
 		path_to = fn_strjoin3(places[kol], "/", command->command);
 	else
 		path_to = ft_strdup(command->argument);
-	if ((execve(path_to, command->splited, fn_array(parsed_data->env_data)) == 0))
+	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
 		return (0);
 	return (COMMAND_NOT_FOUND);
 }

@@ -6,20 +6,20 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:49:51 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/07 17:03:56 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:24:44 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(const char *str1, const char *str2)
 {
 	int		i;
 
 	i = 0;
 	if (str1 && str2)
 	{
-		while(str2[i] && str1[i])
+		while (str2[i] && str1[i])
 		{
 			if ((unsigned char)str2[i] == (unsigned char)str1[i])
 				i++;
@@ -31,7 +31,7 @@ int		ft_strcmp(const char *str1, const char *str2)
 	return (0);
 }
 
-int		ft_strncmp(const char *str1, const char *str2, size_t n)
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	unsigned char	*s1;
 	unsigned char	*s2;

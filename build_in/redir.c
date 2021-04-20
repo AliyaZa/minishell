@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/28 19:48:51 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/16 17:25:30 by nhill            ###   ########.fr       */
+/*   Created: 2021/04/15 19:11:41 by nhill             #+#    #+#             */
+/*   Updated: 2021/04/16 17:06:36 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-size_t	ft_strlen(const char *s)
+#include "../minishell.h"
+/*
+void	redir(t_command *command)
 {
-	size_t	i;
+	char	*arg;
+	int		fdout;
+	int		i;
+	char	*file;
 
+	arg = ft_strdup(command->argument);
 	i = 0;
-	if (s)
-		while (s[i] != '\0')
+	while (fn_search(arg, ">") || fn_search(arg, "<") || fn_search(arg, ">>"))
+	{
+		if (arg[i] == '>')
+		{
+			arg++;
 			i++;
-	return (i);
-}
+			while (arg == ' ')
+			{
+				arg++;
+				i++;
+			}
+			file = ft_strdup(arg);
+			fdout = open(file, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+		}
+	}
 
-size_t	ft_strlen_c(const char *s, const char c)
-{
-	size_t	i;
-
-	i = 0;
-	if (s)
-		while (s[i] != c && s[i] != '\0')
-			i++;
-	return (i);
-}
+}*/

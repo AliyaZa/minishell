@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhill <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 16:29:59 by nhill             #+#    #+#             */
-/*   Updated: 2020/11/06 17:00:33 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:17:52 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*ft_create_str(char *str, int i, long nn, int zn)
 	return (str);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		zn;
@@ -62,7 +62,8 @@ char		*ft_itoa(int n)
 	}
 	ch = nn;
 	i = i + ft_len(ch);
-	if (!(str = (char *)malloc((++i) * sizeof(char))))
+	str = (char *)malloc((++i) * sizeof(char));
+	if (!str)
 		return (NULL);
 	return (str = ft_create_str(str, i, nn, zn));
 }
