@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	redirect(char *text, char *string)
+int		redirect(char *text, char *string)
 {
 	int		fd;
 	char	*filename;
@@ -20,10 +20,6 @@ void	redirect(char *text, char *string)
 	char	*tmp;
 
 	index = 0;
-	// exit condition
-	if (!string || ft_strlen(string) == 0)
-		return ;
-	// 
 	tmp = string;
 	filename = ft_take_word(&string);
 	while (string[index] == ' ' || string[index] == '>')
@@ -31,9 +27,11 @@ void	redirect(char *text, char *string)
 	string = ft_substr(string, index, ft_strlen(string));
 	free(tmp);
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	// recursion
-	redirect(text, string);
+	if (!string || ft_strlen(string) == 0)
+		return (fd);
 	close(fd);
+	redirect(text, string);
+	return (0);
 }
 
 void	validator(char **string, t_env *env, t_command *command)
@@ -95,7 +93,7 @@ void	validator(char **string, t_env *env, t_command *command)
 		{
 			char	*text = ft_substr(p, 0, index);
 			index += 2;
-			redirect(text, ft_substr(&p[index], 0 , ft_strlen(&p[index])));
+			command->fd = redirect(text, ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 		}
 		index++;
 	}
