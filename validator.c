@@ -16,15 +16,22 @@ void	redirect(char *text, char *string)
 {
 	int		fd;
 	char	*filename;
+	size_t	index;
+	char	*tmp;
 
+	index = 0;
 	// exit condition
 	if (!string || ft_strlen(string) == 0)
 		return ;
 	// 
+	tmp = string;
 	filename = ft_take_word(&string);
-	fd = open(filename, O_RDWR | O_CREAT, 0644);
+	while (string[index] == ' ' || string[index] == '>')
+		index++;
+	string = ft_substr(string, index, ft_strlen(string));
+	free(tmp);
+	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	// recursion
-
 	redirect(text, string);
 	close(fd);
 }
@@ -88,7 +95,7 @@ void	validator(char **string, t_env *env, t_command *command)
 		{
 			char	*text = ft_substr(p, 0, index);
 			index += 2;
-			redirect(text, &p[index]);
+			redirect(text, ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 		}
 		index++;
 	}
