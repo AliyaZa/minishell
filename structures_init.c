@@ -11,7 +11,7 @@ t_command		*initialize_command()
 	command->argument = NULL;
 	command->rest_string = 0;
 	command->queue = NULL;
-	command->fd = 0;
+	command->fd = 1;
 	return (command);
 }
 

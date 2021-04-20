@@ -12,26 +12,58 @@
 
 #include "minishell.h"
 
+int		is_next_redirect(char *string)
+{
+	int		index;
+
+	index = 0;
+	while (string[index])
+	{
+		if (string[index] == '>')
+			return (1);
+		else if (string[index] == '"' || string[index] == '\'')
+			return (0);
+		index++;
+	}
+	return (0);
+}
+
 int		redirect(char *text, char *string)
 {
 	int		fd;
 	char	*filename;
 	size_t	index;
 	char	*tmp;
+	int		r_type;
 
+	printf("text: %s\n", text);
+	r_type = 0;
 	index = 0;
-	tmp = string;
-	filename = ft_take_word(&string);
-	while (string[index] == ' ' || string[index] == '>')
-		index++;
-	string = ft_substr(string, index, ft_strlen(string));
-	free(tmp);
-	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (!string || ft_strlen(string) == 0)
-		return (fd);
-	close(fd);
-	redirect(text, string);
-	return (0);
+	while (string[index])
+	{
+		tmp = string;
+		while (string[index] == ' ' || string[index] == '>')
+			string[index++] == '>' ? r_type++ : 1;
+		string = ft_substr(string, index, ft_strlen(string));
+		filename = ft_take_word(&string);
+		if (r_type == 2)
+			fd = open(filename, O_RDWR | O_CREAT, 0777);
+		else if (r_type == 1)
+			fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
+		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string))
+		{
+			printf("going to write next text: %s\n", string);
+			write(fd, text, ft_strlen(text));
+			return (fd);
+		}
+		free(filename);
+		free(tmp);
+		if (is_next_redirect(string))
+		{
+			close(fd);
+		}
+	}
+	return (fd);
 }
 
 void	validator(char **string, t_env *env, t_command *command)
@@ -89,10 +121,9 @@ void	validator(char **string, t_env *env, t_command *command)
 			p = tmp;
 			continue ;
 		}
-		if (!ft_strncmp(&p[index], ">>", 2) && !flag)
+		if (!ft_strncmp(&p[index], ">", 1) && !flag)
 		{
 			char	*text = ft_substr(p, 0, index);
-			index += 2;
 			command->fd = redirect(text, ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 		}
 		index++;
