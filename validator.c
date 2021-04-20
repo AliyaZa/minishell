@@ -12,6 +12,22 @@
 
 #include "minishell.h"
 
+void	redirect(char *text, char *string)
+{
+	int		fd;
+	char	*filename;
+
+	// exit condition
+	if (!string || ft_strlen(string) == 0)
+		return ;
+	// 
+	filename = ft_take_word(&string);
+	fd = open(filename, O_RDWR | O_CREAT, 0644);
+	// recursion
+
+	redirect(text, string);
+	close(fd);
+}
 
 void	validator(char **string, t_env *env, t_command *command)
 {
@@ -67,6 +83,12 @@ void	validator(char **string, t_env *env, t_command *command)
 			tmp = ft_strjoin_free(tmp, tmp1, 3);
 			p = tmp;
 			continue ;
+		}
+		if (!ft_strncmp(&p[index], ">>", 2) && !flag)
+		{
+			char	*text = ft_substr(p, 0, index);
+			index += 2;
+			redirect(text, &p[index]);
 		}
 		index++;
 	}

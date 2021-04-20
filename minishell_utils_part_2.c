@@ -50,3 +50,20 @@ int		count_req_chars(char *string, char req)
 	}
 	return (counter);
 }
+
+char	*ft_take_word(char **string)
+{
+	int		index;
+	char	*p;
+	int		start;
+
+	p = *string;
+	index = 0;
+	while (p[index] == ' ')
+		index++;
+	start = index;
+	while(p[index] && (ft_isalpha(p[index]) || ft_isdigit(p[index])))
+		index++;
+	*string = &p[index];
+	return (ft_substr(p, start, index));
+}
