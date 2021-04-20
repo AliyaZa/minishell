@@ -22,6 +22,7 @@ void	save_history(t_parsed_data **parsed_data, char *line)
 		if ((*parsed_data)->history[i])
 		{
 			(*parsed_data)->history[i + 1] = ft_strdup((*parsed_data)->history[i]);
+			free((*parsed_data)->history[i]);
 		}
 		i--;
 	}
