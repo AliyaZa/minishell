@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:04:00 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 14:45:58 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:23:24 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	redirect(char **string, int *fd)
 		if (r_type == 2)
 			*fd = open(filename, O_RDWR | O_CREAT, 0777);
 		else if (r_type == 1)
+
 			*fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if ((!p || ft_strlen(p) == 0) && !is_next_redirect(p))
 			return ;
+
 		free(filename);
 		free(tmp);
 		if (is_next_redirect(p))
