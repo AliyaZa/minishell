@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:04:00 by mismene           #+#    #+#             */
-/*   Updated: 2021/03/19 14:45:58 by mismene          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:23:24 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		redirect(char *text, char *string)
 	char	*tmp;
 	int		r_type;
 
-	printf("text: %s\n", text);
+
 	r_type = 0;
 	index = 0;
 	while (string[index])
@@ -52,8 +52,7 @@ int		redirect(char *text, char *string)
 			fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string))
 		{
-			printf("going to write next text: %s\n", string);
-			write(fd, text, ft_strlen(text));
+
 			return (fd);
 		}
 		free(filename);

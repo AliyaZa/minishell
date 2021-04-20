@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/20 16:05:57 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/20 16:21:02 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	char	**places;
 	int		kol;
 	char	*path_to;
-	int		fd;
 
 	kol = 0;
 	places = NULL;
