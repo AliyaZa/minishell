@@ -62,7 +62,7 @@ char	*ft_take_word(char **string)
 	while (p[index] == ' ')
 		index++;
 	start = index;
-	while(p[index] && (ft_isalpha(p[index]) || ft_isdigit(p[index])))
+	while(p[index] && ft_isprint(p[index]) && p[index] != ' ')
 		index++;
 	*string = &p[index];
 	return (ft_substr(p, start, index));
