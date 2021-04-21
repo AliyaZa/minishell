@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:04:00 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/20 16:36:21 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/21 19:36:43 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,15 @@ int		redirect(char *string)
 		string = ft_substr(string, index, ft_strlen(string));
 		filename = ft_take_word(&string);
 		if (r_type == 2)
-			fd = open(filename, O_RDWR | O_CREAT, 0777);
+			fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0777);
 		else if (r_type == 1)
 			fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
 		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string))
-		{
 			return (fd);
-		}
 		free(filename);
-		free(tmp);
+		//free(tmp);
 		if (is_next_redirect(string))
-		{
 			close(fd);
-		}
 	}
 	return (fd);
 }
