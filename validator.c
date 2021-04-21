@@ -120,8 +120,9 @@ void	validator(char **string, t_env *env, t_command *command)
 		}
 		if (!ft_strncmp(&p[index], ">", 1) && !flag)
 		{
-			// char	*text = ft_substr(p, 0, index);
+			*string = ft_substr(p, 0, index);
 			command->fd = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
+			p = ft_strdup(*string);
 		}
 		index++;
 	}
