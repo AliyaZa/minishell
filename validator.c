@@ -28,38 +28,39 @@ int		is_next_redirect(char *string)
 	return (0);
 }
 
-void	redirect(char **string, int *fd)
+int		redirect(char *string)
 {
+	int		fd;
 	char	*filename;
 	size_t	index;
 	char	*tmp;
 	int		r_type;
-	char	*p;
 
-	p = ft_strdup(*string);
 	r_type = 0;
 	index = 0;
-	while (p[index])
+	while (string[index])
 	{
 		tmp = string;
-		while (p[index] == ' ' || p[index] == '>')
-			p[index++] == '>' ? r_type++ : 1;
-		p = ft_substr(string, index, ft_strlen(p));
-		filename = ft_take_word(&p);
+		while (string[index] == ' ' || string[index] == '>')
+			string[index++] == '>' ? r_type++ : 1;
+		string = ft_substr(string, index, ft_strlen(string));
+		filename = ft_take_word(&string);
 		if (r_type == 2)
-			*fd = open(filename, O_RDWR | O_CREAT, 0777);
+			fd = open(filename, O_RDWR | O_CREAT, 0777);
 		else if (r_type == 1)
-
-			*fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
-		if ((!p || ft_strlen(p) == 0) && !is_next_redirect(p))
-			return ;
-
+			fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
+		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string))
+		{
+			return (fd);
+		}
 		free(filename);
 		free(tmp);
-		if (is_next_redirect(p))
-			close(*fd);
+		if (is_next_redirect(string))
+		{
+			close(fd);
+		}
 	}
-	return ;
+	return (fd);
 }
 
 void	validator(char **string, t_env *env, t_command *command)
@@ -119,9 +120,8 @@ void	validator(char **string, t_env *env, t_command *command)
 		}
 		if (!ft_strncmp(&p[index], ">", 1) && !flag)
 		{
-			*string = ft_substr(p, 0, index);
-			char	*pp = &p[index];
-			redirect(ft_substr(&pp, 0 , ft_strlen(&p[index])), &command->fd);
+			// char	*text = ft_substr(p, 0, index);
+			command->fd = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 		}
 		index++;
 	}

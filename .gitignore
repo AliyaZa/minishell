@@ -1,3 +1,5 @@
-*/*.o
+*.o
 minishell
 .vscode/
+*.a
+*.dSYM/
