@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/20 16:21:02 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/22 19:41:14 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,12 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		path_to = fn_strjoin3(places[kol], "/", command->command);
 	else
 		path_to = ft_strdup(command->argument);
+	if (command->fd > 1)
+		{
 	dup2(command->fd, 1);
 	dup2(command->fd, 2);
 	close(command->fd);
+		}
 	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
 		return (0);
 	return (COMMAND_NOT_FOUND);

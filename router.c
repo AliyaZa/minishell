@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/20 15:21:04 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/22 19:41:38 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 		else
 		{
 			child = fork();
+//			child = 0;
 			if (child == 0)
 				fn_fork(parsed_data, command);
 			while ((parent = wait(&status)) > 0)
