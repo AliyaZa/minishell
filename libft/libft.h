@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 14:07:15 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/08 19:57:13 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/24 16:56:59 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_env
 	void			*value;
 	void			*equal;
 	struct s_env	*next;
+	int				order;
 }					t_env;
 
 void				free_str(char **s);
@@ -84,5 +85,6 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
 int					ft_strcmp(const char *str1, const char *str2);
+int					ft_lstsize1(t_env *lst);
 
 #endif
