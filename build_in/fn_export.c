@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/24 20:14:10 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/24 20:20:52 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static char	**create_sort_export(t_env *parsed_data)
 		else
 			tmp[i] = fn_strjoin3("declare -x ", parsed_data1->key, "\n");
 //			printf("declare -x %s\n", parsed_data1->key);
+		i++;
 		parsed_data1 = parsed_data1->next;
 	}
 	return (tmp);
