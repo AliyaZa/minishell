@@ -3,3 +3,4 @@ minishell
 .vscode/
 *.a
 *.dSYM/
+.DS_Store
