@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:04:00 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/21 19:36:43 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/24 18:38:22 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,8 @@ void	validator(char **string, t_env *env, t_command *command)
 			command->fd = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 			p = ft_strdup(*string);
 		}
-		if (!ft_strncmp(&p[index], "<", 1) && !flag)
-		{
-			write(1, "reversed redirect\n", 18);
-		}
+		if (flag)
+			fn_errors(command, errno);
 		index++;
 	}
 	if (flag)

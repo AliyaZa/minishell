@@ -69,5 +69,8 @@ int				fn_errors(t_command *command, int error);
 void			fn_fork(t_parsed_data *parsed_data, t_command *command);
 void			fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name);
 int				fn_check(char *new_path, t_command *command);
+t_env			*create_export(t_parsed_data *parsed_data);
+void			fn_get_name(t_env **lst_name, char *value, int flag);
+void			fn_get_needed_el(char *tmp, char **value,t_env **lst_name, t_parsed_data *parsed_data);
 
 #endif
