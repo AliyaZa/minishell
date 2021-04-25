@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	validate_command(char **command)
+int	validate_command(char **command)
 {
 	size_t	index;
 	char	*p;
@@ -26,5 +26,8 @@ void	validate_command(char **command)
 		}
 		index++;
 	}
+	if (flag)
+		return (1);
 	*command = ft_strdup(p);
+	return (0);
 }

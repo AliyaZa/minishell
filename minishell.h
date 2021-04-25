@@ -22,7 +22,7 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 
-void			validate_command(char **command);
+int				validate_command(char **command);
 char			*ft_take_word(char **string);
 void			substitution(char **dst, t_env *env);
 void			semicolon(t_command **command);

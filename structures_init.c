@@ -3,7 +3,9 @@
 t_command		*initialize_command()
 {
 	t_command	*command;
+	t_flags		*flags;
 
+	flags = malloc(sizeof(flags));
 	command = (t_command *)malloc(sizeof(t_command));
 	command->raw_string = ft_strnew(0);
 	command->command = NULL;
@@ -12,7 +14,10 @@ t_command		*initialize_command()
 	command->rest_string = 0;
 	command->queue = NULL;
 	command->fd = 1;
+	command->flags = flags;
+	command->flags->is_bin = 0;
 	return (command);
+
 }
 
 t_parsed_data	*initialize_parsed_data(char **env)

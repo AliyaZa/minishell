@@ -7,6 +7,11 @@ typedef struct	s_parsed_data
 	t_env		*env_data;
 }				t_parsed_data;
 
+typedef	struct	s_flags
+{
+	int			is_bin;
+}				t_flags;
+
 typedef struct	s_command
 {
 	char 		*raw_string;
@@ -18,12 +23,7 @@ typedef struct	s_command
 	char		*queue;
 	char		**splited;
 	int			fd;
+	t_flags		*flags;
 }				t_command;
-/*
-typedef struct	s_redir
-{
-	int			fdin;
-	int			fdout;
-}				t_redir;
-*/
+
 #endif

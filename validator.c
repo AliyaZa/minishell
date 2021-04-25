@@ -119,12 +119,14 @@ void	validator(char **string, t_env *env, t_command *command)
 			command->fd = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 			p = ft_strdup(*string);
 		}
-		if (flag)
-			fn_errors(command, errno);
+		if (!ft_strncmp(&p[index], "<", 1) && !flag)
+		{
+			printf("reversed redirect\n|");
+		}
 		index++;
 	}
 	if (flag)
-		ft_putstr_fd("minishell: syntax error: unexpected end of file\n", 1);
+		fn_errors(command, SYNTAX_ERROR);
 	*string = ft_strdup(p);
 	free(p);
 }

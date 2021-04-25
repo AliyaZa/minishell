@@ -98,6 +98,17 @@ static char	*determine_command(t_command **command)
 	return (p);
 }
 
+int		is_command_bin(t_command *command)
+{
+	if (!ft_strncmp(command->command, "/", 1))
+		return (1);
+	if (!ft_strncmp(command->command, "~", 1))
+		return (1);
+	if (!ft_strncmp(command->command, ".", 1))
+		return (1);
+	return (0);
+}
+
 void	parser(t_command **command, t_env *env)
 {
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
@@ -109,9 +120,16 @@ void	parser(t_command **command, t_env *env)
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
 	semicolon(command);
 	(*command)->rest_string = determine_command(command);
-	validate_command(&(*command)->command);
+	if (validate_command(&(*command)->command))
+		fn_errors(*command, SYNTAX_ERROR);
+	(*command)->flags->is_bin = is_command_bin(*command);
+	//printf("command: %s\n", (*command)->command);
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
 	validator(&(*command)->argument, env, *command);
 	(*command)->splited = ft_split((*command)->raw_string, ' ');
+	if ((*command)->flags->is_bin)
+	{
+		(*command)->splited[0] = ft_strdup((ft_strrchr((*command)->splited[0], '/') + 1));
+	}
 }
