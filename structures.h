@@ -10,6 +10,7 @@ typedef struct	s_parsed_data
 typedef	struct	s_flags
 {
 	int			is_bin;
+	int			rev_redirect;
 }				t_flags;
 
 typedef struct	s_command

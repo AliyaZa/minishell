@@ -16,6 +16,7 @@ t_command		*initialize_command()
 	command->fd = 1;
 	command->flags = flags;
 	command->flags->is_bin = 0;
+	command->flags->rev_redirect = 0;
 	return (command);
 
 }
