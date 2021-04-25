@@ -123,7 +123,6 @@ void	parser(t_command **command, t_env *env)
 	if (validate_command(&(*command)->command))
 		fn_errors(*command, SYNTAX_ERROR);
 	(*command)->flags->is_bin = is_command_bin(*command);
-	//printf("command: %s\n", (*command)->command);
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
 	validator(&(*command)->argument, env, *command);

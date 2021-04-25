@@ -121,7 +121,7 @@ void	validator(char **string, t_env *env, t_command *command)
 		}
 		if (!ft_strncmp(&p[index], "<", 1) && !flag)
 		{
-			printf("reversed redirect\n|");
+			command->flags->rev_redirect = 1;
 		}
 		index++;
 	}

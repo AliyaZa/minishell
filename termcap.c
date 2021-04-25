@@ -25,8 +25,11 @@ void    fn_termcap(t_command **command, char **history)
 		l = read(0, str, 100);
 		cursor_position += l;
 		str[l] = 0;
-		if (!ft_strncmp(str, "\x04", 1))
+		if (!ft_strncmp(str, "\x04", 1) && cursor_position == 1)
+		{
+			ft_putstr_fd("exit\n", 1);
 			exit(0);
+		}
 		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
 			free((*command)->raw_string);
