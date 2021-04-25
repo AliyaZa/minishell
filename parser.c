@@ -82,12 +82,12 @@ static char	*determine_command(t_command **command)
 
 	p = (*command)->raw_string;
 	i = 0;
-	while (!(ft_isalpha(*p)))
+	while (!ft_isprint(*p) && *p != ' ')
 	{
 		p++;
 	}
 	command_p = p;
-	while (ft_isalpha(*p))
+	while (ft_isprint(*p) && *p != ' ')
 	{
 		p++;
 		i++;
@@ -109,6 +109,7 @@ void	parser(t_command **command, t_env *env)
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
 	semicolon(command);
 	(*command)->rest_string = determine_command(command);
+	validate_command(&(*command)->command);
 	determine_options(command);
 	(*command)->argument = determine_argument(*command);
 	validator(&(*command)->argument, env, *command);

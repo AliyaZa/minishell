@@ -13,7 +13,7 @@ SRC = main.c parser.c minishell_utils.c parse_env.c \
 	build_in/fn_export.c build_in/fn_unset.c build_in/pwd.c \
 	build_in/fn_fork.c build_in/fn_errors.c semicolon.c substitution.c \
 	build_in/command_utils.c build_in/command_utils2.c\
-	build_in/fn_cd.c
+	build_in/fn_cd.c validator_part_2.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -52,7 +52,6 @@ int		redirect(char *string)
 		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string))
 			return (fd);
 		free(filename);
-		//free(tmp);
 		if (is_next_redirect(string))
 			close(fd);
 	}
@@ -120,8 +119,14 @@ void	validator(char **string, t_env *env, t_command *command)
 			command->fd = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 			p = ft_strdup(*string);
 		}
+		if (!ft_strncmp(&p[index], "<", 1) && !flag)
+		{
+			write(1, "reversed redirect\n", 18);
+		}
 		index++;
 	}
+	if (flag)
+		ft_putstr_fd("minishell: syntax error: unexpected end of file\n", 1);
 	*string = ft_strdup(p);
 	free(p);
 }
