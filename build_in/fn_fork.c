@@ -69,22 +69,14 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		path_to = fn_strjoin3(places[kol], "/", command->command);
 	else
 		path_to = ft_strdup(command->argument);
-<<<<<<< HEAD
 	if (command->fd[1] > 1)
 		dup2(command->fd[1], 1);
-=======
 	//if (command->fd > 1)
-		dup2(command->fd, 1);
->>>>>>> bd56c4d788b56c655136ae28ce9797dc3504aae2
 	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
 	{
-		dup2(1, command->fd);
+		dup2(1, command->fd[1]);
 		return (0);
-<<<<<<< HEAD
-	dup2(1, command->fd[1]);
-=======
 	}
->>>>>>> bd56c4d788b56c655136ae28ce9797dc3504aae2
 	return (COMMAND_NOT_FOUND);
 }
 
@@ -97,10 +89,10 @@ void	fn_fork(t_parsed_data *parsed_data, t_command *command)
 		error = fn_path(parsed_data, command);
 	else
 	{
-		dup2(command->fd, 1);
+		dup2(command->fd[1], 1);
 		if ((execve(command->command, command->splited, fn_arr(parsed_data->env_data)) == 0))
 		{
-			dup2(1, command->fd);
+			dup2(1, command->fd[1]);
 			error = 0;
 		}
 	}
