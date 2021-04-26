@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/26 20:21:17 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/26 20:37:26 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	while (places && places[kol] && (access(fn_strjoin3(places[kol],
 					"/", command->command), F_OK) == -1))
 		kol++;
+	command->splited[0] = ft_strdup("./minishell");
 	if ((places && places[kol] && access(fn_strjoin3(places[kol],
 					"/", command->command), X_OK) == -1) || (!access
 			(command->command, F_OK) && access(command->command, X_OK) == -1))
@@ -71,7 +72,6 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		path_to = ft_strdup(command->argument);
 	if (command->fd[1] > 1)
 		dup2(command->fd[1], 1);
-	//if (command->fd > 1)
 	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
 	{
 		dup2(1, command->fd[1]);
