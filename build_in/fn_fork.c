@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/26 19:28:47 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/26 20:21:17 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	fn_fork(t_parsed_data *parsed_data, t_command *command)
 	int		error;
 
 	error = 0;
-	if (!command->flags->is_bin)
+	//if (!command->flags->is_bin)
 		error = fn_path(parsed_data, command);
-	else
+/*	else
 	{
 		dup2(command->fd[1], 1);
 		if ((execve(command->command, command->splited, fn_arr(parsed_data->env_data)) == 0))
@@ -95,7 +95,7 @@ void	fn_fork(t_parsed_data *parsed_data, t_command *command)
 			dup2(1, command->fd[1]);
 			error = 0;
 		}
-	}
+	}*/
 	if (error != 0)
 	{
 		if (error == COMMAND_NOT_FOUND)
