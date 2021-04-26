@@ -129,6 +129,9 @@ void	parser(t_command **command, t_env *env)
 	(*command)->splited = ft_split((*command)->raw_string, ' ');
 	if ((*command)->flags->is_bin)
 	{
+		char	*tmp = ft_strdup((*command)->command);
+		(*command)->argument = ft_strdup((*command)->splited[0]);
 		(*command)->splited[0] = ft_strdup((ft_strrchr((*command)->splited[0], '/') + 1));
+		(*command)->command = ft_strdup((ft_strrchr(tmp, '/') + 1));
 	}
 }
