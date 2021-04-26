@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/26 20:37:26 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/26 20:40:25 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	while (places && places[kol] && (access(fn_strjoin3(places[kol],
 					"/", command->command), F_OK) == -1))
 		kol++;
-	command->splited[0] = ft_strdup("./minishell");
 	if ((places && places[kol] && access(fn_strjoin3(places[kol],
 					"/", command->command), X_OK) == -1) || (!access
 			(command->command, F_OK) && access(command->command, X_OK) == -1))
