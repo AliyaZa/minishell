@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/23 19:06:48 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/26 19:28:47 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		path_to = fn_strjoin3(places[kol], "/", command->command);
 	else
 		path_to = ft_strdup(command->argument);
-	if (command->fd > 1)
+	//if (command->fd > 1)
 		dup2(command->fd, 1);
 	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
+	{
+		dup2(1, command->fd);
 		return (0);
-	dup2(1, command->fd);
+	}
 	return (COMMAND_NOT_FOUND);
 }
 
@@ -81,7 +83,18 @@ void	fn_fork(t_parsed_data *parsed_data, t_command *command)
 {
 	int		error;
 
-	error = fn_path(parsed_data, command);
+	error = 0;
+	if (!command->flags->is_bin)
+		error = fn_path(parsed_data, command);
+	else
+	{
+		dup2(command->fd, 1);
+		if ((execve(command->command, command->splited, fn_arr(parsed_data->env_data)) == 0))
+		{
+			dup2(1, command->fd);
+			error = 0;
+		}
+	}
 	if (error != 0)
 	{
 		if (error == COMMAND_NOT_FOUND)
