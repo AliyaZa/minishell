@@ -46,8 +46,8 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 			while ((parent = wait(&status)) > 0)
 			;
 		}
-			if (command->fd > 1)
-				close(command->fd);
+			if (command->fd[1] > 1)
+				close(command->fd[1]);
 	}
 	else
 		return ;

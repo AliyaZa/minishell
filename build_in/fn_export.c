@@ -73,7 +73,7 @@ static void		print_export(t_env *parsed_data, t_command *command)
 	tmp = sort_tmp(tmp ,parsed_data);
 	while (i < ft_lstsize1(parsed_data))
 	{
-		ft_putstr_fd(tmp[i], command->fd);
+		ft_putstr_fd(tmp[i], command->fd[1]);
 		i++;
 	}
 }

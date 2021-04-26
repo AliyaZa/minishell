@@ -28,6 +28,17 @@ int		is_next_redirect(char *string)
 	return (0);
 }
 
+// int		rev_redirect(char *string)
+// {
+// 	int		fd;
+// 	char	*filename;
+// 	while ()
+// 	{
+
+// 	}
+// 	return (0);
+// }
+
 int		redirect(char *string)
 {
 	int		fd;
@@ -116,12 +127,14 @@ void	validator(char **string, t_env *env, t_command *command)
 		if (!ft_strncmp(&p[index], ">", 1) && !flag)
 		{
 			*string = ft_substr(p, 0, index);
-			command->fd = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
+			command->fd[1] = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 			p = ft_strdup(*string);
 		}
 		if (!ft_strncmp(&p[index], "<", 1) && !flag)
 		{
 			command->flags->rev_redirect = 1;
+			*string = ft_substr(p, 0, index);
+			// rev_redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
 		}
 		index++;
 	}

@@ -18,6 +18,6 @@ void	pwd(t_command *command)
 
 	pwd = NULL;
 	pwd = getcwd(pwd, PATH_MAX);
-	write(command->fd, pwd, ft_strlen(pwd));
-	write(command->fd, "\n", 1);
+	write(command->fd[1], pwd, ft_strlen(pwd));
+	write(command->fd[1], "\n", 1);
 }

@@ -23,7 +23,7 @@ typedef struct	s_command
 	char		quotes_type;
 	char		*queue;
 	char		**splited;
-	int			fd;
+	int			fd[2];
 	t_flags		*flags;
 }				t_command;
 

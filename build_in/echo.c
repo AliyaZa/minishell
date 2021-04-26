@@ -14,10 +14,10 @@
 
 void	fn_echo(t_command *command)
 {
-	write(command->fd, command->argument, ft_strlen(command->argument));
+	write(command->fd[1], command->argument, ft_strlen(command->argument));
 	if (command->option != 'n')
 	{
-		write(command->fd, "\n", 1);
+		write(command->fd[1], "\n", 1);
 		return ;
 	}
 }

@@ -13,7 +13,8 @@ t_command		*initialize_command()
 	command->argument = NULL;
 	command->rest_string = 0;
 	command->queue = NULL;
-	command->fd = 1;
+	command->fd[0] = 0;
+	command->fd[1] = 1;
 	command->flags = flags;
 	command->flags->is_bin = 0;
 	command->flags->rev_redirect = 0;
@@ -38,6 +39,9 @@ void	reset_(t_command **command, size_t flag)
 		free_str(&(*command)->raw_string);
 		free_str(&(*command)->command);
 		free_str(&(*command)->argument);
+		(*command)->flags->is_bin = 0;
+		(*command)->fd[0] = 0;
+		(*command)->fd[1] = 1;
 		(*command)->raw_string = ft_strnew(0);
 		(*command)->option = 0;
 		(*command)->rest_string = 0;

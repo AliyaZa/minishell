@@ -38,9 +38,7 @@ void    fn_termcap(t_command **command, char **history)
 		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3) || !ft_strncmp(str, "\t", 1))
 			;
 		else if (!ft_strncmp(str, "\x7f", ft_strlen("\x7f")) || !ft_strncmp(str, "\177", 1))
-		{
 			backspace(&(*command)->raw_string, &cursor_position);
-		}
 		else
 		{
 			ft_putstr_fd(str, 1);

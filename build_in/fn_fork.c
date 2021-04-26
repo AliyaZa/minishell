@@ -69,11 +69,11 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		path_to = fn_strjoin3(places[kol], "/", command->command);
 	else
 		path_to = ft_strdup(command->argument);
-	if (command->fd > 1)
-		dup2(command->fd, 1);
+	if (command->fd[1] > 1)
+		dup2(command->fd[1], 1);
 	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
 		return (0);
-	dup2(1, command->fd);
+	dup2(1, command->fd[1]);
 	return (COMMAND_NOT_FOUND);
 }
 
