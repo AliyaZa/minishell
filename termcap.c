@@ -35,16 +35,12 @@ void    fn_termcap(t_command **command, char **history)
 			(*command)->raw_string = ft_strjoin_free((*command)->raw_string, str, 1);
 			break ;
 		}
-		if (!ft_strncmp(str, "\034", 2))
-		{
-			printf("ctr \\\n");
-		}
 		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
 			free((*command)->raw_string);
 			(*command)->raw_string = navigate_history(history, &str, &current);
 		}
-		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3) || !ft_strncmp(str, "\t", 1))
+		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str, "\e[C", 3) || !ft_strncmp(str, "\t", 1) || !ft_strncmp(str, "\034", 2))
 			;
 		else if (!ft_strncmp(str, "\x7f", ft_strlen("\x7f")) || !ft_strncmp(str, "\177", 1))
 			backspace(&(*command)->raw_string, &cursor_position);
