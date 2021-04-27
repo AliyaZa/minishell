@@ -104,9 +104,9 @@ void	parser(t_command **command, t_env *env)
 
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
 		(*command)->raw_string = ft_strdup((*command)->queue);
-	if (!ft_strncmp_end((*command)->raw_string, "\x03", 1) || (ft_strlen(
-		(*command)->raw_string) == 0 && ft_strlen((*command)->queue) == 0))
-		return ;
+	// if (!ft_strncmp_end((*command)->raw_string, "\x03", 1) || (ft_strlen(
+	// 	(*command)->raw_string) == 0 && ft_strlen((*command)->queue) == 0))
+	// 	return ;
 	if (!ft_strncmp((*command)->raw_string, "\n", 1))
 		return ;
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
