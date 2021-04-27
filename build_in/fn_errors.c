@@ -17,7 +17,7 @@ int	fn_errors(t_command *command, int error)
 	write(2, "minishell: ", 11);
 	ft_putstr_fd(command->command, 2);
 	write (2, ": ", 2);
-	ft_putstr_fd(command->argument, 2);
+	// ft_putstr_fd(command->argument, 2);
 	write (2, ": ", 2);
 	if (error == COMMAND_NOT_FOUND)
 	{
@@ -30,7 +30,7 @@ int	fn_errors(t_command *command, int error)
 		exit (1);
 	}
 	else if (error == SYNTAX_ERROR)
-		ft_putstr_fd("syntax error: unexpected end of file", 2);
+		ft_putstr_fd("syntax error: unexpected end of file\n", 2);
 	else if (error == IS_FILE)
 		ft_putstr_fd("Not a directory\n", 2);
 	else if (error == errno)
@@ -38,5 +38,6 @@ int	fn_errors(t_command *command, int error)
 		ft_putstr_fd(strerror(errno), 2);
 		write(2, "\n", 1);
 	}
+	command->flags->error = error;
 	return (0);
 }
