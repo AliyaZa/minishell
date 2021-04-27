@@ -1,6 +1,27 @@
 #include "minishell.h"
 
-void    fn_termcap(t_command **command, char **history)
+void	ctr_d(void)
+{
+	ft_putstr_fd("exit\n", 1);
+	exit(0);
+}
+
+void	ctr_c(t_command **command, char **str)
+{
+	ft_putstr_fd("\n", 1);
+	(*command)->raw_string = ft_strjoin_free((*command)->raw_string, *str, 1);
+}
+
+void	new_symbol(char **str, t_command **command, int *current)
+{
+	ft_putstr_fd(*str, 1);
+	if (!(*command)->raw_string)
+		(*command)->raw_string = ft_strnew(0);
+	(*command)->raw_string = ft_strjoin_free((*command)->raw_string, *str, 1);
+	*current = -1;
+}
+
+void	fn_termcap(t_command **command, char **history)
 {
 	int			l;
 	char		*str;
@@ -17,14 +38,10 @@ void    fn_termcap(t_command **command, char **history)
 		cursor_position += l;
 		str[l] = 0;
 		if (!ft_strncmp(str, "\x04", 1) && cursor_position == 1)
-		{
-			ft_putstr_fd("exit\n", 1);
-			exit(0);
-		}
+			ctr_d();
 		if (!ft_strncmp(str, "\x03", 1))
 		{
-			ft_putstr_fd("\n", 1);
-			(*command)->raw_string = ft_strjoin_free((*command)->raw_string, str, 1);
+			ctr_c(command, &str);
 			break ;
 		}
 		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
@@ -37,12 +54,6 @@ void    fn_termcap(t_command **command, char **history)
 		else if (!ft_strncmp(str, "\x7f", ft_strlen("\x7f")) || !ft_strncmp(str, "\177", 1))
 			backspace(&(*command)->raw_string, &cursor_position);
 		else
-		{
-			ft_putstr_fd(str, 1);
-			if (!(*command)->raw_string)
-				(*command)->raw_string = ft_strnew(0);
-			(*command)->raw_string = ft_strjoin_free((*command)->raw_string, str, 1);
-			current = -1;
-		}
+			new_symbol(&str, command, &current);
 	}
 }

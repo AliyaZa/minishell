@@ -11,7 +11,7 @@ SRC = main.c parser.c minishell_utils.c parse_env.c \
 	termcap.c navigate_history.c termcap_utils.c validator.c \
 	structures_init.c router.c build_in/echo.c build_in/env.c \
 	build_in/fn_export.c build_in/fn_unset.c build_in/pwd.c \
-	build_in/fn_fork.c build_in/fn_errors.c semicolon.c substitution.c \
+	build_in/fn_fork.c build_in/fn_errors.c semicolon.c \
 	build_in/command_utils.c build_in/command_utils2.c \
 	build_in/fn_cd.c validator_part_2.c parser_part_2.c \
 

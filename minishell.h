@@ -22,6 +22,7 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 
+void			backspace(char **string, int *cursor_position);
 char			*determine_argument(t_command *command);
 void			determine_options(t_command **command);
 char			*determine_command(t_command **command);
