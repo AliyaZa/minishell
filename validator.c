@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-int		is_next_redirect(char *string)
+int		is_next_redirect(char *string, char type)
 {
 	int		index;
 
 	index = 0;
 	while (string[index])
 	{
-		if (string[index] == '>')
+		if (string[index] == type)
 			return (1);
 		else if (string[index] == '"' || string[index] == '\'')
 			return (0);
@@ -28,21 +28,7 @@ int		is_next_redirect(char *string)
 	return (0);
 }
 
-// int		rev_redirect(char *string)
-// {
-// 	int		fd;
-// 	char	*filename;
-// 	size_t	index;
-// 	char	*tmp;
-
-// 	while (string[index])
-// 	{
-
-// 	}
-// 	return (0);
-// }
-
-int		redirect(char *string)
+int		redirect(char *string, char type)
 {
 	int		fd;
 	char	*filename;
@@ -55,18 +41,23 @@ int		redirect(char *string)
 	while (string[index])
 	{
 		tmp = string;
-		while (string[index] == ' ' || string[index] == '>')
-			string[index++] == '>' ? r_type++ : 1;
+		while (string[index] == ' ' || string[index] == type)
+			string[index++] == type ? r_type++ : 1;
 		string = ft_substr(string, index, ft_strlen(string));
 		filename = ft_take_word(&string);
-		if (r_type == 2)
-			fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0777);
-		else if (r_type == 1)
-			fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
-		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string))
+		if (type == '>')
+		{
+			if (r_type == 2)
+				fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
+			else if (r_type == 1)
+				fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		}
+		else
+			fd = open(filename, O_RDWR, 0633);
+		if ((!string || ft_strlen(string) == 0) && !is_next_redirect(string, type))
 			return (fd);
 		free(filename);
-		if (is_next_redirect(string))
+		if (is_next_redirect(string, type))
 			close(fd);
 	}
 	return (fd);
@@ -130,14 +121,15 @@ void	validator(char **string, t_env *env, t_command *command)
 		if (!ft_strncmp(&p[index], ">", 1) && !flag)
 		{
 			*string = ft_substr(p, 0, index);
-			command->fd[1] = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
+			command->fd[1] = redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])), '>');
 			p = ft_strdup(*string);
 		}
 		if (!ft_strncmp(&p[index], "<", 1) && !flag)
 		{
 			command->flags->rev_redirect = 1;
 			*string = ft_substr(p, 0, index);
-			// rev_redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])));
+			redirect(ft_substr(&p[index], 0 , ft_strlen(&p[index])), '<');
+			p = ft_strdup(*string);
 		}
 		index++;
 	}
