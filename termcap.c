@@ -1,14 +1,5 @@
 #include "minishell.h"
 
-void	backspace(char **string, int *cursor_position)
-{
-	if (*cursor_position)
-		delete_last_charachter(string);
-	*cursor_position = *cursor_position - 1;
-	clear_command_line();
-	ft_putstr_fd(*string, 1);
-}
-
 void    fn_termcap(t_command **command, char **history)
 {
 	int			l;

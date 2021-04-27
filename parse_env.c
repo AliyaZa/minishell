@@ -24,7 +24,7 @@ t_env	*parse_env(char **env)
 	while (env[i])
 	{
 		env_el = malloc(sizeof(t_env));
-		env_el->next =NULL;
+		env_el->next = NULL;
 		matrix = ft_split(env[i], '=');
 		env_el->key = ft_strdup(matrix[0]);
 		env_el->value = ft_strdup(matrix[1]);
@@ -38,4 +38,3 @@ t_env	*parse_env(char **env)
 	}
 	return (our_env);
 }
-

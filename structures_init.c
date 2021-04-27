@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures_init.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/27 14:42:22 by mismene           #+#    #+#             */
+/*   Updated: 2021/04/27 14:42:23 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_command		*initialize_command()
+t_command		*initialize_command(void)
 {
 	t_command	*command;
 	t_flags		*flags;
@@ -19,7 +31,6 @@ t_command		*initialize_command()
 	command->flags->is_bin = 0;
 	command->flags->rev_redirect = 0;
 	return (command);
-
 }
 
 t_parsed_data	*initialize_parsed_data(char **env)
@@ -32,7 +43,7 @@ t_parsed_data	*initialize_parsed_data(char **env)
 	return (parsed_data);
 }
 
-void	reset_(t_command **command, size_t flag)
+void			reset_(t_command **command, size_t flag)
 {
 	if (flag)
 	{

@@ -82,7 +82,7 @@ char	*determine_command(t_command **command)
 
 	p = (*command)->raw_string;
 	i = 0;
-	while (!ft_isprint(*p) && *p != ' ')
+	while (*p == ' ')
 	{
 		p++;
 	}

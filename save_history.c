@@ -15,13 +15,14 @@
 void	save_history(t_parsed_data **parsed_data, char *line)
 {
 	int				i;
-	
+
 	i = 498;
 	while (i >= 0)
 	{
 		if ((*parsed_data)->history[i])
 		{
-			(*parsed_data)->history[i + 1] = ft_strdup((*parsed_data)->history[i]);
+			(*parsed_data)->history[i + 1] =
+			ft_strdup((*parsed_data)->history[i]);
 			free((*parsed_data)->history[i]);
 		}
 		i--;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_part_2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/27 14:37:14 by mismene           #+#    #+#             */
+/*   Updated: 2021/04/27 14:37:15 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	determine_command_struct(t_command **command, t_env *env)
@@ -11,7 +23,7 @@ void	determine_command_struct(t_command **command, t_env *env)
 	validator(&(*command)->argument, env, *command);
 }
 
-int		is_current_folder(char	*command)
+int		is_current_folder(char *command)
 {
 	if (command[0] == '.' && command[1] == '/')
 		return (1);

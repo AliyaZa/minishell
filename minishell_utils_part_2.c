@@ -22,6 +22,7 @@ int		ft_putchar(int c)
 void	replace_symbol(char **string, char old, char new)
 {
 	char	*p_n;
+
 	if ((p_n = ft_strchr(*string, old)))
 		*p_n = new;
 }
@@ -62,7 +63,7 @@ char	*ft_take_word(char **string)
 	while (p[index] == ' ')
 		index++;
 	start = index;
-	while(p[index] && ft_isprint(p[index]) && p[index] != ' ')
+	while (p[index] && ft_isprint(p[index]) && p[index] != ' ')
 		index++;
 	*string = &p[index];
 	return (ft_substr(p, start, index));

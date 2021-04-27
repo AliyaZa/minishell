@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   semicolon.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/27 14:41:34 by mismene           #+#    #+#             */
+/*   Updated: 2021/04/27 14:41:36 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	semicolon(t_command **command)
@@ -15,7 +27,7 @@ void	semicolon(t_command **command)
 		{
 			counter++;
 			string[index] = 0;
-			(*command)->queue= ft_strdup(&string[index + 1]);
+			(*command)->queue = ft_strdup(&string[index + 1]);
 			break ;
 		}
 		index++;
