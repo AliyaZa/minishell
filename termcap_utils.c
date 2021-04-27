@@ -5,6 +5,7 @@ void	term_ini()
 	struct	termios term;
 
 	tcgetattr(0, &term);
+	term.c_lflag &= ~(ISIG);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
 	tcsetattr(0, TCSANOW, &term);

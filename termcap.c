@@ -30,6 +30,15 @@ void    fn_termcap(t_command **command, char **history)
 			ft_putstr_fd("exit\n", 1);
 			exit(0);
 		}
+		if (!ft_strncmp(str, "\x03", 1))
+		{
+			(*command)->raw_string = ft_strjoin_free((*command)->raw_string, str, 1);
+			break ;
+		}
+		if (!ft_strncmp(str, "\034", 2))
+		{
+			printf("ctr \\\n");
+		}
 		if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
 			free((*command)->raw_string);
