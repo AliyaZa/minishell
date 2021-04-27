@@ -32,6 +32,7 @@ void    fn_termcap(t_command **command, char **history)
 		}
 		if (!ft_strncmp(str, "\x03", 1))
 		{
+			ft_putstr_fd("\n", 1);
 			(*command)->raw_string = ft_strjoin_free((*command)->raw_string, str, 1);
 			break ;
 		}

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static char	*determine_argument(t_command *command)
+char	*determine_argument(t_command *command)
 {
 	char	*arg;
 	size_t	index;
@@ -33,7 +33,7 @@ static char	*determine_argument(t_command *command)
 	return (arg);
 }
 
-static void	determine_rest_string(t_command **command, size_t index)
+void	determine_rest_string(t_command **command, size_t index)
 {
 	size_t	strlen;
 
@@ -52,7 +52,7 @@ static void	determine_rest_string(t_command **command, size_t index)
 	}
 }
 
-static void	determine_options(t_command **command)
+void	determine_options(t_command **command)
 {
 	char	option;
 	size_t	index;
@@ -74,7 +74,7 @@ static void	determine_options(t_command **command)
 	determine_rest_string(command, index);
 }
 
-static char	*determine_command(t_command **command)
+char	*determine_command(t_command **command)
 {
 	int		i;
 	char	*p;
@@ -104,29 +104,22 @@ void	parser(t_command **command, t_env *env)
 
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
 		(*command)->raw_string = ft_strdup((*command)->queue);
-	if (!ft_strncmp_end((*command)->raw_string, "\x03", 1) || (ft_strlen((*command)->raw_string) == 0 && ft_strlen((*command)->queue) == 0))
-	{
-		ft_putstr_fd("\n", 1);
+	if (!ft_strncmp_end((*command)->raw_string, "\x03", 1) || (ft_strlen(
+		(*command)->raw_string) == 0 && ft_strlen((*command)->queue) == 0))
 		return ;
-	}
 	if (!ft_strncmp((*command)->raw_string, "\n", 1))
 		return ;
 	replace_symbol(&(*command)->raw_string, '\n', '\0');
 	semicolon(command);
-	(*command)->rest_string = determine_command(command);
-	if (validate_command(&(*command)->command))
-		fn_errors(*command, SYNTAX_ERROR);
-	(*command)->flags->is_bin = is_command_bin(*command);
-	determine_options(command);
-	(*command)->argument = determine_argument(*command);
-	validator(&(*command)->argument, env, *command);
+	determine_command_struct(command, env);
 	(*command)->splited = ft_split((*command)->raw_string, ' ');
 	if ((*command)->flags->is_bin)
 	{
 		tmp = ft_strdup((*command)->command);
 		(*command)->argument = ft_strdup((*command)->splited[0]);
 		if (!(is_current_folder((*command)->command)))
-			(*command)->splited[0] = ft_strdup((ft_strrchr((*command)->splited[0], '/') + 1));
+			(*command)->splited[0] =
+			ft_strdup((ft_strrchr((*command)->splited[0], '/') + 1));
 		(*command)->command = ft_strdup((ft_strrchr(tmp, '/') + 1));
 	}
 }

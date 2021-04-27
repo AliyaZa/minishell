@@ -22,6 +22,10 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 
+char			*determine_argument(t_command *command);
+void			determine_options(t_command **command);
+char			*determine_command(t_command **command);
+void			determine_command_struct(t_command **command, t_env *env);
 int				is_current_folder(char	*command);
 int				is_command_bin(t_command *command);
 int				validate_command(char **command);
