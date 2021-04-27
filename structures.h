@@ -11,6 +11,7 @@ typedef	struct	s_flags
 {
 	int			is_bin;
 	int			rev_redirect;
+	int			error;
 }				t_flags;
 
 typedef struct	s_command

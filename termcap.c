@@ -29,7 +29,8 @@ void	fn_termcap(t_command **command, char **history)
 	while (str[0] != '\n')
 	{
 		l = read(0, str, 100);
-		cursor_position += l;
+		if ((ft_strncmp_end(str, "\x03", 1)))
+			cursor_position += l;
 		str[l] = 0;
 		if (!ft_strncmp(str, "\x04", 1) && cursor_position == 1)
 			ctr_d();
