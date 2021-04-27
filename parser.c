@@ -98,19 +98,11 @@ static char	*determine_command(t_command **command)
 	return (p);
 }
 
-int		is_command_bin(t_command *command)
-{
-	if (!ft_strncmp(command->command, "/", 1))
-		return (1);
-	if (!ft_strncmp(command->command, "~", 1))
-		return (1);
-	if (!ft_strncmp(command->command, ".", 1))
-		return (1);
-	return (0);
-}
-
 void	parser(t_command **command, t_env *env)
 {
+	char	*tmp;
+
+
 	if (!ft_strlen((*command)->raw_string) && (*command)->queue)
 	{
 		(*command)->raw_string = ft_strdup((*command)->queue);
@@ -129,9 +121,10 @@ void	parser(t_command **command, t_env *env)
 	(*command)->splited = ft_split((*command)->raw_string, ' ');
 	if ((*command)->flags->is_bin)
 	{
-		char	*tmp = ft_strdup((*command)->command);
+		tmp = ft_strdup((*command)->command);
 		(*command)->argument = ft_strdup((*command)->splited[0]);
-		(*command)->splited[0] = ft_strdup((ft_strrchr((*command)->splited[0], '/') + 1));
+		if (!(is_current_folder((*command)->command)))
+			(*command)->splited[0] = ft_strdup((ft_strrchr((*command)->splited[0], '/') + 1));
 		(*command)->command = ft_strdup((ft_strrchr(tmp, '/') + 1));
 	}
 }

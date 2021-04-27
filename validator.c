@@ -32,7 +32,10 @@ int		is_next_redirect(char *string)
 // {
 // 	int		fd;
 // 	char	*filename;
-// 	while ()
+// 	size_t	index;
+// 	char	*tmp;
+
+// 	while (string[index])
 // 	{
 
 // 	}
