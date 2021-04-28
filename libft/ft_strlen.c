@@ -33,3 +33,14 @@ size_t	ft_strlen_c(const char *s, const char c)
 			i++;
 	return (i);
 }
+
+size_t	ft_strlen_cc(const char *s, const char c, const char c2)
+{
+	size_t	i;
+
+	i = 0;
+	if (s)
+		while (s[i] != c && s[i] != c2 && s[i] != '\0')
+			i++;
+	return (i);
+}

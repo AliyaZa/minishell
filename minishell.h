@@ -22,6 +22,7 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 
+void			ft_insert_str(char **string, char *buf, size_t index);
 char			*ft_take_word2(char *string);
 void			print_array(char **p);
 char			**ft_separator(char *string, char c);

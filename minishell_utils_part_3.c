@@ -12,25 +12,14 @@ void	print_array(char **p)
 	}
 }
 
-// char	*ft_take_word2(char *string)
-// {
-// 	int		index;
-// 	char	*p;
-// 	int		start;
-// 	char	flag;
-
-// 	p = string;
-// 	index = 0;
-// 	flag = '\0';
-// 	while (p[index] == ' ' && !flag)
-// 	{
-// 		index++;
-// 		if (p[index] == '"' || p[index] == '\'')
-// 			flag = p[index];
-// 	}
-// 	start = index;
-// 	while (p[index] && ft_isprint(p[index]) && p[index] != ' ')
-// 		index++;
-// 	string = &p[index];
-// 	return (ft_substr(p, start, index));
-// }
+void	ft_insert_str(char **string, char *buf, size_t index)
+{
+	char	*start;
+	char	*end;
+	
+	start = ft_substr(*string, 0, index);
+	end = ft_substr(*string, index, ft_strlen(*string));
+	start = ft_strjoin(start, buf);
+	start = ft_strjoin(start, end);
+	*string = ft_strdup(start);
+}
