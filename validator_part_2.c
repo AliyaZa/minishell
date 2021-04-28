@@ -43,3 +43,31 @@ int	validate_command(char **command)
 	*command = ft_strdup(p);
 	return (0);
 }
+
+char	*validate_raw_string(char *raw_string)
+{
+	char	*p;
+	size_t	index;
+	char	quote;
+
+	index = 0;
+	p = ft_strdup(raw_string);
+	free(raw_string);
+	quote = '\0';
+	while (p[index])
+	{
+		if (p[index] == '\'' || p[index] == '"')
+		{
+			if (p[index] == quote)
+				quote = '\0';
+			else if (!quote)
+				quote = p[index];
+		}
+		if (quote && p[index] == ' ')
+		{
+			p[index] = -1;
+		}
+		index++;
+	}
+	return (p);
+}

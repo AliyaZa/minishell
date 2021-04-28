@@ -82,10 +82,6 @@ void	validator(char **string, t_env *env, t_command *command)
 	flag = 0;
 	while (p[index])
 	{
-		if (p[index] == ' ' && flag)
-		{
-			p[index] = -1;
-		}
 		if (p[index] == '"' || p[index] == '\'')
 		{
 			if (!flag || p[index] == flag)

@@ -9,7 +9,7 @@ CC = gcc
 SRC = main.c  minishell_utils.c \
 	main_cycle.c minishell_utils_part_2.c save_history.c \
 	termcap.c navigate_history.c termcap_utils.c validator.c \
-	structures_init.c router.c ft_separator.c minishell_utils_part_3.c\
+	structures_init.c router.c minishell_utils_part_3.c\
 	semicolon.c \
 	validator_part_2.c \
 	build_in/echo.c \
