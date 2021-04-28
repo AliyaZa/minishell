@@ -6,14 +6,26 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRC = main.c parser.c minishell_utils.c parse_env.c \
+SRC = main.c  minishell_utils.c \
 	main_cycle.c minishell_utils_part_2.c save_history.c \
 	termcap.c navigate_history.c termcap_utils.c validator.c \
-	structures_init.c router.c build_in/echo.c build_in/env.c \
-	build_in/fn_export.c build_in/fn_unset.c build_in/pwd.c \
-	build_in/fn_fork.c build_in/fn_errors.c semicolon.c \
-	build_in/command_utils.c build_in/command_utils2.c \
-	build_in/fn_cd.c validator_part_2.c parser_part_2.c \
+	structures_init.c router.c ft_separator.c minishell_utils_part_3.c\
+	semicolon.c \
+	validator_part_2.c \
+	build_in/echo.c \
+	build_in/env.c \
+	build_in/fn_export.c \
+	build_in/fn_unset.c \
+	build_in/pwd.c \
+	build_in/fn_fork.c \
+	build_in/fn_errors.c \
+	build_in/command_utils.c \
+	build_in/command_utils2.c \
+	build_in/fn_cd.c \
+	parser/parser.c \
+	parser/parse_env.c \
+	parser/parser_utils.c \
+	parser/parser_utils_part_2.c \
 
 OBJ = $(SRC:.c=.o)
 

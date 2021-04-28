@@ -14,14 +14,10 @@
 
 int	fn_errors(t_command *command, int error)
 {
-	write(2, "minishell: ", 11);
-	ft_putstr_fd(command->command, 2);
-	write (2, ": ", 2);
-	// ft_putstr_fd(command->argument, 2);
-	write (2, ": ", 2);
+	ft_putstr_fd("minishell: ", 1);
 	if (error == COMMAND_NOT_FOUND)
 	{
-		write(2, "command not found\n", 20);
+		ft_putstr_fd("command not found\n", 1);
 		exit (1);
 	}
 	else if (error == NOT_AN_EXECUTABLE_FILE)

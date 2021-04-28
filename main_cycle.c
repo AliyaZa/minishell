@@ -32,7 +32,6 @@ int		main_cycle(char **env)
 			save_history(&parsed_data, command->raw_string);
 		}
 		parser(&command, parsed_data->env_data);
-		printf("error is %i\n", command->flags->error);
 		if (!(command->flags->error))
 			router(parsed_data, command);
 		flag = 1;

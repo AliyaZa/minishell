@@ -22,11 +22,14 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 
+char			*ft_take_word2(char *string);
+void			print_array(char **p);
+char			**ft_separator(char *string, char c);
+void			sort_splitted(char ***splitted);
 void			backspace(char **string, int *cursor_position);
 char			*determine_argument(t_command *command);
 void			determine_options(t_command **command);
 char			*determine_command(t_command **command);
-void			determine_command_struct(t_command **command, t_env *env);
 int				is_current_folder(char	*command);
 int				is_command_bin(t_command *command);
 int				validate_command(char **command);

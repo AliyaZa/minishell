@@ -103,7 +103,7 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		else if (level == 999)
 			mini->value = "";
 	}
-	if ((execve(path_to, command->splited, fn_arr(parsed_data->env_data)) == 0))
+	if ((execve(path_to, command->splitted, fn_arr(parsed_data->env_data)) == 0))
 	{
 		dup2(1, command->fd[1]);
 		return (0);
@@ -121,7 +121,7 @@ void	fn_fork(t_parsed_data *parsed_data, t_command *command)
 /*	else
 	{
 		dup2(command->fd[1], 1);
-		if ((execve(command->command, command->splited, fn_arr(parsed_data->env_data)) == 0))
+		if ((execve(command->command, command->splitted, fn_arr(parsed_data->env_data)) == 0))
 		{
 			dup2(1, command->fd[1]);
 			error = 0;
