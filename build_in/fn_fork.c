@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/27 20:34:05 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/28 19:33:10 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,22 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	path_to = NULL;
 	//if (command->flags->is_bin != 1)
 	path = fn_get_el(parsed_data, "PATH");
-	if (path)
-		places = ft_split(path->value, ':');
-	while (places && places[kol] && (access(fn_strjoin3(places[kol],
-					"/", command->command), F_OK) == -1))
-		kol++;
-	if ((places && places[kol] && access(fn_strjoin3(places[kol],
-					"/", command->command), X_OK) == -1) || (!access
-			(command->command, F_OK) && access(command->command, X_OK) == -1))
-		return (NOT_AN_EXECUTABLE_FILE);
-	if (places && places[kol])
-		path_to = fn_strjoin3(places[kol], "/", command->command);
+	if (command->flags->is_bin != 1)
+	{
+		if (path)
+			places = ft_split(path->value, ':');
+		while (places && places[kol] && (access(fn_strjoin3(places[kol],
+						"/", command->command), F_OK) == -1))
+			kol++;
+		if ((places && places[kol] && access(fn_strjoin3(places[kol],
+						"/", command->command), X_OK) == -1) || (!access
+				(command->command, F_OK) && access(command->command, X_OK) == -1))
+			return (NOT_AN_EXECUTABLE_FILE);
+		if (places && places[kol])
+			path_to = fn_strjoin3(places[kol], "/", command->command);
+		else
+			path_to = ft_strdup(command->argument);
+	}
 	else
 		path_to = ft_strdup(command->argument);
 	if (command->fd[1] > 1)
@@ -103,6 +108,10 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		else if (level == 999)
 			mini->value = "";
 	}
+	free(command->splitted[0]);
+	command->splitted[0] = NULL;
+	command->splitted[0] = ft_strdup(command->argument);
+	printf("path = %s\n", path_to);
 	if ((execve(path_to, command->splitted, fn_arr(parsed_data->env_data)) == 0))
 	{
 		dup2(1, command->fd[1]);

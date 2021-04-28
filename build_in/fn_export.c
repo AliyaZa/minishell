@@ -6,11 +6,32 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/27 20:29:40 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/28 19:18:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static char	*create_str_ex(char *str)
+{
+	char	*rez;
+	size_t		i;
+	size_t		j;
+	size_t		len;
+
+	i = 1;
+	j = 0;
+	len = ft_strlen(str);
+	rez = (char *)malloc(sizeof(char) * (len + 3));
+	rez[0] = '"';
+	while (j < len)
+	{
+		rez[i++] = str[j++];
+	}
+	rez[i++] = '"';
+	rez[i] = '\0';
+	return (rez);
+}
 
 static char	**create_sort_export(t_env *parsed_data)
 {
@@ -24,7 +45,9 @@ static char	**create_sort_export(t_env *parsed_data)
 	while (parsed_data1 != NULL)
 	{
 		if (!parsed_data1->equal)
-			tmp[i] = fn_strjoin3(fn_strjoin3("declare -x ", parsed_data1->key, "="), parsed_data1->value, "\n");
+		{
+			tmp[i] = fn_strjoin3(fn_strjoin3("declare -x ", parsed_data1->key, "="), create_str_ex(parsed_data1->value), "\n");
+		}
 //			printf("declare -x %s=\"%s\"\n",
 //				parsed_data1->key, parsed_data1->value);
 		else

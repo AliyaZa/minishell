@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/23 19:05:01 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/28 19:40:03 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 //			child = 0;
 			if (child == 0)
 				fn_fork(parsed_data, command);
-			while ((parent = wait(&status)) > 0)
-			;
+			waitpid(child, &status, 0);
+			if (status == 9)
+				kill(0, status);
+			// while ((parent = wait(&status)) > 0)
+			// ;
 		}
 			if (command->fd[1] > 1)
 				close(command->fd[1]);
