@@ -28,26 +28,6 @@ int		is_next_redirect(char *string, char type)
 	return (0);
 }
 
-void	ft_delete_char(char **string, size_t place)
-{
-	char	*start;
-	char	*end;
-
-	start = ft_substr(*string, 0, place);
-	end = ft_substr(*string, place + 1, ft_strlen(*string));
-	start = ft_strjoin(start, end);
-	*string = start;
-}
-
-void	ft_delete_word(char **string, size_t start, size_t size)
-{
-	while (start < size)
-	{
-		ft_delete_char(string, start);
-		start++;
-	}
-}
-
 int		redirect(char **string, char type, size_t i)
 {
 	int		fd;
@@ -69,8 +49,6 @@ int		redirect(char **string, char type, size_t i)
 		p = ft_substr(p, index, ft_strlen(p));
 		filename = ft_take_word(&p);
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
-		ft_delete_word(&p, index, ft_strlen(buf));
-		// ft_insert_str(string, buf, i);
 		if (type == '>')
 		{
 			if (r_type == 2)
@@ -122,18 +100,23 @@ void	validator(char **string, t_env *env, t_command *command)
 		}
 		if (p[index] == '$' && (quote == 0 || quote == '"'))
 		{
+			if (p[index + 1] == ' ' || p[index+ 1] == '\0')
+			{
+				index++;
+				continue ;
+			}
 			tmp = ft_substr(p, 0, index);
-			tmp1 = ft_substr(p, (ft_strlen_c(&p[index], ' ')) + index, ft_strlen(p));
+			tmp1 = ft_substr(p, (ft_strlen_cc(&p[index], ' ', '"')) + index, ft_strlen(p));
 			i = index;
 			kc = 0;
-			while (p[i] != ' ' && p[i] != quote)
+			while (p[i] != ' ' && p[i] != '"' && p[i] != '\'' && p[i] != quote)
 			{
 				kc++;
 				i++;
 			}
-			key = ft_substr(p, index +1, kc - 1);
+			key = ft_substr(p, index + 1, kc - 1);
 			value = get_value_by_key(env, key);
-			free(key);
+			free_str(&key);
 			if (value)
 				tmp = ft_strjoin_free(tmp, value, 1);
 			tmp = ft_strjoin_free(tmp, tmp1, 3);

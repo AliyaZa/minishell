@@ -32,10 +32,10 @@ void	fn_termcap(t_command **command, char **history)
 		if ((ft_strncmp_end(str, "\x03", 1)))
 			cursor_position += l;
 		str[l] = 0;
-		if (!ft_strncmp(str, "\x04", 1) && cursor_position == 1)
+		if (!ft_strncmp_end(str, "\x04", 1) && cursor_position == 1)
 			ctr_d();
 		else if (!ft_strncmp(str, "\x03", 1))
-			ft_putstr_fd("\nminishell>", 1);
+			ft_putstr_fd("\nminishell> ", 1);
 		else if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
 			free((*command)->raw_string);

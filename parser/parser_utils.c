@@ -85,7 +85,8 @@ void	determine_options(t_command **command)
 		{
 			if (ft_isalpha((*command)->rest_string[index + 1]))
 			{
-				(*command)->option = (*command)->rest_string[index + 1];
+				if ((*command)->rest_string[index + 2] == ' ')
+					(*command)->option = (*command)->rest_string[index + 1];
 				break ;
 			}
 		}

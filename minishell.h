@@ -22,6 +22,8 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 
+void			ft_delete_word(char **string, size_t start, size_t size);
+void			ft_delete_char(char **string, size_t place);
 void			ft_insert_str(char **string, char *buf, size_t index);
 char			*ft_take_word2(char *string);
 void			print_array(char **p);

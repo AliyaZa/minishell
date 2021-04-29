@@ -23,3 +23,26 @@ void	ft_insert_str(char **string, char *buf, size_t index)
 	start = ft_strjoin(start, end);
 	*string = ft_strdup(start);
 }
+
+void	ft_delete_char(char **string, size_t place)
+{
+	char	*start;
+	char	*end;
+
+	start = ft_substr(*string, 0, place);
+	end = ft_substr(*string, place + 1, ft_strlen(*string));
+	start = ft_strjoin(start, end);
+	*string = start;
+}
+
+void	ft_delete_word(char **string, size_t start, size_t size)
+{
+	size_t	place;
+
+	place = start;
+	while (start < size)
+	{
+		ft_delete_char(string, place);
+		start++;
+	}
+}

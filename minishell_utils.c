@@ -28,7 +28,8 @@ char	*get_value_by_key(t_env *env_data, char *key)
 	{
 		if (!ft_strncmp(key, env_data->key, ft_strlen(key)))
 		{
-			return (env_data->value);
+			if (ft_strlen(key) == ft_strlen(env_data->key))
+				return (env_data->value);
 		}
 		env_data = env_data->next;
 	}
