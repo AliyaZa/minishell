@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/28 19:18:09 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/29 19:06:56 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ void	fn_export(t_parsed_data *parsed_data, t_command *command)
 	int		flag;
 
 	flag = 0;
+	if (!ft_isalpha(command->argument[0]))
+		fn_errors(command, NOT_VALID_ID);
 	if (command->argument[0] != '\0')
 		fn_make_part(&parsed_data, command, &flag);
 	else

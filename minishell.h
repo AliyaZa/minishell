@@ -21,6 +21,7 @@
 # define NOT_AN_EXECUTABLE_FILE 4
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
+# define NOT_VALID_ID 6
 
 void			ft_delete_word(char **string, size_t start, size_t size);
 void			ft_delete_char(char **string, size_t place);
