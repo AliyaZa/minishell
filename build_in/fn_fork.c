@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/28 19:33:10 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/29 19:25:27 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	kol = 0;
 	places = NULL;
 	path_to = NULL;
-	//if (command->flags->is_bin != 1)
 	path = fn_get_el(parsed_data, "PATH");
 	if (command->flags->is_bin != 1)
 	{
