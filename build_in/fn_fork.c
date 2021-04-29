@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/29 19:25:27 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/29 19:51:39 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	check_digit(char *str)
 
 static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 {
+	struct stat	buf;
 	t_env	*path;
 	char	**places;
 	int		kol;
@@ -76,12 +77,12 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	{
 		if (path)
 			places = ft_split(path->value, ':');
-		while (places && places[kol] && (access(fn_strjoin3(places[kol],
-						"/", command->command), F_OK) == -1))
+		while (places && places[kol] && (stat(fn_strjoin3(places[kol],
+						"/", command->command), &buf)))
 			kol++;
-		if ((places && places[kol] && access(fn_strjoin3(places[kol],
-						"/", command->command), X_OK) == -1) || (!access
-				(command->command, F_OK) && access(command->command, X_OK) == -1))
+		if ((places && places[kol] && stat(fn_strjoin3(places[kol],
+						"/", command->command), &buf)) || (!stat
+				(command->command, &buf) && stat(command->command, &buf)))
 			return (NOT_AN_EXECUTABLE_FILE);
 		if (places && places[kol])
 			path_to = fn_strjoin3(places[kol], "/", command->command);
@@ -110,7 +111,6 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	free(command->splitted[0]);
 	command->splitted[0] = NULL;
 	command->splitted[0] = ft_strdup(command->argument);
-	printf("path = %s\n", path_to);
 	if ((execve(path_to, command->splitted, fn_arr(parsed_data->env_data)) == 0))
 	{
 		dup2(1, command->fd[1]);
