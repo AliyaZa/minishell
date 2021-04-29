@@ -47,7 +47,8 @@ void	replace_symbol_array(char	***array, char old, char new)
 	index = 0;
 	while (p[index])
 	{
-		replace_symbol(&p[index], old, new);
+		while (ft_strchr(p[index], old))
+			replace_symbol(&p[index], old, new);
 		index++;
 	}
 }
