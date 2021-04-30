@@ -6,11 +6,11 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 19:04:30 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/30 19:27:52 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/30 19:29:45 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*#include "../minishell.h"
 
 int		kol_pipe(char **arr)
 {
@@ -49,4 +49,5 @@ void	fn_pipes(t_parsed_data *parsed_data ,t_command *command, int kol)
 		if (fork() == 0)
 			fn_fork(parsed_data, command);
 	}
-}*/
+}
+*/
