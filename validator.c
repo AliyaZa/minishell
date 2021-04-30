@@ -28,12 +28,11 @@ int		is_next_redirect(char *string, char type)
 	return (0);
 }
 
-int		redirect(char **string, char type, size_t i)
+int		redirect(char **string, char type, size_t i, char **argument)
 {
 	int		fd;
 	char	*filename;
 	size_t	index;
-	char	*tmp;
 	int		r_type;
 	char	*buf;
 	char	*p;
@@ -41,14 +40,21 @@ int		redirect(char **string, char type, size_t i)
 	p = &(*string)[i];
 	r_type = 0;
 	index = 0;
+	buf = NULL;
 	while (p[index])
 	{
-		tmp = p;
 		while (p[index] == ' ' || p[index] == type)
 			p[index++] == type ? r_type++ : 1;
 		p = ft_substr(p, index, ft_strlen(p));
 		filename = ft_take_word(&p);
+		if (*p == ' ')
+			p++;
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
+		if (ft_strlen(buf))
+			*argument = ft_strjoin(*argument, buf);
+		ft_delete_word(&p, index - 1, ft_strlen(buf));
+		while (*p && *p != '>')
+			p++;
 		if (type == '>')
 		{
 			if (r_type == 2)
@@ -127,7 +133,7 @@ void	validator(char **string, t_env *env, t_command *command)
 		{
 			p[index] == '<' ? command->flags->rev_redirect = 1 : 1;
 			*string = ft_substr(p, 0, index);
-			redirect(&p, p[index], index);
+			command->fd[1] = redirect(&p, p[index], index, string);
 			p = ft_strdup(*string);
 		}
 		index++;
