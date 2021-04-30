@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/04/28 19:40:03 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/30 18:58:30 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 		}
 			if (command->fd[1] > 1)
 				close(command->fd[1]);
+			if (command->fd[0] > 0)
+				close(command->fd[0]);
 	}
 	else
 		return ;

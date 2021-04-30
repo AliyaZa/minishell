@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/29 19:51:39 by nhill            ###   ########.fr       */
+/*   Updated: 2021/04/30 18:47:56 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	}
 	else
 		path_to = ft_strdup(command->argument);
-	if (command->fd[1] > 1)
-		dup2(command->fd[1], 1);
+//	if (command->fd[1] > 1)
+		dup2(command->fd[1], command->fd[0]);
 	if (fn_search(command->command, "minishell"))
 	{
 		mini = fn_get_el(parsed_data, "SHLVL");
@@ -113,7 +113,7 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	command->splitted[0] = ft_strdup(command->argument);
 	if ((execve(path_to, command->splitted, fn_arr(parsed_data->env_data)) == 0))
 	{
-		dup2(1, command->fd[1]);
+		dup2(command->fd[0], command->fd[1]);
 		return (0);
 	}
 	return (COMMAND_NOT_FOUND);
