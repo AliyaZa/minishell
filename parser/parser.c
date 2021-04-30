@@ -37,6 +37,7 @@ void		parser(t_command **command, t_env *env)
 	semicolon(command);
 	determine_command_struct(command, env);
 	(*command)->splitted = ft_split((*command)->raw_string, ' ');
+	(*command)->pipes = ft_split((*command)->raw_string, '|');
 	replace_symbol_array(&(*command)->splitted, -1, ' ');
 	if ((*command)->flags->is_bin)
 	{

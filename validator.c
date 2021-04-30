@@ -135,10 +135,8 @@ void	validator(char **string, t_env *env, t_command *command)
 		{
 			p[index] == '<' ? command->flags->rev_redirect = 1 : 1;
 			*string = ft_substr(p, 0, index);
-			printf("%i\n", command->fd[1]);
 			if (-1 == (command->fd[1] = redirect(&p, p[index], index, string)))
 				fn_errors(command, 2);
-			printf("%i\n", command->fd[1]);
 			p = ft_strdup(*string);
 		}
 		index++;

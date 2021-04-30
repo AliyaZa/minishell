@@ -31,6 +31,7 @@ t_command		*initialize_command(void)
 	command->flags->is_bin = 0;
 	command->flags->rev_redirect = 0;
 	command->flags->error = 0;
+	command->flags->pipe = 0;
 	return (command);
 }
 

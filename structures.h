@@ -12,6 +12,7 @@ typedef	struct	s_flags
 	int			is_bin;
 	int			rev_redirect;
 	int			error;
+	int			pipe;
 }				t_flags;
 
 typedef struct	s_command
@@ -24,6 +25,7 @@ typedef struct	s_command
 	char		quotes_type;
 	char		*queue;
 	char		**splitted;
+	char		**pipes;
 	int			fd[2];
 	t_flags		*flags;
 }				t_command;
