@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # define COMMAND_NOT_FOUND 1
+# define NO_FILE 7
 # define NOT_AN_EXECUTABLE_FILE 4
 # define SYNTAX_ERROR 3
 # define IS_FILE 5

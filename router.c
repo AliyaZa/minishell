@@ -36,7 +36,10 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 		else if (fn_search(command->command, "unset") && *command->command)
 			fn_unset(parsed_data, command);
 		else if (fn_search(command->command, "exit") && *command->command)
+		{
+			ft_putstr_fd("exit\n", 1);
 			exit(0);
+		}
 		else
 		{
 			child = fork();

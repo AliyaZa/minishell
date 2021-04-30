@@ -51,8 +51,10 @@ int		redirect(char **string, char type, size_t i, char **argument)
 			p++;
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
 		if (ft_strlen(buf))
+		{
 			*argument = ft_strjoin(*argument, buf);
-		ft_delete_word(&p, index - 1, ft_strlen(buf));
+			ft_delete_word(&p, index - 1, ft_strlen(buf));
+		}
 		while (*p && *p != '>')
 			p++;
 		if (type == '>')
@@ -88,7 +90,7 @@ void	validator(char **string, t_env *env, t_command *command)
 	index = 0;
 	p = ft_strdup(*string);
 	quote = '\0';
-	while (p[index])
+	while (p[index] && ft_strlen(p))
 	{
 		if (p[index] == '"' || p[index] == '\'')
 		{
@@ -133,7 +135,10 @@ void	validator(char **string, t_env *env, t_command *command)
 		{
 			p[index] == '<' ? command->flags->rev_redirect = 1 : 1;
 			*string = ft_substr(p, 0, index);
-			command->fd[1] = redirect(&p, p[index], index, string);
+			printf("%i\n", command->fd[1]);
+			if (-1 == (command->fd[1] = redirect(&p, p[index], index, string)))
+				fn_errors(command, 2);
+			printf("%i\n", command->fd[1]);
 			p = ft_strdup(*string);
 		}
 		index++;
