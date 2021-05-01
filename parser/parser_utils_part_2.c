@@ -52,3 +52,26 @@ void	replace_symbol_array(char	***array, char old, char new)
 		index++;
 	}
 }
+
+void		delete_quotes(char ***splitted)
+{
+	char	**p;
+	size_t	i;
+	char	quote;
+
+	i = 0;
+	p = *splitted;
+	while (p[i])
+	{
+		if (p[i][0] == '\'' || p[i][0] == '"')
+		{
+			quote = p[i][0];
+			if (p[i][0] == quote && (p[i][ft_strlen(p[i]) - 1] == quote))
+			{
+				ft_delete_char(&p[i], 0);
+				ft_delete_char(&p[i], ft_strlen(p[i]) - 1);
+			}
+		}
+		i++;
+	}
+}

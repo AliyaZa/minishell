@@ -21,8 +21,6 @@ int	fn_errors(t_command *command, int error)
 		ft_putstr_fd(": command not found\n", 1);
 		exit (1);
 	}
-	else if (error == NO_FILE)
-		ft_putstr_fd("No such file or directory\n", 1);
 	else if (error == NOT_AN_EXECUTABLE_FILE)
 	{
 		ft_putstr_fd(":not an executable file.\n", 2);

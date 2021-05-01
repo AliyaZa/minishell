@@ -18,23 +18,23 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # define COMMAND_NOT_FOUND 1
-# define NO_FILE 7
 # define NOT_AN_EXECUTABLE_FILE 4
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 # define NOT_VALID_ID 6
 
+void			delete_quotes(char ***splitted);
+int				ft_form_file(char *file);
 void			ft_delete_word(char **string, size_t start, size_t size);
 void			ft_delete_char(char **string, size_t place);
 void			ft_insert_str(char **string, char *buf, size_t index);
-char			*ft_take_word2(char *string);
 void			print_array(char **p);
 char			**ft_separator(char *string, char c);
 void			sort_splitted(char ***splitted);
 void			backspace(char **string, int *cursor_position);
 char			*determine_argument(t_command *command);
-void			determine_options(t_command **command);
-char			*determine_command(t_command **command);
+void			determine_options(t_command *command);
+char			*determine_command(t_command *command);
 int				is_current_folder(char	*command);
 int				is_build_in(char *command);
 int				is_command_bin(t_command *command);
@@ -42,7 +42,7 @@ int				validate_command(char **command);
 char			*validate_raw_string(char *raw_string);
 char			*ft_take_word(char **string);
 void			substitution(char **dst, t_env *env);
-void			semicolon(t_command **command);
+void			semicolon(t_command *command);
 size_t			matrixlen(char **matrix);
 int				count_req_chars(char *string, char req);
 void			reset_(t_command *command, size_t flag);
@@ -64,7 +64,7 @@ void			initialize_structure(t_command *command);
 void			pwd(t_command *command);
 void			router(t_parsed_data *parsed_data, t_command *command);
 void			save_history(t_parsed_data *parsed_data, char *line);
-void			parser(t_command **command, t_env *env);
+void			parser(t_command *command, t_env *env);
 void			free_str(char **s);
 int				main_cycle(char **env);
 void			print_env(t_env *env_data, t_command *command);
