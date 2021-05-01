@@ -23,6 +23,7 @@
 # define IS_FILE 5
 # define NOT_VALID_ID 6
 
+void			delete_quotes(char ***splitted);
 int				ft_form_file(char *file);
 void			ft_delete_word(char **string, size_t start, size_t size);
 void			ft_delete_char(char **string, size_t place);

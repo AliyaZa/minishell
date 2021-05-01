@@ -25,6 +25,8 @@ static void	determine_command_struct(t_command *command, t_env *env)
 		command->raw_string = validate_raw_string(command->raw_string);
 }
 
+
+
 void		parser(t_command *command, t_env *env)
 {
 	char	*tmp;
@@ -39,6 +41,7 @@ void		parser(t_command *command, t_env *env)
 	command->splitted = ft_split(command->raw_string, ' ');
 	command->pipes = ft_split(command->raw_string, '|');
 	replace_symbol_array(&command->splitted, -1, ' ');
+	delete_quotes(&command->splitted);
 	if (command->flags->is_bin)
 	{
 		tmp = ft_strdup(command->command);
