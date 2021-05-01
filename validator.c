@@ -36,19 +36,27 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	int		r_type;
 	char	*buf;
 	char	*p;
+	int		kc;
 
 	p = &(*string)[i];
-	r_type = 0;
-	index = 0;
 	buf = NULL;
+	index = 0;
 	while (p[index])
 	{
+		kc = 0;
+		r_type = 0;
+		index = 0;
 		while (p[index] == ' ' || p[index] == type)
-			p[index++] == type ? r_type++ : 1;
-		p = ft_substr(p, index, ft_strlen(p));
+		{
+			if (p[index] == type)
+			{
+				r_type++;
+				kc++;
+			}
+			index++;
+		}
+		p = ft_substr(p, kc, ft_strlen(p));
 		filename = ft_take_word(&p);
-		if (*p == ' ')
-			p++;
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
 		if (ft_strlen(buf))
 		{
