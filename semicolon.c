@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-void	semicolon(t_command **command)
+void	semicolon(t_command *command)
 {
 	char	*string;
 	int		index;
 	int		counter;
 
-	string = (*command)->raw_string;
+	string = command->raw_string;
 	index = 0;
 	counter = 0;
 	while (string[index])
@@ -27,13 +27,13 @@ void	semicolon(t_command **command)
 		{
 			counter++;
 			string[index] = 0;
-			(*command)->queue = ft_strdup(&string[index + 1]);
+			command->queue = ft_strdup(&string[index + 1]);
 			break ;
 		}
 		index++;
 	}
 	if (!counter)
 	{
-		(*command)->queue = NULL;
+		command->queue = NULL;
 	}
 }

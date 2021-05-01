@@ -12,22 +12,22 @@
 
 #include "../minishell.h"
 
-void	determine_rest_string(t_command **command, size_t index)
+void	determine_rest_string(t_command *command, size_t index)
 {
 	size_t	strlen;
 
-	strlen = ft_strlen((*command)->rest_string);
-	while ((*command)->option == 'n' && index > 0)
+	strlen = ft_strlen(command->rest_string);
+	while (command->option == 'n' && index > 0)
 	{
-		(*command)->rest_string++;
+		command->rest_string++;
 		index--;
 	}
-	while (!(ft_isprint(*(*command)->rest_string))
-		&& (*(*command)->rest_string != ' ') && strlen)
+	while (!(ft_isprint(*command->rest_string))
+		&& (*command->rest_string != ' ') && strlen)
 	{
-		if (*(*command)->rest_string == (*command)->option)
-			(*command)->rest_string++;
-		(*command)->rest_string++;
+		if (*command->rest_string == command->option)
+			command->rest_string++;
+		command->rest_string++;
 	}
 }
 
@@ -48,13 +48,13 @@ char	*determine_argument(t_command *command)
 	return (arg);
 }
 
-char	*determine_command(t_command **command)
+char	*determine_command(t_command *command)
 {
 	int		i;
 	char	*p;
 	char	*command_p;
 
-	p = (*command)->raw_string;
+	p = command->raw_string;
 	i = 0;
 	while (*p == ' ')
 	{
@@ -66,27 +66,27 @@ char	*determine_command(t_command **command)
 		p++;
 		i++;
 	}
-	(*command)->command = (char *)malloc((sizeof(char) * i) + 1);
-	ft_strlcpy((*command)->command, command_p, (size_t)(i + 1));
-	string_tolower((*command)->command);
+	command->command = (char *)malloc((sizeof(char) * i) + 1);
+	ft_strlcpy(command->command, command_p, (size_t)(i + 1));
+	string_tolower(command->command);
 	return (p);
 }
 
-void	determine_options(t_command **command)
+void	determine_options(t_command *command)
 {
 	char	option;
 	size_t	index;
 
 	index = 0;
 	option = 0;
-	while ((*command)->rest_string[index])
+	while (command->rest_string[index])
 	{
-		if ((*command)->rest_string[index] == '-')
+		if (command->rest_string[index] == '-')
 		{
-			if (ft_isalpha((*command)->rest_string[index + 1]))
+			if (ft_isalpha(command->rest_string[index + 1]))
 			{
-				if ((*command)->rest_string[index + 2] == ' ')
-					(*command)->option = (*command)->rest_string[index + 1];
+				if (command->rest_string[index + 2] == ' ')
+					command->option = command->rest_string[index + 1];
 				break ;
 			}
 		}
