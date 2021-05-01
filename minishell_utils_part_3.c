@@ -46,3 +46,11 @@ void	ft_delete_word(char **string, size_t start, size_t size)
 		start++;
 	}
 }
+
+void	free_memory(t_parsed_data *parsed_data, t_command *command)
+{
+	free(parsed_data->history);
+	free(parsed_data->env_data);
+	free(parsed_data);
+	free(command);
+}

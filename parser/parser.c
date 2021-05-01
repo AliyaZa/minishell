@@ -25,8 +25,6 @@ static void	determine_command_struct(t_command *command, t_env *env)
 		command->raw_string = validate_raw_string(command->raw_string);
 }
 
-
-
 void		parser(t_command *command, t_env *env)
 {
 	char	*tmp;

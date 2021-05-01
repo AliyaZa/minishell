@@ -23,7 +23,6 @@ int		main(int argc, char **argv, char **env)
 	term_ini();
 	if ((main_cycle(env)) == 1)
 		ft_putstr_fd("error during memory allocation!\n", 1);
-	(void)argc;
 	(void)argv[0][0];
 	return (0);
 }

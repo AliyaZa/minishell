@@ -36,8 +36,6 @@ int		main_cycle(char **env)
 			router(parsed_data, command);
 		flag = 1;
 	}
-	free(parsed_data->history);
-	free(parsed_data->env_data);
-	free(parsed_data);
-	free(command);
+	free_memory(parsed_data, command);
+	return (0);
 }
