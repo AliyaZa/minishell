@@ -63,7 +63,7 @@ void			spec_symbol(char *buf, t_parsed_data **parsed_data);
 void			initialize_structure(t_command *command);
 void			pwd(t_command *command);
 void			router(t_parsed_data *parsed_data, t_command *command);
-void			save_history(t_parsed_data **parsed_data, char *line);
+void			save_history(t_parsed_data *parsed_data, char *line);
 void			parser(t_command **command, t_env *env);
 void			free_str(char **s);
 int				main_cycle(char **env);
