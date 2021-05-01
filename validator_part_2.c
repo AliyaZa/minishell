@@ -71,3 +71,16 @@ char	*validate_raw_string(char *raw_string)
 	}
 	return (p);
 }
+
+int		ft_form_file(char *file)
+{
+	size_t	i;
+	int		fd;
+
+	i = 0;
+	fd = 0;
+	while (file[i] && (file[i] != ' ' && file[i] != '>' && file[i] != '<'))
+		i++;
+	fd = open(ft_substr(file, 0, i), O_RDWR, 0644);
+	return (fd);
+}

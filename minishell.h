@@ -18,16 +18,15 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # define COMMAND_NOT_FOUND 1
-# define NO_FILE 7
 # define NOT_AN_EXECUTABLE_FILE 4
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 # define NOT_VALID_ID 6
 
+int				ft_form_file(char *file);
 void			ft_delete_word(char **string, size_t start, size_t size);
 void			ft_delete_char(char **string, size_t place);
 void			ft_insert_str(char **string, char *buf, size_t index);
-char			*ft_take_word2(char *string);
 void			print_array(char **p);
 char			**ft_separator(char *string, char c);
 void			sort_splitted(char ***splitted);
