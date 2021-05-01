@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/30 18:47:56 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/01 20:45:29 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	t_env	*mini;
 	int		level;
 
+
+	int save1 = dup(1); // save original stdout
+	int save0 = dup(0);
 	kol = 0;
 	places = NULL;
 	path_to = NULL;
@@ -78,21 +81,26 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		if (path)
 			places = ft_split(path->value, ':');
 		while (places && places[kol] && (stat(fn_strjoin3(places[kol],
-						"/", command->command), &buf)))
+						"/", command->command), &buf) != 0))
 			kol++;
-		if ((places && places[kol] && stat(fn_strjoin3(places[kol],
-						"/", command->command), &buf)) || (!stat
-				(command->command, &buf) && stat(command->command, &buf)))
-			return (NOT_AN_EXECUTABLE_FILE);
+		if (places && places[kol])
+		{
+			if (S_ISDIR(buf.st_mode))
+				return(errno = 21); // its a directory
+			else if (!(buf.st_mode & S_IXUSR))
+				return(errno = 13);// its permission denied
+		}
 		if (places && places[kol])
 			path_to = fn_strjoin3(places[kol], "/", command->command);
 		else
-			path_to = ft_strdup(command->argument);
+			path_to = ft_strdup(command->command);
 	}
 	else
-		path_to = ft_strdup(command->argument);
-//	if (command->fd[1] > 1)
-		dup2(command->fd[1], command->fd[0]);
+		path_to = ft_strdup(command->command);
+	if (command->fd[1] > 1)
+		dup2(command->fd[1], 1);
+	if (command->fd[0] > 0)
+		dup2(command->fd[0], 0);
 	if (fn_search(command->command, "minishell"))
 	{
 		mini = fn_get_el(parsed_data, "SHLVL");
@@ -111,11 +119,23 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	free(command->splitted[0]);
 	command->splitted[0] = NULL;
 	command->splitted[0] = ft_strdup(command->argument);
+	command->splitted[2] = NULL;
+	// for (int i = 0; i < 3; i++)
+	// 	printf("%s\n", command->splitted[i]);
 	if ((execve(path_to, command->splitted, fn_arr(parsed_data->env_data)) == 0))
 	{
-		dup2(command->fd[0], command->fd[1]);
+		if (command->fd[1] > 1)
+			dup2(save1, 1/*, save1*/);
+		if (command->fd[0] > 0)
+			dup2(save0, 0/*, save0*/);
 		return (0);
 	}
+	if (command->fd[1] > 1)
+			dup2(save1, 1/*, save1*/);
+		if (command->fd[0] > 0)
+			dup2(save0, 0/*, save0*/);
+	write(1, "sdf\n", 4);
+	//dup2(command->fd[0], command->fd[1]);
 	return (COMMAND_NOT_FOUND);
 }
 

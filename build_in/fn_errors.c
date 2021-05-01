@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:17:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/29 19:56:58 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/01 18:39:29 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	fn_errors(t_command *command, int error)
 {
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(command->argument, 2);
+	ft_putstr_fd(command->command, 2);
 	if (error == COMMAND_NOT_FOUND)
 	{
 		ft_putstr_fd(": command not found\n", 1);
