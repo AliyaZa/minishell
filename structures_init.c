@@ -45,19 +45,19 @@ t_parsed_data	*initialize_parsed_data(char **env)
 	return (parsed_data);
 }
 
-void			reset_(t_command **command, size_t flag)
+void			reset_(t_command *command, size_t flag)
 {
 	if (flag)
 	{
-		free_str(&(*command)->raw_string);
-		free_str(&(*command)->command);
-		free_str(&(*command)->argument);
-		(*command)->flags->is_bin = 0;
-		(*command)->flags->error = 0;
-		(*command)->fd[0] = 0;
-		(*command)->fd[1] = 1;
-		(*command)->raw_string = ft_strnew(0);
-		(*command)->option = 0;
-		(*command)->rest_string = 0;
+		free_str(&command->raw_string);
+		free_str(&command->command);
+		free_str(&command->argument);
+		command->flags->is_bin = 0;
+		command->flags->error = 0;
+		command->fd[0] = 0;
+		command->fd[1] = 1;
+		command->raw_string = ft_strnew(0);
+		command->option = 0;
+		command->rest_string = 0;
 	}
 }

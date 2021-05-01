@@ -23,12 +23,12 @@ int		main_cycle(char **env)
 	parsed_data = initialize_parsed_data(env);
 	while (1)
 	{
-		reset_(&command, flag);
+		reset_(command, flag);
 		if (!command->queue)
 		{
 			write(1, "minishell> ", 11);
 			tputs(save_cursor, 1, ft_putchar);
-			fn_termcap(&command, parsed_data->history);
+			fn_termcap(command, parsed_data->history);
 			save_history(parsed_data, command->raw_string);
 		}
 		parser(&command, parsed_data->env_data);
