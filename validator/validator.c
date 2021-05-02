@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int		is_next_redirect(char *string, char type)
 {
@@ -85,15 +85,9 @@ int		redirect(char **string, char type, size_t i, char **argument)
 
 void	validator(char **string, t_env *env, t_command *command)
 {
-	char	*tmp;
-	char	*tmp1;
 	char	*p;
 	size_t	index;
 	char	quote;
-	char	*value;
-	char	*key;
-	int		kc;
-	int		i;
 
 	index = 0;
 	p = ft_strdup(*string);
@@ -101,45 +95,10 @@ void	validator(char **string, t_env *env, t_command *command)
 	while (p[index] && ft_strlen(p))
 	{
 		if (p[index] == '"' || p[index] == '\'')
-		{
-			if (!quote || p[index] == quote)
-			{
-				if (!quote)
-					quote = p[index];
-				else if (p[index] == quote)
-					quote = 0;
-				tmp = ft_substr(p, 0, index);
-				tmp1 = ft_substr(p, index + 1, ft_strlen(p));
-				p = ft_strjoin(tmp, tmp1);
-				continue ;
-			}
-		}
-		if (p[index] == '$' && (quote == 0 || quote == '"'))
-		{
-			if (p[index + 1] == ' ' || p[index+ 1] == '\0')
-			{
-				index++;
-				continue ;
-			}
-			tmp = ft_substr(p, 0, index);
-			tmp1 = ft_substr(p, (ft_strlen_cc(&p[index], ' ', '"')) + index, ft_strlen(p));
-			i = index;
-			kc = 0;
-			while (p[i] != ' ' && p[i] != '"' && p[i] != '\'' && p[i] != quote)
-			{
-				kc++;
-				i++;
-			}
-			key = ft_substr(p, index + 1, kc - 1);
-			value = get_value_by_key(env, key);
-			free_str(&key);
-			if (value)
-				tmp = ft_strjoin_free(tmp, value, 1);
-			tmp = ft_strjoin_free(tmp, tmp1, 3);
-			p = tmp;
-			continue ;
-		}
-		if ((!ft_strncmp(&p[index], "<", 1) || !ft_strncmp(&p[index], ">", 1)) && !quote)
+			p = validate_quote(&quote, p, index--);
+		else if ((p[index] == '$' && (quote == 0 || quote == '"')) && (p[index + 1] != ' ' || p[index+ 1] != '\0'))
+			p = validate_env_sub(quote, p, index--, env);
+		else if ((!ft_strncmp(&p[index], "<", 1) || !ft_strncmp(&p[index], ">", 1)) && !quote)
 		{
 			p[index] == '<' ? command->flags->rev_redirect = 1 : 1;
 			*string = ft_substr(p, 0, index);

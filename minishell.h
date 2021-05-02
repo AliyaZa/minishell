@@ -23,6 +23,8 @@
 # define IS_FILE 5
 # define NOT_VALID_ID 6
 
+char			*validate_env_sub(char quote, char *p, size_t index, t_env *env);
+char			*validate_quote(char *quote, char *p, size_t index);
 void			free_memory(t_parsed_data *parsed_data, t_command *command);
 void			delete_quotes(char ***splitted);
 int				ft_form_file(char *file);
