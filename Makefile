@@ -28,6 +28,7 @@ SRC = main.c  minishell_utils.c \
 	parser/parse_env.c \
 	parser/parser_utils.c \
 	parser/parser_utils_part_2.c \
+	build_in/fn_pipe.c \
 
 OBJ = $(SRC:.c=.o)
 
