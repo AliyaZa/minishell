@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/01 20:45:29 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/02 18:06:31 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,9 @@ static int	fn_path(t_parsed_data *parsed_data, t_command *command)
 			dup2(save0, 0/*, save0*/);
 		return (0);
 	}
-	if (command->fd[1] > 1)
+//	if (command->fd[1] > 1)
 			dup2(save1, 1/*, save1*/);
-		if (command->fd[0] > 0)
+//		if (command->fd[0] > 0)
 			dup2(save0, 0/*, save0*/);
 	write(1, "sdf\n", 4);
 	//dup2(command->fd[0], command->fd[1]);
