@@ -40,3 +40,17 @@ char	*validate_env_sub(char quote, char *p, size_t index, t_env *env)
 	tmp = ft_strjoin_free(tmp, tmp1, 3);
 	return (tmp);
 }
+
+char	*mirroring(char *p,char quote)
+{
+	if (!quote)
+		ft_delete_char(&p, 0);
+	else if (quote == '"')
+	{
+		if (!ft_isalpha(*(p + 1)))
+		{
+			ft_delete_char(&p, 0);
+		}
+	}
+	return (p);
+}

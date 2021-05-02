@@ -83,14 +83,6 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	return (fd);
 }
 
-char	*mirroring(char *p, size_t index, char quote)
-{
-	(void)index;
-	if (!quote || quote == '"')
-		ft_delete_char(&p, 0);
-	return (p);
-}
-
 void	validator(char **string, t_env *env, t_command *command)
 {
 	char	*p;
@@ -118,7 +110,7 @@ void	validator(char **string, t_env *env, t_command *command)
 			p = ft_strdup(*string);
 		}
 		else if (p[index] == '\\')
-			p = mirroring(p, &index, quote);
+			p = mirroring(p, quote);
 		index++;
 	}
 	if (quote)
