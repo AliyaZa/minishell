@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/02 20:13:13 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/02 20:19:13 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	check_digit(char *str)
 	return (1);
 }
 
-static int	fn_path(t_parsed_data *parsed_data, t_command *command)
+int	fn_path(t_parsed_data *parsed_data, t_command *command)
 {
 	struct stat	buf;
 	t_env	*path;

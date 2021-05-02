@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:10:44 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/02 20:13:03 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/02 20:26:26 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ int		kol_pipe(char **arr)
 //форк перепиши
 
 static void	ft_success_fork(t_parsed_data *parsed_data, t_command *command,
-	int i, int **fd)
+	int i, int **fd, char *path)
 {
 	int j;
-	char *path;
 
 	if (i == 0)
 	{
@@ -81,13 +80,29 @@ int		fn_pipe(t_parsed_data *parsed_data ,t_command *command, int kol)
 {
 	int		i;
 	int		fd[kol][2];
+	char	*path;
 
 	i = 0;
 	while (i++ < kol)
 		pipe(fd[i]);
 	i = 0;
-	while (command->pipes)
+	while (i < kol)
 	{
-		router(parsed_data, command);
+		if (path = fn_path(parsed_data ,command))
+		{
+			fork() == 0 ? ft_success_fork(parsed_data, command,
+			i, fd, path) : 0;
+			free (path);
+			path = NULL;
+		}
+		i++;
+//		router(parsed_data, command);
 	}
+	int j = -1;
+	while (++j < kol - 1)
+	{
+		close(fd[i][0]);
+		close(fd[i][1]);
+	}
+	return (ft_wait(i));
 }
