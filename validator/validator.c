@@ -123,7 +123,7 @@ void	validator(char **string, t_env *env, t_command *command)
 				fn_errors(command, errno);
 			tmp = p;
 			p = ft_strdup(*string);
-			//free(tmp);
+			free(tmp);
 		}
 		else if (p[index] == '\\')
 			p = mirroring(p, quote);
@@ -133,5 +133,5 @@ void	validator(char **string, t_env *env, t_command *command)
 		fn_errors(command, SYNTAX_ERROR);
 	tmp = *string;
 	*string = ft_strdup(p);
-	//free(p);
+	free(p);
 }
