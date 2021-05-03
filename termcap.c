@@ -29,10 +29,10 @@ void		fn_termcap(t_command *command, char **history)
 	while (str[0] != '\n')
 	{
 		l = read(0, str, 1998);
-		if (ft_strncmp_end(str, "\x03", 1))
+		if (ft_strncmp_end(str, "\x03", 1) && ft_strncmp_end(str, "\x7f", 1))
 			cursor_position += l;
 		str[l] = 0;
-		if (!ft_strncmp_end(str, "\x04", 1) && cursor_position == 1)
+		if (!ft_strncmp(str, "\x04", 1) && cursor_position == 1)
 			ctr_d();
 		else if (!ft_strncmp(str, "\x03", 1))
 		{
@@ -49,10 +49,10 @@ void		fn_termcap(t_command *command, char **history)
 		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str,
 		"\e[C", 3) || !ft_strncmp(str, "\t", 1) || !ft_strncmp(str, "\034", 2))
 			;
-		else if ((!ft_strncmp_end(str, "\177", 1) && !ft_strncmp(str, "\x7f",
-		ft_strlen("\x7f"))) || !ft_strncmp(str, "\177", 1))
+		else if (((!ft_strncmp_end(str, "\177", 1) && !ft_strncmp(str, "\x7f",
+		ft_strlen("\x7f"))) || !ft_strncmp(str, "\177", 1)) && (cursor_position > 0))
 			backspace(&command->raw_string, &cursor_position);
-		else
+		else if (cursor_position > 0)
 			new_symbol(&str, command, &current);
 	}
 }
