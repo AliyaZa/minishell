@@ -93,3 +93,28 @@ void	determine_options(t_command *command)
 	}
 	determine_rest_string(command, index);
 }
+
+char		**get_splitted(char *raw_string)
+{
+	char	*p;
+	size_t	index;
+	char	quote;
+
+	p = raw_string;
+	quote = '\0';
+	index = 0;
+	while (p[index])
+	{
+		if (p[index] == '\'' || p[index] == '"')
+		{
+			if (!quote)
+				quote = p[index];
+			else if (quote == p[index])
+				quote = 0;
+		}
+		if ((p[index] == '>' || p[index] == '<') && !quote)
+			ft_delete_char(&p, index);
+		index++;
+	}
+	return (ft_split(p, ' '));
+}
