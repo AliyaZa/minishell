@@ -113,7 +113,10 @@ char		**get_splitted(char *raw_string)
 				quote = 0;
 		}
 		if ((p[index] == '>' || p[index] == '<') && !quote)
+		{
 			ft_delete_char(&p, index);
+			continue ;
+		}
 		index++;
 	}
 	return (ft_split(p, ' '));
