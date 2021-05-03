@@ -109,7 +109,7 @@ void	validator(char **string, t_env *env, t_command *command)
 			// free(tmp);
 			if (!command->flags->rev_redirect)
 			{
-				if ((-1 == (command->fd[0] = ft_form_file(p))))
+				if ((-1 == (command->fd[0] = ft_form_file(p))) && ft_strncmp(command->command, "echo", 4))
 					fn_errors(command, errno);
 			}
 			if (-1 == (command->fd[1] = redirect(&p, p[index], index, string))) //
