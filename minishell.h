@@ -23,6 +23,7 @@
 # define IS_FILE 5
 # define NOT_VALID_ID 6
 
+size_t			array_size(char **array);
 char			*mirroring(char *p, char quote);
 char			*validate_env_sub(char quote, char *p, size_t index, t_env *env);
 char			*validate_quote(char *quote, char *p, size_t index);

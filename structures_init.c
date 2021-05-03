@@ -25,6 +25,7 @@ t_command		*initialize_command(void)
 	command->argument = NULL;
 	command->rest_string = 0;
 	command->queue = NULL;
+	command->pipes_quantity = 0;
 	command->fd[0] = 0;
 	command->fd[1] = 1;
 	command->flags = flags;
@@ -59,5 +60,6 @@ void			reset_(t_command *command, size_t flag)
 		command->raw_string = ft_strnew(0);
 		command->option = 0;
 		command->rest_string = 0;
+		command->pipes_quantity = 0;
 	}
 }

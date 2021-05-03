@@ -6,11 +6,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRC = main.c  minishell_utils.c \
-	main_cycle.c minishell_utils_part_2.c save_history.c \
+SRC = main.c \
+	main_cycle.c save_history.c \
 	termcap.c navigate_history.c termcap_utils.c \
-	structures_init.c router.c minishell_utils_part_3.c\
+	structures_init.c router.c \
 	semicolon.c \
+	minishell_utils/minishell_utils.c \
+	minishell_utils/minishell_utils_part_2.c \
+	minishell_utils/minishell_utils_part_3.c \
+	minishell_utils/minishell_utils_part_4.c \
 	validator/validator.c \
 	validator/validator_part_2.c \
 	validator/validator_part_3.c \
