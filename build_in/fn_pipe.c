@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:10:44 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 18:08:18 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/03 19:04:58 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // 	return(i);
 // 	//sizeof(arr)/sizeof(arr[0]);
 // }
-// //форк перепиши
+//форк перепиши
 
 // static void	ft_success_fork(t_parsed_data *parsed_data, t_command *command,
 // 	int i, int **fd, char *path)
