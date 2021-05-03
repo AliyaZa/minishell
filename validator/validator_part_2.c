@@ -37,6 +37,7 @@ int	validate_command(char **command)
 	if (flag)
 		return (1);
 	free(*command);
+	free(p);
 	*command = ft_strdup(p);
 	return (0);
 }
