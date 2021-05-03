@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:17:43 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 18:05:10 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/03 18:48:48 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	fn_errors(t_command *command, int error)
 		ft_putstr_fd(": is a directory\n", 2);
 	else if (error == PERM_DEN)
 		ft_putstr_fd(": permission denied\n", 2);
+	else if (error == TOO_HIGH)
+		ft_putstr_fd(": shell level (>1000) too high, resetting to 1\n", 2);
 	else if (error == errno)
 	{
 		ft_putstr_fd(strerror(errno), 2);
