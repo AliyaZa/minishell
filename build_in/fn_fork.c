@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 17:47:05 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/03 18:07:12 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	check_digit(char *str)
 	return (1);
 }
 
-char	*fn_path(t_parsed_data *parsed_data, t_command *command)
+char	*fn_path(t_parsed_data *parsed_data, t_command *command, int *error)
 {
 	t_env	*path;
 	char	**places;
@@ -81,9 +81,15 @@ char	*fn_path(t_parsed_data *parsed_data, t_command *command)
 		if (places && places[kol])
 		{
 			if (S_ISDIR(buf.st_mode))
-				return(errno = 21); // its a directory
+			{
+				*error = 21; // its a directory
+				return (NULL);
+			}
 			else if (!(buf.st_mode & S_IXUSR))
-				return(errno = 13);// its permission denied
+			{
+				*error = 13;// its permission denied
+				return(NULL);
+			}
 		}
 		if (places && places[kol])
 			path_to = fn_strjoin3(places[kol], "/", command->command);
@@ -95,7 +101,7 @@ char	*fn_path(t_parsed_data *parsed_data, t_command *command)
 	return (path_to);
 }
 
-static void	level(t_parsed_data *parsed_data, t_command *command)
+static void	level(t_parsed_data *parsed_data, t_command *command, int *error)
 {
 	t_env	*mini;
 	int		level;
@@ -110,28 +116,30 @@ static void	level(t_parsed_data *parsed_data, t_command *command)
 		if ((level < 999))
 		{
 			if (!(mini->value = ft_itoa(level + 1)))
-				return(errno);
+				*error = errno;
 		}
 		else if (level == 999)
 			mini->value = "";
 	}
 }
 
-int	fn_path(t_parsed_data *parsed_data, t_command *command)
+int	fn_redir(t_parsed_data *parsed_data, t_command *command)
 {
 	char	*path_to;
+	int		error;
 //	t_env	*mini;
 //	int		level;
 
 
 	int save1 = dup(1);
 	int save0 = dup(0);
+	error = 0;
 	path_to = NULL;
 	if (command->fd[1] > 1)
 		dup2(command->fd[1], 1);
 	if (command->fd[0] > 0)
 		dup2(command->fd[0], 0);
-	level(parsed_data, command);
+	level(parsed_data, command, &error);
 	// if (fn_search(command->command, "minishell"))
 	// {
 	// 	mini = fn_get_el(parsed_data, "SHLVL");
@@ -151,8 +159,9 @@ int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	command->splitted[0] = NULL;
 	command->splitted[0] = ft_strdup(command->argument);
 	command->splitted[2] = NULL;
-	if ((execve(fn_path(parsed_data, command), command->splitted, fn_arr(parsed_data->env_data)) == 0))
+	if (fn_path(parsed_data, command, &error))
 	{
+		execve(fn_path(parsed_data, command, &error), command->splitted, fn_arr(parsed_data->env_data));
 		if (command->fd[1] > 1)
 			dup2(save1, 1);
 		if (command->fd[0] > 0)
@@ -173,7 +182,7 @@ void	fn_fork(t_parsed_data *parsed_data, t_command *command)
 
 	error = 0;
 	//if (!command->flags->is_bin)
-		error = fn_path(parsed_data, command);
+		error = fn_redir(parsed_data, command);
 /*	else
 	{
 		dup2(command->fd[1], 1);
