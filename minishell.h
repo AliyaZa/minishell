@@ -22,6 +22,8 @@
 # define SYNTAX_ERROR 3
 # define IS_FILE 5
 # define NOT_VALID_ID 6
+# define IS_DIR 21
+# define PERM_DEN 13
 
 char			**get_splitted(char *raw_string);
 size_t			array_size(char **array);
@@ -97,6 +99,7 @@ t_env			*create_export(t_parsed_data *parsed_data);
 void			fn_get_name(t_env **lst_name, char *value, int flag);
 void			fn_get_needed_el(char *tmp, char **value,t_env **lst_name, t_parsed_data *parsed_data);
 char			**fn_arr(t_env *env);
-char			*fn_path(t_parsed_data *parsed_data, t_command *command);
+char			*fn_path(t_parsed_data *parsed_data, t_command *command, int *error);
+int				fn_redir(t_parsed_data *parsed_data, t_command *command);
 
 #endif
