@@ -28,10 +28,15 @@ void	ft_delete_char(char **string, size_t place)
 {
 	char	*start;
 	char	*end;
+	char	*tmp;
 
 	start = ft_substr(*string, 0, place);
 	end = ft_substr(*string, place + 1, ft_strlen(*string));
+	tmp = start;
 	start = ft_strjoin(start, end);
+	free(tmp);
+	free(end);
+	free(*string);
 	*string = start;
 }
 
