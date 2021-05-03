@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/02 20:19:13 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/03 17:47:05 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,17 @@ static int	check_digit(char *str)
 	return (1);
 }
 
-int	fn_path(t_parsed_data *parsed_data, t_command *command)
+char	*fn_path(t_parsed_data *parsed_data, t_command *command)
 {
-	struct stat	buf;
 	t_env	*path;
 	char	**places;
-	int		kol;
 	char	*path_to;
-	t_env	*mini;
-	int		level;
+	int		kol;
+	struct stat	buf;
 
-
-	int save1 = dup(1); // save original stdout
-	int save0 = dup(0);
-	kol = 0;
 	places = NULL;
 	path_to = NULL;
+	kol = 0;
 	path = fn_get_el(parsed_data, "PATH");
 	if (command->flags->is_bin != 1)
 	{
@@ -97,10 +92,14 @@ int	fn_path(t_parsed_data *parsed_data, t_command *command)
 	}
 	else
 		path_to = ft_strdup(command->command);
-	if (command->fd[1] > 1)
-		dup2(command->fd[1], 1);
-	if (command->fd[0] > 0)
-		dup2(command->fd[0], 0);
+	return (path_to);
+}
+
+static void	level(t_parsed_data *parsed_data, t_command *command)
+{
+	t_env	*mini;
+	int		level;
+
 	if (fn_search(command->command, "minishell"))
 	{
 		mini = fn_get_el(parsed_data, "SHLVL");
@@ -116,18 +115,48 @@ int	fn_path(t_parsed_data *parsed_data, t_command *command)
 		else if (level == 999)
 			mini->value = "";
 	}
+}
+
+int	fn_path(t_parsed_data *parsed_data, t_command *command)
+{
+	char	*path_to;
+//	t_env	*mini;
+//	int		level;
+
+
+	int save1 = dup(1);
+	int save0 = dup(0);
+	path_to = NULL;
+	if (command->fd[1] > 1)
+		dup2(command->fd[1], 1);
+	if (command->fd[0] > 0)
+		dup2(command->fd[0], 0);
+	level(parsed_data, command);
+	// if (fn_search(command->command, "minishell"))
+	// {
+	// 	mini = fn_get_el(parsed_data, "SHLVL");
+	// 	if (check_digit(mini->value) == 0)
+	// 		level = 0;
+	// 	else
+	// 		level = ft_atoi(mini->value);
+	// 	if ((level < 999))
+	// 	{
+	// 		if (!(mini->value = ft_itoa(level + 1)))
+	// 			return(errno);
+	// 	}
+	// 	else if (level == 999)
+	// 		mini->value = "";
+	// }
 	free(command->splitted[0]);
 	command->splitted[0] = NULL;
 	command->splitted[0] = ft_strdup(command->argument);
 	command->splitted[2] = NULL;
-	// for (int i = 0; i < 3; i++)
-	// 	printf("%s\n", command->splitted[i]);
-	if ((execve(path_to, command->splitted, fn_arr(parsed_data->env_data)) == 0))
+	if ((execve(fn_path(parsed_data, command), command->splitted, fn_arr(parsed_data->env_data)) == 0))
 	{
 		if (command->fd[1] > 1)
-			dup2(save1, 1/*, save1*/);
+			dup2(save1, 1);
 		if (command->fd[0] > 0)
-			dup2(save0, 0/*, save0*/);
+			dup2(save0, 0);
 		return (0);
 	}
 //	if (command->fd[1] > 1)

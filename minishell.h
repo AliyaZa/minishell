@@ -96,6 +96,6 @@ t_env			*create_export(t_parsed_data *parsed_data);
 void			fn_get_name(t_env **lst_name, char *value, int flag);
 void			fn_get_needed_el(char *tmp, char **value,t_env **lst_name, t_parsed_data *parsed_data);
 char			**fn_arr(t_env *env);
-int				fn_path(t_parsed_data *parsed_data, t_command *command);
+char			*fn_path(t_parsed_data *parsed_data, t_command *command);
 
 #endif
