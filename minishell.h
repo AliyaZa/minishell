@@ -26,6 +26,7 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+char			**get_splitted(char *raw_string);
 size_t			array_size(char **array);
 char			*mirroring(char *p, char quote);
 char			*validate_env_sub(char quote, char *p, size_t index, t_env *env);

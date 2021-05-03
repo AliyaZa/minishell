@@ -25,31 +25,6 @@ static void	determine_command_struct(t_command *command, t_env *env)
 		command->raw_string = validate_raw_string(command->raw_string);
 }
 
-char		**get_splitted(char *raw_string)
-{
-	char	*p;
-	size_t	index;
-	char	quote;
-
-	p = raw_string;
-	quote = '\0';
-	index = 0;
-	while (p[index])
-	{
-		if (p[index] == '\'' || p[index] == '"')
-		{
-			if (!quote)
-				quote = p[index];
-			else if (quote == p[index])
-				quote = 0;
-		}
-		if ((p[index] == '>' || p[index] == '<') && !quote)
-			ft_delete_char(&p, index);
-		index++;
-	}
-	return (ft_split(p, ' '));
-}
-
 void		parser(t_command *command, t_env *env)
 {
 	char	*tmp;
@@ -63,7 +38,6 @@ void		parser(t_command *command, t_env *env)
 	determine_command_struct(command, env); // leak 16 bytes (case: echo 123)
 	command->splitted = get_splitted(command->raw_string);
 	command->pipes = ft_split(command->raw_string, '|');
-	// validate_splitted(&command->splitted);
 	command->pipes_quantity = array_size(command->pipes);
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);

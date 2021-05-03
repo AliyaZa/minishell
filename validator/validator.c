@@ -37,10 +37,12 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	char	*buf;
 	char	*p;
 	int		kc;
+	char	*tmp;
 
 	p = &(*string)[i];
 	buf = NULL;
 	index = 0;
+	filename = NULL;
 	while (p[index])
 	{
 		kc = 0;
@@ -55,13 +57,17 @@ int		redirect(char **string, char type, size_t i, char **argument)
 			}
 			index++;
 		}
+		tmp = p;
 		p = ft_substr(p, kc, ft_strlen(p));
+		// free(tmp);
 		filename = ft_take_word(&p);
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
 		if (ft_strlen(buf))
 		{
+			// free(*argument);
 			*argument = ft_strjoin(*argument, buf);
 			ft_delete_word(&p, index - 1, ft_strlen(buf));
+			// free(buf);
 		}
 		while (*p && *p != '>')
 			p++;
@@ -74,9 +80,9 @@ int		redirect(char **string, char type, size_t i, char **argument)
 		}
 		else
 			fd = open(filename, O_RDWR, 0644);
+		free_str(&filename);
 		if ((!p || ft_strlen(p) == 0) && !is_next_redirect(p, type))
 			return (fd);
-		free(filename);
 		if (is_next_redirect(p, type))
 			close(fd);
 	}
@@ -117,7 +123,7 @@ void	validator(char **string, t_env *env, t_command *command)
 				fn_errors(command, errno);
 			tmp = p;
 			p = ft_strdup(*string);
-			// free(tmp);
+			free(tmp);
 		}
 		else if (p[index] == '\\')
 			p = mirroring(p, quote);
@@ -126,6 +132,6 @@ void	validator(char **string, t_env *env, t_command *command)
 	if (quote)
 		fn_errors(command, SYNTAX_ERROR);
 	tmp = *string;
-	*string = ft_strdup(p); // leak
+	*string = ft_strdup(p);
 	free(p);
 }
