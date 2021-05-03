@@ -35,7 +35,7 @@ void		parser(t_command *command, t_env *env)
 		return ;
 	replace_symbol(&command->raw_string, '\n', '\0');
 	semicolon(command);
-	determine_command_struct(command, env); // leak 16 bytes (case: echo 123)
+	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
 	command->pipes = ft_split(command->raw_string, '|');
 	command->pipes_quantity = array_size(command->pipes);
