@@ -33,6 +33,7 @@ SRC = main.c \
 	parser/parser_utils.c \
 	parser/parser_utils_part_2.c \
 	build_in/fn_pipe.c \
+	build_in/level.c \
 
 OBJ = $(SRC:.c=.o)
 

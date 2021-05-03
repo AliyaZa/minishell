@@ -24,6 +24,7 @@
 # define NOT_VALID_ID 6
 # define IS_DIR 21
 # define PERM_DEN 13
+# define TOO_HIGH 14
 
 size_t			array_size(char **array);
 char			*mirroring(char *p, char quote);
@@ -100,5 +101,6 @@ void			fn_get_needed_el(char *tmp, char **value,t_env **lst_name, t_parsed_data 
 char			**fn_arr(t_env *env);
 char			*fn_path(t_parsed_data *parsed_data, t_command *command, int *error);
 int				fn_redir(t_parsed_data *parsed_data, t_command *command);
+void			level(t_parsed_data *parsed_data, t_command *command);
 
 #endif

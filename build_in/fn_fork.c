@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 18:07:12 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/03 18:45:11 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,6 @@ char	**fn_arr(t_env *env)
 	}
 	res[i] = NULL;
 	return (res);
-}
-
-static int	check_digit(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 char	*fn_path(t_parsed_data *parsed_data, t_command *command, int *error)
@@ -101,28 +87,6 @@ char	*fn_path(t_parsed_data *parsed_data, t_command *command, int *error)
 	return (path_to);
 }
 
-static void	level(t_parsed_data *parsed_data, t_command *command, int *error)
-{
-	t_env	*mini;
-	int		level;
-
-	if (fn_search(command->command, "minishell"))
-	{
-		mini = fn_get_el(parsed_data, "SHLVL");
-		if (check_digit(mini->value) == 0)
-			level = 0;
-		else
-			level = ft_atoi(mini->value);
-		if ((level < 999))
-		{
-			if (!(mini->value = ft_itoa(level + 1)))
-				*error = errno;
-		}
-		else if (level == 999)
-			mini->value = "";
-	}
-}
-
 int	fn_redir(t_parsed_data *parsed_data, t_command *command)
 {
 	char	*path_to;
@@ -139,7 +103,6 @@ int	fn_redir(t_parsed_data *parsed_data, t_command *command)
 		dup2(command->fd[1], 1);
 	if (command->fd[0] > 0)
 		dup2(command->fd[0], 0);
-	level(parsed_data, command, &error);
 	// if (fn_search(command->command, "minishell"))
 	// {
 	// 	mini = fn_get_el(parsed_data, "SHLVL");
