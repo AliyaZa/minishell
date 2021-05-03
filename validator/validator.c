@@ -88,10 +88,12 @@ void	validator(char **string, t_env *env, t_command *command)
 	char	*p;
 	size_t	index;
 	char	quote;
+	char	*tmp;
 
 	index = 0;
-	p = ft_strdup(*string);
+	p = ft_strdup(*string); // leak
 	quote = '\0';
+	tmp = NULL;
 	while (p[index] && ft_strlen(p))
 	{
 		if (p[index] == '"' || p[index] == '\'')
@@ -102,15 +104,19 @@ void	validator(char **string, t_env *env, t_command *command)
 		else if ((!ft_strncmp(&p[index], "<", 1) || !ft_strncmp(&p[index], ">", 1)) && !quote)
 		{
 			p[index] == '<' ? command->flags->rev_redirect = 1 : 1;
+			tmp = *string;
 			*string = ft_substr(p, 0, index);
+			// free(tmp);
 			if (!command->flags->rev_redirect)
 			{
 				if ((-1 == (command->fd[0] = ft_form_file(p))))
 					fn_errors(command, errno);
 			}
-			if (-1 == (command->fd[1] = redirect(&p, p[index], index, string)))
+			if (-1 == (command->fd[1] = redirect(&p, p[index], index, string))) //
 				fn_errors(command, errno);
+			tmp = p;
 			p = ft_strdup(*string);
+			// free(tmp);
 		}
 		else if (p[index] == '\\')
 			p = mirroring(p, quote);
@@ -118,6 +124,7 @@ void	validator(char **string, t_env *env, t_command *command)
 	}
 	if (quote)
 		fn_errors(command, SYNTAX_ERROR);
-	*string = ft_strdup(p);
+	tmp = *string;
+	*string = ft_strdup(p); // leak
 	free(p);
 }

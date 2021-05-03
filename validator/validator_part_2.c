@@ -16,8 +16,6 @@ int	validate_command(char **command)
 {
 	size_t	index;
 	char	*p;
-	char	*start;
-	char	*end;
 	char	flag;
 
 	p = ft_strdup(*command);
@@ -31,15 +29,14 @@ int	validate_command(char **command)
 				flag = p[index];
 			else if (flag == p[index])
 				flag = 0;
-			start = ft_substr(p, 0, index);
-			end = ft_substr(p, index + 1, ft_strlen(p));
-			p = ft_strjoin(start, end);
+			ft_delete_char(&p, index);
 			continue ;
 		}
 		index++;
 	}
 	if (flag)
 		return (1);
+	free(*command);
 	*command = ft_strdup(p);
 	return (0);
 }
@@ -76,11 +73,14 @@ int		ft_form_file(char *file)
 {
 	size_t	i;
 	int		fd;
+	char	*filename;
 
 	i = 0;
 	fd = 0;
 	while (file[i] && (file[i] != ' ' && file[i] != '>' && file[i] != '<'))
 		i++;
-	fd = open(ft_substr(file, 0, i), O_RDWR, 0644);
+	filename = ft_substr(file, 0, i);
+	fd = open(filename, O_RDWR, 0644);
+	free(filename);
 	return (fd);
 }

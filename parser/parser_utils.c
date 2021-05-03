@@ -66,8 +66,7 @@ char	*determine_command(t_command *command)
 		p++;
 		i++;
 	}
-	command->command = (char *)malloc((sizeof(char) * i) + 1);
-	ft_strlcpy(command->command, command_p, (size_t)(i + 1));
+	command->command = ft_substr(command_p, 0, i);
 	string_tolower(command->command);
 	return (p);
 }

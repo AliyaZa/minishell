@@ -29,7 +29,8 @@ int		main_cycle(char **env)
 			write(1, "minishell> ", 11);
 			tputs(save_cursor, 1, ft_putchar);
 			fn_termcap(command, parsed_data->history);
-			save_history(parsed_data, command->raw_string);
+			if (command->raw_string[0] != '\n')
+				save_history(parsed_data, command->raw_string);
 		}
 		parser(command, parsed_data->env_data);
 		if (!(command->flags->error))

@@ -14,13 +14,13 @@
 
 static void	determine_command_struct(t_command *command, t_env *env)
 {
-	command->rest_string = determine_command(command);
-	if (validate_command(&command->command))
+	command->rest_string = determine_command(command); // memory leaks checked
+	if (validate_command(&command->command)) // memory leaks checked
 		fn_errors(command, SYNTAX_ERROR);
 	command->flags->is_bin = is_command_bin(command);
 	determine_options(command);
 	command->argument = determine_argument(command);
-	validator(&command->argument, env, command);
+	validator(&command->argument, env, command); // checking
 	if (!is_build_in(command->command))
 		command->raw_string = validate_raw_string(command->raw_string);
 }
