@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 18:45:11 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/03 19:14:16 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,25 +103,12 @@ int	fn_redir(t_parsed_data *parsed_data, t_command *command)
 		dup2(command->fd[1], 1);
 	if (command->fd[0] > 0)
 		dup2(command->fd[0], 0);
-	// if (fn_search(command->command, "minishell"))
-	// {
-	// 	mini = fn_get_el(parsed_data, "SHLVL");
-	// 	if (check_digit(mini->value) == 0)
-	// 		level = 0;
-	// 	else
-	// 		level = ft_atoi(mini->value);
-	// 	if ((level < 999))
-	// 	{
-	// 		if (!(mini->value = ft_itoa(level + 1)))
-	// 			return(errno);
-	// 	}
-	// 	else if (level == 999)
-	// 		mini->value = "";
-	// }
 	free(command->splitted[0]);
-	command->splitted[0] = NULL;
-	command->splitted[0] = ft_strdup(command->argument);
+	//command->splitted[0] = NULL;
+	// command->splitted[0] = ft_strdup(command->argument);
 	command->splitted[2] = NULL;
+	//for (int i = 0; i < 4; i++)
+	//	printf("%s\n",command->splitted[i]);
 	if (fn_path(parsed_data, command, &error))
 	{
 		execve(fn_path(parsed_data, command, &error), command->splitted, fn_arr(parsed_data->env_data));
