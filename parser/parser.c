@@ -25,9 +25,11 @@ static void	determine_command_struct(t_command *command, t_env *env)
 		command->raw_string = validate_raw_string(command->raw_string);
 }
 
-char		**get_pipes(char *raw_string)
+char		**get_pipes(t_command *command)
 {
-	return (ft_split(raw_string, '|'));
+	if (ft_strchr(command->raw_string, '|'))
+		command->flags->pipe = 1;
+	return (ft_split(command->raw_string, '|'));
 }
 
 void		parser(t_command *command, t_env *env)
@@ -42,7 +44,7 @@ void		parser(t_command *command, t_env *env)
 	semicolon(command);
 	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
-	command->pipes = get_pipes(command->raw_string);
+	command->pipes = get_pipes(command);
 	command->pipes_quantity = array_size(command->pipes);
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);
