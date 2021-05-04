@@ -8,7 +8,7 @@ CC = gcc
 
 SRC = main.c \
 	main_cycle.c save_history.c \
-	termcap.c navigate_history.c termcap_utils.c \
+	navigate_history.c \
 	structures_init.c router.c \
 	minishell_utils/minishell_utils.c \
 	minishell_utils/minishell_utils_part_2.c \
@@ -27,13 +27,16 @@ SRC = main.c \
 	build_in/command_utils.c \
 	build_in/command_utils2.c \
 	build_in/fn_cd.c \
+	build_in/fn_pipe.c \
+	build_in/level.c \
 	parser/parser.c \
 	parser/parse_env.c \
 	parser/parser_utils.c \
 	parser/parser_utils_part_2.c \
 	parser/semicolon.c \
-	build_in/fn_pipe.c \
-	build_in/level.c \
+	termcap/termcap.c \
+	termcap/termcap_utils.c \
+	termcap/termcap_utils_part_2.c \
 
 OBJ = $(SRC:.c=.o)
 

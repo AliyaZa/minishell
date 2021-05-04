@@ -26,6 +26,11 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+void			new_symbol(char **str, t_command *command, int *current, size_t *c_p);
+void			ctr_d(void);
+void			ctr_c(t_command *command);
+int				is_backspace_allowed(char *str, size_t cursor_position);
+int				termcap_check(char *str);
 void			free_array(char ***array);
 char			**get_splitted(char *raw_string);
 size_t			array_size(char **array);
@@ -63,7 +68,7 @@ void			delete_last_charachter(char **string);
 void			clear_command_line();
 void			replace_symbol(char **string, char old, char new);
 void			replace_symbol_array(char	***array, char old, char new);
-char			*navigate_history(char **history, char **str, int *current);
+char			*navigate_history(char **history, char *str, int *current);
 void			fn_termcap(t_command *command, char **history);
 int				ft_putchar(int c);
 void			ft_putstr(const char *str);
