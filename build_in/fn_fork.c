@@ -108,7 +108,7 @@ int	fn_redir(t_parsed_data *parsed_data, t_command *command)
 	// command->splitted[0] = ft_strdup(command->argument);
 /*	if (command->splitted[2] != NULL)
 	{
-		free(command->splitted[2]);
+		// free(command->splitted[2]);
 		command->splitted[2] = NULL;
 	}*/
 	//for (int i = 0; i < 4; i++)

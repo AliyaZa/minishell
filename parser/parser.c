@@ -20,9 +20,14 @@ static void	determine_command_struct(t_command *command, t_env *env)
 	command->flags->is_bin = is_command_bin(command);
 	determine_options(command);
 	command->argument = determine_argument(command);
-	validator(&command->argument, env, command); // checking
+	validator(&command->argument, env, command);
 	if (!is_build_in(command->command))
 		command->raw_string = validate_raw_string(command->raw_string);
+}
+
+char		**get_pipes(char *raw_string)
+{
+	return (ft_split(raw_string, '|'));
 }
 
 void		parser(t_command *command, t_env *env)
@@ -37,7 +42,7 @@ void		parser(t_command *command, t_env *env)
 	semicolon(command);
 	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
-	command->pipes = ft_split(command->raw_string, '|');
+	command->pipes = get_pipes(command->raw_string);
 	command->pipes_quantity = array_size(command->pipes);
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);

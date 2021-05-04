@@ -72,7 +72,7 @@ int		fn_make_pipe(t_parsed_data *parsed_data ,t_command *command)
 		if ((path = fn_path(parsed_data ,command, &error)) != NULL)
 		{
 			fork() == 0 ? ft_success_fork(parsed_data, command,i, fd, path) : 0;
-			free (path);
+			// free (path);
 			path = NULL;
 		}
 		i++;

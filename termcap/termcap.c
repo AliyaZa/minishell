@@ -33,6 +33,7 @@ void		fn_termcap(t_command *command, char **history)
 			ctr_c(command);
 		else if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
 		{
+			free(command->raw_string);
 			command->raw_string = navigate_history(history, str, &current);
 			cursor_position += ft_strlen(command->raw_string);
 		}
