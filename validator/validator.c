@@ -12,21 +12,14 @@
 
 #include "../minishell.h"
 
-int		is_next_redirect(char *string, char type)
-{
-	int		index;
-
-	index = 0;
-	while (string[index])
-	{
-		if (string[index] == type)
-			return (1);
-		else if (string[index] == '"' || string[index] == '\'')
-			return (0);
-		index++;
-	}
-	return (0);
-}
+// void	replace_word()
+// {
+// 	if (ft_strlen(buf))
+// 	{
+// 		*argument = ft_strjoin(*argument, buf);
+// 		ft_delete_word(&p, index - 1, ft_strlen(buf));
+// 	}
+// }
 
 int		redirect(char **string, char type, size_t i, char **argument)
 {
@@ -46,12 +39,11 @@ int		redirect(char **string, char type, size_t i, char **argument)
 		index = 0;
 		filename = determine_filename(&p, &index, type, &r_type);
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
+		// replace_word();
 		if (ft_strlen(buf))
 		{
-			// free(*argument);
 			*argument = ft_strjoin(*argument, buf);
 			ft_delete_word(&p, index - 1, ft_strlen(buf));
-			// free(buf);
 		}
 		move_pointer_to(&p, '>');
 		fd = open_file(type, r_type, &filename);
@@ -84,7 +76,6 @@ void	redirect_logic(char **p, int index, t_command *command, char **string)
 	}
 	tmp = pp;
 	pp = ft_strdup(*string);
-	free(tmp);
 }
 
 void	validator(char **string, t_env *env, t_command *command)
@@ -115,5 +106,4 @@ void	validator(char **string, t_env *env, t_command *command)
 		fn_errors(command, SYNTAX_ERROR);
 	tmp = *string;
 	*string = ft_strdup(p);
-	free(p);
 }

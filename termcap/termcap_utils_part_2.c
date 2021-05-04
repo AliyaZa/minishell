@@ -2,7 +2,6 @@
 
 void	ctr_c(t_command *command)
 {
-	free(command->raw_string);
 	command->raw_string = ft_strnew(0);
 	ft_putstr_fd("\nminishell> ", 1);
 	tputs(save_cursor, 1, ft_putchar);
