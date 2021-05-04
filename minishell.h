@@ -114,5 +114,6 @@ char			**fn_arr(t_env *env);
 char			*fn_path(t_parsed_data *parsed_data, t_command *command, int *error);
 int				fn_redir(t_parsed_data *parsed_data, t_command *command);
 void			level(t_parsed_data *parsed_data, t_command *command);
+void			fn_pipe(t_parsed_data *parsed_data ,t_command *command);
 
 #endif

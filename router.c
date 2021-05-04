@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/05/03 18:26:41 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/04 18:54:34 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 
 	child = pid[0];
 	parent = pid[1];
+//	command->flags->pipe = 1;
 	if (command->command != NULL)
 	{
+		if (command->flags->pipe)
+			fn_pipe(parsed_data, command);
 		if (fn_search(command->command, "echo"))
 			fn_echo(command);
 		else if (fn_search(command->command, "pwd") && *command->command)

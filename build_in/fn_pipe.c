@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:10:44 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 20:15:13 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/04 18:16:51 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		fn_make_pipe(t_parsed_data *parsed_data ,t_command *command)
 	return (error);
 }
 
-int		fn_pipe(t_parsed_data *parsed_data ,t_command *command)
+void		fn_pipe(t_parsed_data *parsed_data ,t_command *command)
 {
 	int		error;
 

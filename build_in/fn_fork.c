@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/04 18:00:59 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/04 18:21:19 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,13 @@ int	fn_redir(t_parsed_data *parsed_data, t_command *command)
 	//free(command->splitted[0]);
 	//command->splitted[0] = NULL;
 	// command->splitted[0] = ft_strdup(command->argument);
-	if (command->splitted[2] != NULL)
+/*	if (command->splitted[2] != NULL)
 	{
 		free(command->splitted[2]);
 		command->splitted[2] = NULL;
-	}
-	for (int i = 0; i < 4; i++)
-		printf("%s\n",command->splitted[i]);
+	}*/
+	//for (int i = 0; i < 4; i++)
+	//	printf("%s\n",command->splitted[i]);
 	if (fn_path(parsed_data, command, &error))
 	{
 		execve(fn_path(parsed_data, command, &error), command->splitted, fn_arr(parsed_data->env_data));
