@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   termcap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/04 10:51:59 by mismene           #+#    #+#             */
+/*   Updated: 2021/05/04 10:52:01 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ctr_d(void)
@@ -6,13 +18,14 @@ void	ctr_d(void)
 	exit(0);
 }
 
-static void	new_symbol(char **str, t_command *command, int *current)
+static void	new_symbol(char **str, t_command *command, int *current, size_t *c_p)
 {
 	ft_putstr_fd(*str, 1);
 	if (!command->raw_string)
 		command->raw_string = ft_strnew(0);
 	command->raw_string = ft_strjoin_free(command->raw_string, *str, 1);
 	*current = -1;
+	*c_p += ft_strlen(*str);
 }
 
 void		fn_termcap(t_command *command, char **history)
@@ -20,7 +33,7 @@ void		fn_termcap(t_command *command, char **history)
 	int			l;
 	char		*str;
 	static int	current;
-	int			cursor_position;
+	size_t		cursor_position;
 
 	current = -1;
 	str = ft_calloc(2000, sizeof(char));
@@ -29,8 +42,8 @@ void		fn_termcap(t_command *command, char **history)
 	while (str[0] != '\n')
 	{
 		l = read(0, str, 1998);
-		if (ft_strncmp_end(str, "\x03", 1) && ft_strncmp_end(str, "\x7f", 1))
-			cursor_position += l;
+		// if (ft_strncmp_end(str, "\x03", 1) && ft_strncmp_end(str, "\x7f", 1))
+		// 	cursor_position += l;
 		str[l] = 0;
 		if (!ft_strncmp(str, "\x04", 1) && cursor_position == 1)
 			ctr_d();
@@ -47,12 +60,13 @@ void		fn_termcap(t_command *command, char **history)
 			command->raw_string = navigate_history(history, &str, &current);
 		}
 		else if (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str,
-		"\e[C", 3) || !ft_strncmp(str, "\t", 1) || !ft_strncmp(str, "\034", 2))
+		"\e[C", 3) || !ft_strncmp(str, "\t", 1) || !ft_strncmp(str, "\034", 2)
+		|| !ft_strncmp(str, "\v", 1))
 			;
 		else if (((!ft_strncmp_end(str, "\177", 1) && !ft_strncmp(str, "\x7f",
 		ft_strlen("\x7f"))) || !ft_strncmp(str, "\177", 1)) && (cursor_position > 0))
 			backspace(&command->raw_string, &cursor_position);
-		else if (cursor_position > 0)
-			new_symbol(&str, command, &current);
+		else
+			new_symbol(&str, command, &current, &cursor_position);
 	}
 }

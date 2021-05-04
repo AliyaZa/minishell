@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	backspace(char **string, int *cursor_position)
+void	backspace(char **string, size_t *cursor_position)
 {
 	if (*cursor_position)
 		delete_last_charachter(string);

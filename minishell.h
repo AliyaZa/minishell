@@ -40,7 +40,7 @@ void			ft_insert_str(char **string, char *buf, size_t index);
 void			print_array(char **p);
 char			**ft_separator(char *string, char c);
 void			sort_splitted(char ***splitted);
-void			backspace(char **string, int *cursor_position);
+void			backspace(char **string, size_t *cursor_position);
 char			*determine_argument(t_command *command);
 void			determine_options(t_command *command);
 char			*determine_command(t_command *command);
