@@ -12,11 +12,6 @@
 
 #include "../minishell.h"
 
-int			is_ctrd_allowed(char *str, size_t c_p)
-{
-	return (!ft_strncmp(str, "\x04", 1) && c_p == 1);
-}
-
 void		fn_termcap(t_command *command, char **history)
 {
 	int			l;
@@ -40,8 +35,7 @@ void		fn_termcap(t_command *command, char **history)
 		{
 			free(command->raw_string);
 			command->raw_string = navigate_history(history, str, &current);
-			size_t len = ft_strlen(command->raw_string);
-			cursor_position += len;
+			cursor_position += ft_strlen(command->raw_string);
 		}
 		else if (termcap_check(str))
 			;

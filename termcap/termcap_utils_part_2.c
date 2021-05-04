@@ -28,3 +28,8 @@ void	new_symbol(char **str, t_command *command, int *current, size_t *c_p)
 		*c_p += ft_strlen(*str);
 	}
 }
+
+int			is_ctrd_allowed(char *str, size_t c_p)
+{
+	return (!ft_strncmp(str, "\x04", 1) && c_p == 1);
+}

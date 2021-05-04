@@ -89,6 +89,27 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	return (fd);
 }
 
+void	redirect_logic(char **p, int index, t_command *command, char **string)
+{
+	char	*tmp;
+	char	*pp;
+
+	pp = *p;
+	pp[index] == '<' ? command->flags->rev_redirect = 1 : 1;
+	tmp = *string;
+	*string = ft_substr(pp, 0, index);
+	// free(tmp);
+	if (!command->flags->rev_redirect)
+	{
+		command->fd[0] = ft_form_file(pp);
+	}
+	command->fd[1] = redirect(p, pp[index], index, string); //
+		// fn_errors(command, errno);
+	tmp = pp;
+	pp = ft_strdup(*string);
+	free(tmp);
+}
+
 void	validator(char **string, t_env *env, t_command *command)
 {
 	char	*p;
@@ -108,23 +129,7 @@ void	validator(char **string, t_env *env, t_command *command)
 		&& (p[index + 1] != ' ' || p[index+ 1] != '\0'))
 			p = validate_env_sub(quote, p, index--, env);
 		else if ((!ft_strncmp(&p[index], "<", 1) || !ft_strncmp(&p[index], ">", 1)) && !quote)
-		{
-			p[index] == '<' ? command->flags->rev_redirect = 1 : 1;
-			tmp = *string;
-			*string = ft_substr(p, 0, index);
-			// free(tmp);
-			if (!command->flags->rev_redirect)
-			{
-				if ((-1 == (command->fd[0] = ft_form_file(p)))
-				&& ft_strncmp(command->command, "echo", 4))
-					fn_errors(command, errno);
-			}
-			if (-1 == (command->fd[1] = redirect(&p, p[index], index, string))) //
-				fn_errors(command, errno);
-			tmp = p;
-			p = ft_strdup(*string);
-			free(tmp);
-		}
+			redirect_logic(&p, index, command, string);
 		else if (p[index] == '\\')
 			p = mirroring(p, quote);
 		index++;
