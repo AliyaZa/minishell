@@ -117,6 +117,10 @@ char		**get_splitted(char *raw_string)
 		if ((p[index] == '>' || p[index] == '<') && !quote)
 		{
 			if (p[index] == '>')
+			{
+				ft_delete_char(&p, index);
+				if (p[index])
+					ft_delete_char(&p, index);
 				while (p[index] && flag != 2)
 				{
 					ft_delete_char(&p, index);
@@ -125,6 +129,7 @@ char		**get_splitted(char *raw_string)
 					if (flag == 1 && p[index] == ' ')
 						flag++;
 				}
+			}
 			else
 				ft_delete_char(&p, index);
 			continue ;
