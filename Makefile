@@ -10,7 +10,6 @@ SRC = main.c \
 	main_cycle.c save_history.c \
 	termcap.c navigate_history.c termcap_utils.c \
 	structures_init.c router.c \
-	semicolon.c \
 	minishell_utils/minishell_utils.c \
 	minishell_utils/minishell_utils_part_2.c \
 	minishell_utils/minishell_utils_part_3.c \
@@ -32,6 +31,7 @@ SRC = main.c \
 	parser/parse_env.c \
 	parser/parser_utils.c \
 	parser/parser_utils_part_2.c \
+	parser/semicolon.c \
 	build_in/fn_pipe.c \
 	build_in/level.c \
 

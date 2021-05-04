@@ -26,6 +26,7 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+void			free_array(char ***array);
 char			**get_splitted(char *raw_string);
 size_t			array_size(char **array);
 char			*mirroring(char *p, char quote);
