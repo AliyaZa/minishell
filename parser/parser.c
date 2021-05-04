@@ -14,8 +14,8 @@
 
 static void	determine_command_struct(t_command *command, t_env *env)
 {
-	command->rest_string = determine_command(command); // memory leaks checked
-	if (validate_command(&command->command)) // memory leaks checked
+	command->rest_string = determine_command(command);
+	if (validate_command(&command->command))
 		fn_errors(command, SYNTAX_ERROR);
 	command->flags->is_bin = is_command_bin(command);
 	determine_options(command);
