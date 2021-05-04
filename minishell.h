@@ -26,6 +26,9 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+char			*determine_filename(char **p, size_t *index, char type, int *r_type);
+void			move_pointer_to(char **p, char c);
+int				open_file(char type, int r_type, char **filename);
 int				is_ctrd_allowed(char *str, size_t c_p);
 void			new_symbol(char **str, t_command *command, int *current, size_t *c_p);
 void			ctr_d(void);

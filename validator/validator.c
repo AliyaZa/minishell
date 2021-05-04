@@ -36,8 +36,6 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	int		r_type;
 	char	*buf;
 	char	*p;
-	int		kc;
-	char	*tmp;
 
 	p = &(*string)[i];
 	buf = NULL;
@@ -45,22 +43,8 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	filename = NULL;
 	while (p[index])
 	{
-		kc = 0;
-		r_type = 0;
 		index = 0;
-		while (p[index] == ' ' || p[index] == type)
-		{
-			if (p[index] == type)
-			{
-				r_type++;
-				kc++;
-			}
-			index++;
-		}
-		tmp = p;
-		p = ft_substr(p, kc, ft_strlen(p));
-		// free(tmp);
-		filename = ft_take_word(&p);
+		filename = determine_filename(&p, &index, type, &r_type);
 		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
 		if (ft_strlen(buf))
 		{
@@ -69,21 +53,11 @@ int		redirect(char **string, char type, size_t i, char **argument)
 			ft_delete_word(&p, index - 1, ft_strlen(buf));
 			// free(buf);
 		}
-		while (*p && *p != '>')
-			p++;
-		if (type == '>')
-		{
-			if (r_type == 2)
-				fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
-			else if (r_type == 1)
-				fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-		}
-		else
-			fd = open(filename, O_RDWR, 0644);
-		free_str(&filename);
+		move_pointer_to(&p, '>');
+		fd = open_file(type, r_type, &filename);
 		if ((!p || ft_strlen(p) == 0) && !is_next_redirect(p, type))
 			return (fd);
-		if (is_next_redirect(p, type))
+		else
 			close(fd);
 	}
 	return (fd);
@@ -98,13 +72,16 @@ void	redirect_logic(char **p, int index, t_command *command, char **string)
 	pp[index] == '<' ? command->flags->rev_redirect = 1 : 1;
 	tmp = *string;
 	*string = ft_substr(pp, 0, index);
-	// free(tmp);
 	if (!command->flags->rev_redirect)
 	{
 		command->fd[0] = ft_form_file(pp);
+		command->fd[1] = redirect(p, pp[index], index, string);
 	}
-	command->fd[1] = redirect(p, pp[index], index, string); //
-		// fn_errors(command, errno);
+	else
+	{
+		command->fd[0] = redirect(p, pp[index], index, string);
+		command->fd[1] = ft_form_file(pp);
+	}
 	tmp = pp;
 	pp = ft_strdup(*string);
 	free(tmp);

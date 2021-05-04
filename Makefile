@@ -17,6 +17,7 @@ SRC = main.c \
 	validator/validator.c \
 	validator/validator_part_2.c \
 	validator/validator_part_3.c \
+	validator/validator_part_4.c \
 	build_in/echo.c \
 	build_in/env.c \
 	build_in/fn_export.c \
