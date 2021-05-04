@@ -131,6 +131,5 @@ char		**get_splitted(char *raw_string)
 		}
 		index++;
 	}
-	print_array(ft_split(p, ' '));
 	return (ft_split(p, ' '));
 }
