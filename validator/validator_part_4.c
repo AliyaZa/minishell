@@ -14,6 +14,7 @@ int		open_file(char type, int r_type, char **filename)
 	}
 	else
 		fd = open(*filename, O_RDWR, 0644);
+	free(*filename);
 	return (fd);
 }
 

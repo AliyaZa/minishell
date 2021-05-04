@@ -18,6 +18,9 @@ char	*validate_quote(char *quote, char *p, size_t index)
 		tmp1 = ft_substr(p, index + 1, ft_strlen(p));
 	}
 	validated = ft_strjoin(tmp, tmp1);
+	free_str(&tmp);
+	free_str(&tmp1);
+	free(p);
 	return (validated);
 }
 
