@@ -25,11 +25,23 @@ static void	determine_command_struct(t_command *command, t_env *env)
 		command->raw_string = validate_raw_string(command->raw_string);
 }
 
-char		**get_pipes(t_command *command)
+char		***get_pipes(t_command *command)
 {
+	char	**matrix;
+	char	***pipes;
+	size_t	i;
+
+	i = 0;
 	if (ft_strchr(command->raw_string, '|'))
 		command->flags->pipe = 1;
-	return (ft_split(command->raw_string, '|'));
+	matrix = ft_split(command->raw_string, '|');
+	pipes = (char ***)malloc(sizeof(char **) * array_size(matrix));
+	while (matrix[i])
+	{
+		pipes[i] = ft_split(matrix[i], ' ');
+		i++;
+	}
+	return (pipes);
 }
 
 void		parser(t_command *command, t_env *env)
@@ -45,7 +57,8 @@ void		parser(t_command *command, t_env *env)
 	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
 	command->pipes = get_pipes(command);
-	command->pipes_quantity = array_size(command->pipes);
+	print_array3(command->pipes);
+	// command->pipes_quantity = array_size(command->pipes);
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);
 	if (command->flags->is_bin)

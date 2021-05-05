@@ -26,6 +26,7 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+void			print_array3(char ***array);
 int				is_next_redirect(char *string, char type);
 char			*determine_filename(char **p, size_t *index, char type, int *r_type);
 void			move_pointer_to(char **p, char c);

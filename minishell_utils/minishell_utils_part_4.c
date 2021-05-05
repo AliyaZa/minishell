@@ -24,3 +24,23 @@ void	free_array(char ***array)
 	}
 	free(array);
 }
+
+void	print_array3(char ***array)
+{
+	int		i;
+	int		ii;
+
+	i = 0;
+	while (array[i])
+	{
+		printf("%i\n", i);
+		ii = 0;
+		while (array[i][ii])
+		{
+			printf("%s\n", array[i][ii]);
+			ii++;
+		}
+		printf("\n");
+		i++;
+	}
+}

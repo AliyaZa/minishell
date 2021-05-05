@@ -25,7 +25,7 @@ typedef struct	s_command
 	char		quotes_type;
 	char		*queue;
 	char		**splitted;
-	char		**pipes;
+	char		***pipes;
 	size_t		pipes_quantity;
 	int			fd[2];
 	t_flags		*flags;
