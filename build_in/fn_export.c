@@ -6,32 +6,11 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:07:01 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/03 18:36:11 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:23:18 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static char	*create_str_ex(char *str)
-{
-	char	*rez;
-	size_t		i;
-	size_t		j;
-	size_t		len;
-
-	i = 1;
-	j = 0;
-	len = ft_strlen(str);
-	rez = (char *)malloc(sizeof(char) * (len + 3));
-	rez[0] = '"';
-	while (j < len)
-	{
-		rez[i++] = str[j++];
-	}
-	rez[i++] = '"';
-	rez[i] = '\0';
-	return (rez);
-}
 
 static char	**create_sort_export(t_env *parsed_data)
 {
@@ -46,32 +25,30 @@ static char	**create_sort_export(t_env *parsed_data)
 	{
 		if (!parsed_data1->equal)
 		{
-			tmp[i] = fn_strjoin3(fn_strjoin3("declare -x ", parsed_data1->key, "="), create_str_ex(parsed_data1->value), "\n");
+			tmp[i] = fn_strjoin3(fn_strjoin3("declare -x ",
+			parsed_data1->key, "="), create_str_ex(parsed_data1->value), "\n");
 		}
-//			printf("declare -x %s=\"%s\"\n",
-//				parsed_data1->key, parsed_data1->value);
 		else
 			tmp[i] = fn_strjoin3("declare -x ", parsed_data1->key, "\n");
-//			printf("declare -x %s\n", parsed_data1->key);
 		i++;
 		parsed_data1 = parsed_data1->next;
 	}
 	return (tmp);
 }
 
-static char		**sort_tmp(char **tmp, t_env *parsed_data)
+static char	**sort_tmp(char **tmp, t_env *parsed_data)
 {
 	int		i;
 	int		j;
 	char	*str;
 
 	i = 0;
-	while(i < ft_lstsize1(parsed_data) - 1)
+	while (i < ft_lstsize1(parsed_data) - 1)
 	{
 		j = 0;
 		while (j < ft_lstsize1(parsed_data) - i - 1)
 		{
-			if(ft_strcmp(tmp[j], tmp[j + 1]) > 0)
+			if (ft_strcmp(tmp[j], tmp[j + 1]) > 0)
 			{
 				str = ft_strdup(tmp[j]);
 				free_str(&tmp[j]);
@@ -83,17 +60,17 @@ static char		**sort_tmp(char **tmp, t_env *parsed_data)
 		}
 		i++;
 	}
-	return(tmp);
+	return (tmp);
 }
 
-static void		print_export(t_env *parsed_data, t_command *command)
+static void	print_export(t_env *parsed_data, t_command *command)
 {
 	char	**tmp;
 	int		i;
 
 	i = 0;
 	tmp = create_sort_export(parsed_data);
-	tmp = sort_tmp(tmp ,parsed_data);
+	tmp = sort_tmp(tmp, parsed_data);
 	while (i < ft_lstsize1(parsed_data))
 	{
 		ft_putstr_fd(tmp[i], command->fd[1]);
@@ -129,7 +106,7 @@ t_command *command, int *flag)
 	free_str(&value);
 }
 
-void	fn_export(t_parsed_data *parsed_data, t_command *command)
+void		fn_export(t_parsed_data *parsed_data, t_command *command)
 {
 	int		flag;
 

@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:35:24 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/15 18:08:32 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:12:09 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_env	*fn_get_el(t_parsed_data *parsed_data, char *key)
+t_env		*fn_get_el(t_parsed_data *parsed_data, char *key)
 {
 	t_env	*tmp;
 
@@ -92,7 +92,7 @@ char *path, char *env_key)
 	}
 }
 
-void	fn_cd(t_command *command, t_parsed_data *parsed_data)
+void		fn_cd(t_command *command, t_parsed_data *parsed_data)
 {
 	char	*path;
 	char	*new_path;

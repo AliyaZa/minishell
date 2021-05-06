@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 17:21:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/24 19:46:50 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:09:32 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name)
+void		fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name)
 {
 	(*tmp) = NULL;
 	(*lst) = NULL;
@@ -20,7 +20,7 @@ void	fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name)
 	(*lst_name) = NULL;
 }
 
-int	fn_check(char *new_path, t_command *command)
+int			fn_check(char *new_path, t_command *command)
 {
 	struct stat	fl;
 
@@ -33,11 +33,11 @@ int	fn_check(char *new_path, t_command *command)
 	return (1);
 }
 
-t_env	*create_export(t_parsed_data *parsed_data)
+t_env		*create_export(t_parsed_data *parsed_data)
 {
-	t_env	*copy_env;
-	t_env	*export;
-	t_env	*export_el;
+	t_env		*copy_env;
+	t_env		*export;
+	t_env		*export_el;
 
 	copy_env = parsed_data->env_data;
 	export = NULL;
@@ -55,7 +55,7 @@ t_env	*create_export(t_parsed_data *parsed_data)
 	return (export);
 }
 
-void	fn_get_name(t_env **lst_name, char *value, int flag)
+void		fn_get_name(t_env **lst_name, char *value, int flag)
 {
 	if ((*lst_name))
 	{
@@ -67,7 +67,7 @@ void	fn_get_name(t_env **lst_name, char *value, int flag)
 	}
 }
 
-void	fn_get_needed_el(char *tmp, char **value,
+void		fn_get_needed_el(char *tmp, char **value,
 t_env **lst_name, t_parsed_data *parsed_data)
 {
 	int		len;

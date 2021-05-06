@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:51:26 by nhill             #+#    #+#             */
-/*   Updated: 2021/04/15 16:30:03 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:10:44 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_env	*fn_create_el(char *tmp, int flag)
 	return (new_el);
 }
 
-char	*fn_strcreate(char *s, int start, int len)
+char			*fn_strcreate(char *s, int start, int len)
 {
 	char	*str;
 	char	*tmp;
@@ -55,7 +55,7 @@ char	*fn_strcreate(char *s, int start, int len)
 	return (str);
 }
 
-char	*fn_strjoin3(char *str1, char *str2, char *str3)
+char			*fn_strjoin3(char *str1, char *str2, char *str3)
 {
 	char	*str;
 	size_t	size;
@@ -76,7 +76,7 @@ char	*fn_strjoin3(char *str1, char *str2, char *str3)
 	return (str);
 }
 
-static int	fn_creator(t_env **env_copy, char **value, char *tmp)
+static int		fn_creator(t_env **env_copy, char **value, char *tmp)
 {
 	int		flag;
 
@@ -97,7 +97,7 @@ static int	fn_creator(t_env **env_copy, char **value, char *tmp)
 	return (flag);
 }
 
-void	fn_set_env(t_parsed_data *parsed_data, t_command *command,
+void			fn_set_env(t_parsed_data *parsed_data, t_command *command,
 char *tmp, int fl)
 {
 	t_env	*env;
