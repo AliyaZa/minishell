@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:44:46 by mismene           #+#    #+#             */
-/*   Updated: 2021/05/04 18:54:34 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 21:30:03 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 	pid_t	pid[2];
 	pid_t	child;
 	pid_t	parent;
-	int		status;
+//	int		status;
 
 	child = pid[0];
 	parent = pid[1];
@@ -49,11 +49,12 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 		{
 			child = fork();
 //			child = 0;
+			signal(SIGINT, (void *)proc_signal_handler);
 			if (child == 0)
 				fn_fork(parsed_data, command);
-			waitpid(child, &status, 0);
-			if (status == 9)
-				kill(0, status);
+			wait(&child);
+//			if (status == 9)
+//				kill(0, status);
 			// while ((parent = wait(&status)) > 0)
 			// ;
 		}

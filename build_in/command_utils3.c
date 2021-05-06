@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 20:19:54 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/06 20:45:36 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 21:15:16 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ char	**fn_arr(t_env *env)
 	}
 	res[i] = NULL;
 	return (res);
+}
+
+void	proc_signal_handler(int signo)
+{
+	if (signo == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		signal(SIGINT, proc_signal_handler);
+	}
 }

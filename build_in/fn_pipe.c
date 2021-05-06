@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 18:10:44 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/04 18:16:51 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 21:17:44 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	ft_success_fork(t_parsed_data *parsed_data, t_command *command,
 	}
 	command->fd[1] != 1 ? dup2(command->fd[1], fd[i][0]) : 0;
 	command->fd[0] != 1 ? dup2(command->fd[0] , 1) : 0;
-	execve(path, command->splitted, fn_arr(parsed_data->env_data));
+	execve(path, command->pipes[i], fn_arr(parsed_data->env_data));
 }
 
 int		fn_make_pipe(t_parsed_data *parsed_data ,t_command *command)

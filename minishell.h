@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:20:48 by mismene           #+#    #+#             */
-/*   Updated: 2021/05/06 20:21:38 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 21:11:17 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ int				fn_redir(t_parsed_data *parsed_data, t_command *command);
 void			level(t_parsed_data *parsed_data, t_command *command);
 void			fn_pipe(t_parsed_data *parsed_data, t_command *command);
 char			*create_str_ex(char *str);
+void			proc_signal_handler(int signo);
 
 #endif

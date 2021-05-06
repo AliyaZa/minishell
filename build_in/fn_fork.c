@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/06 20:57:58 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 21:16:15 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 	if (command->fd[0] > 0)
 		dup2(command->fd[0], 0);
 	path_to = fn_path(parsed_data, command, &error);
-	printf("%s\n", path_to);
 	if (error == 0)
 	{
 		execve(path_to, command->splitted, fn_arr(parsed_data->env_data));
