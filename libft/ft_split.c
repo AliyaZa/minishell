@@ -66,7 +66,7 @@ static char	**ft_clean(char **arr, int c1)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char		**ft_split(char const *s, char c)
 {
 	char	**ptr;
 	int		i;

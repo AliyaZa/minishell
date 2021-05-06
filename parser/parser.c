@@ -38,8 +38,6 @@ void		parser(t_command *command, t_env *env)
 	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
 	command->pipes = get_pipes(command);
-	// print_array3(command->pipes);
-	// command->pipes_quantity = array_size(command->pipes);
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);
 	if (command->flags->is_bin)

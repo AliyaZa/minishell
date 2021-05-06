@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils_part_2.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/06 17:10:57 by mismene           #+#    #+#             */
+/*   Updated: 2021/05/06 17:10:59 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int		is_command_bin(t_command *command)
@@ -38,7 +50,7 @@ int		is_build_in(char *command)
 	return (0);
 }
 
-void	replace_symbol_array(char	***array, char old, char new)
+void	replace_symbol_array(char ***array, char old, char new)
 {
 	char	**p;
 	size_t	index;
@@ -53,7 +65,7 @@ void	replace_symbol_array(char	***array, char old, char new)
 	}
 }
 
-void		delete_quotes(char ***splitted)
+void	delete_quotes(char ***splitted)
 {
 	char	**p;
 	size_t	i;

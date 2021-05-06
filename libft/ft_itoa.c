@@ -43,7 +43,7 @@ static char	*ft_create_str(char *str, int i, long nn, int zn)
 	return (str);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	char	*str;
 	int		zn;

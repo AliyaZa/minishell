@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_utils_part_3.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/06 17:08:37 by mismene           #+#    #+#             */
+/*   Updated: 2021/05/06 17:08:39 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	print_array(char **p)
@@ -16,7 +28,7 @@ void	ft_insert_str(char **string, char *buf, size_t index)
 {
 	char	*start;
 	char	*end;
-	
+
 	start = ft_substr(*string, 0, index);
 	end = ft_substr(*string, index, ft_strlen(*string));
 	start = ft_strjoin(start, buf);

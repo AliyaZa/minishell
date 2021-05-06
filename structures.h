@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/06 17:20:19 by mismene           #+#    #+#             */
+/*   Updated: 2021/05/06 17:20:21 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
@@ -17,7 +29,7 @@ typedef	struct	s_flags
 
 typedef struct	s_command
 {
-	char 		*raw_string;
+	char		*raw_string;
 	char		*command;
 	char		option;
 	char		*argument;

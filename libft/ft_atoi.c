@@ -29,7 +29,7 @@ static void	for_norm(const char *str, int *i, int *zn)
 	}
 }
 
-int	ft_atoi(const char *str)
+int			ft_atoi(const char *str)
 {
 	unsigned int	ch;
 	unsigned int	l_ch;

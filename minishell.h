@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/06 17:20:48 by mismene           #+#    #+#             */
+/*   Updated: 2021/05/06 17:20:49 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
@@ -26,6 +38,7 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+void			free_four(char **str1, char **str2, char **str3, char **str4);
 char			***get_pipes(t_command *command);
 void			replace_symbol3(char ****array, char old, char new);
 void			validate_spaces(char **string);
@@ -33,11 +46,13 @@ void			validate_pipe(char **raw_string);
 void			validate_q(char *quote, char *p, size_t index);
 void			print_array3(char ***array);
 int				is_next_redirect(char *string, char type);
-char			*determine_filename(char **p, size_t *index, char type, int *r_type);
+char			*determine_filename(char **p, size_t *index,
+					char type, int *r_type);
 void			move_pointer_to(char **p, char c);
 int				open_file(char type, int r_type, char **filename);
 int				is_ctrd_allowed(char *str, size_t c_p);
-void			new_symbol(char **str, t_command *command, int *current, size_t *c_p);
+void			new_symbol(char **str, t_command *command,
+					int *current, size_t *c_p);
 void			ctr_d(void);
 void			ctr_c(t_command *command);
 int				is_backspace_allowed(char *str, size_t cursor_position);
@@ -46,7 +61,8 @@ void			free_array(char ***array);
 char			**get_splitted(char *raw_string);
 size_t			array_size(char **array);
 char			*mirroring(char *p, char quote);
-char			*validate_env_sub(char quote, char *p, size_t index, t_env *env);
+char			*validate_env_sub(char quote, char *p,
+					size_t index, t_env *env);
 char			*validate_quote(char *quote, char *p, size_t index);
 void			free_memory(t_parsed_data *parsed_data, t_command *command);
 void			delete_quotes(char ***splitted);
@@ -104,22 +120,26 @@ char			*ft_strnew(unsigned int size);
 size_t			command_len(const char *command);
 void			fn_cd(t_command *command, t_parsed_data *parsed_data);
 void			fn_export(t_parsed_data *parsed_data, t_command *command);
-void			fn_set_env(t_parsed_data *parsed_data, t_command *command, char *tmp, int fl);
+void			fn_set_env(t_parsed_data *parsed_data,
+					t_command *command, char *tmp, int fl);
 t_env			*fn_get_el(t_parsed_data *parsed_data, char *key);
 void			fn_unset(t_parsed_data *parsed_data, t_command *command);
 char			*fn_strcreate(char *s, int start, int len);
 char			*fn_strjoin3(char *str1, char *str2, char *str3);
 int				fn_errors(t_command *command, int error);
 void			fn_fork(t_parsed_data *parsed_data, t_command *command);
-void			fn_zero(char **tmp, t_env **lst, char **value, t_env **lst_name);
+void			fn_zero(char **tmp, t_env **lst,
+					char **value, t_env **lst_name);
 int				fn_check(char *new_path, t_command *command);
 t_env			*create_export(t_parsed_data *parsed_data);
 void			fn_get_name(t_env **lst_name, char *value, int flag);
-void			fn_get_needed_el(char *tmp, char **value,t_env **lst_name, t_parsed_data *parsed_data);
+void			fn_get_needed_el(char *tmp, char **value,
+					t_env **lst_name, t_parsed_data *parsed_data);
 char			**fn_arr(t_env *env);
-char			*fn_path(t_parsed_data *parsed_data, t_command *command, int *error);
+char			*fn_path(t_parsed_data *parsed_data,
+					t_command *command, int *error);
 int				fn_redir(t_parsed_data *parsed_data, t_command *command);
 void			level(t_parsed_data *parsed_data, t_command *command);
-void			fn_pipe(t_parsed_data *parsed_data ,t_command *command);
+void			fn_pipe(t_parsed_data *parsed_data, t_command *command);
 
 #endif

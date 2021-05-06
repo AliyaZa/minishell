@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   termcap_utils_part_2.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/06 17:17:09 by mismene           #+#    #+#             */
+/*   Updated: 2021/05/06 17:17:11 by mismene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	ctr_c(t_command *command)
@@ -29,7 +41,7 @@ void	new_symbol(char **str, t_command *command, int *current, size_t *c_p)
 	}
 }
 
-int			is_ctrd_allowed(char *str, size_t c_p)
+int		is_ctrd_allowed(char *str, size_t c_p)
 {
 	return (!ft_strncmp(str, "\x04", 1) && c_p == 1);
 }

@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	validate_command(char **command)
+int		validate_command(char **command)
 {
 	size_t	index;
 	char	*p;
@@ -36,8 +36,7 @@ int	validate_command(char **command)
 	}
 	if (flag)
 		return (1);
-	free(*command);
-	free(p);
+	free_four(command, &p, NULL, NULL);
 	*command = ft_strdup(p);
 	return (0);
 }

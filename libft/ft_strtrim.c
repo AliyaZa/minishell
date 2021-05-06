@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_find(char s, char *set)
+int		ft_find(char s, char *set)
 {
 	size_t		i;
 

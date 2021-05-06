@@ -39,14 +39,14 @@ void	clear_command_line(void)
 	tputs(tigetstr("ed"), 1, ft_putchar);
 }
 
-int			termcap_check(char *str)
+int		termcap_check(char *str)
 {
 	return (!ft_strncmp(str, "\e[D", 3) || !ft_strncmp(str,
 		"\e[C", 3) || !ft_strncmp(str, "\t", 1) || !ft_strncmp(str, "\034", 2)
 		|| !ft_strncmp(str, "\v", 1) || !ft_strncmp(str, "\b", 1));
 }
 
-int			is_backspace_allowed(char *str, size_t cursor_position)
+int		is_backspace_allowed(char *str, size_t cursor_position)
 {
 	return (((!ft_strncmp_end(str, "\177", 1))
 			|| (!ft_strncmp(str, "\x7f", 1))

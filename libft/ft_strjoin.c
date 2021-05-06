@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*ptr;
 	int		i;
@@ -53,7 +53,7 @@ static void	for_norm(int flag, char **s1, char **s2)
 	}
 }
 
-char	*ft_strjoin_free(char *s1, char *s2, int flag)
+char		*ft_strjoin_free(char *s1, char *s2, int flag)
 {
 	char	*p;
 	int		i;
