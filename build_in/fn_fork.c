@@ -6,12 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/06 20:39:32 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:57:58 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+<<<<<<< HEAD
 int			ft_count_lst(t_env *env)
 {
 	int		count;
@@ -25,6 +26,8 @@ int			ft_count_lst(t_env *env)
 	return (count);
 }
 
+=======
+>>>>>>> c8bbfda8e9f3cb26767c7d5286bf9ca240734b77
 static int	ret_er(char **places, int kol, struct stat buf)
 {
 	int		er;
@@ -55,8 +58,9 @@ char		*fn_path(t_parsed_data *parsed_data,
 
 	places = NULL;
 	path_to = NULL;
+	kol = 0;
 	path = fn_get_el(parsed_data, "PATH");
-	if (command->flags->is_bin != 1 && (kol = 0))
+	if (command->flags->is_bin != 1)
 	{
 		if (path)
 			places = ft_split(path->value, ':');
@@ -89,9 +93,19 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 	save0 = dup(0);
 	error = 0;
 	path_to = NULL;
+<<<<<<< HEAD
 	fn_redir_helper(command, parsed_data, &error);
+=======
+	if (command->fd[1] > 1)
+		dup2(command->fd[1], 1);
+	if (command->fd[0] > 0)
+		dup2(command->fd[0], 0);
+	path_to = fn_path(parsed_data, command, &error);
+	printf("%s\n", path_to);
+>>>>>>> c8bbfda8e9f3cb26767c7d5286bf9ca240734b77
 	if (error == 0)
 	{
+		execve(path_to, command->splitted, fn_arr(parsed_data->env_data));
 		if (command->fd[1] > 1)
 			dup2(save1, 1);
 		if (command->fd[0] > 0)
@@ -109,7 +123,10 @@ void		fn_fork(t_parsed_data *parsed_data, t_command *command)
 {
 	int		error;
 
+<<<<<<< HEAD
 	error = 0;
+=======
+>>>>>>> c8bbfda8e9f3cb26767c7d5286bf9ca240734b77
 	error = fn_redir(parsed_data, command);
 	if (error != 0)
 	{
