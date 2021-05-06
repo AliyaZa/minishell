@@ -26,6 +26,11 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+char			***get_pipes(t_command *command);
+void			replace_symbol3(char ****array, char old, char new);
+void			validate_spaces(char **string);
+void			validate_pipe(char **raw_string);
+void			validate_q(char *quote, char *p, size_t index);
 void			print_array3(char ***array);
 int				is_next_redirect(char *string, char type);
 char			*determine_filename(char **p, size_t *index, char type, int *r_type);

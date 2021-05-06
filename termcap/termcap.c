@@ -12,6 +12,17 @@
 
 #include "../minishell.h"
 
+int			read_user_input(char **str)
+{
+	int		l;
+	char	*p;
+
+	p = *str;
+	l = read(0, p, 1998);
+	p[l] = 0;
+	return (l);
+}
+
 void		fn_termcap(t_command *command, char **history)
 {
 	int			l;
@@ -25,8 +36,7 @@ void		fn_termcap(t_command *command, char **history)
 	cursor_position = 1;
 	while (str[0] != '\n')
 	{
-		l = read(0, str, 1998);
-		str[l] = 0;
+		l = read_user_input(&str);
 		if (is_ctrd_allowed(str, cursor_position))
 			ctr_d();
 		else if (!ft_strncmp(str, "\x03", 1))

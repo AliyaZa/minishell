@@ -34,6 +34,8 @@ SRC = main.c \
 	parser/parse_env.c \
 	parser/parser_utils.c \
 	parser/parser_utils_part_2.c \
+	parser/parser_utils_part_3.c \
+	parser/parser_utils_part_4.c \
 	parser/semicolon.c \
 	termcap/termcap.c \
 	termcap/termcap_utils.c \
