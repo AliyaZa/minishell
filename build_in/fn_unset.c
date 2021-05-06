@@ -26,7 +26,7 @@ static void	fn_del_el(t_env **root)
 	}
 }
 
-void	fn_unset(t_parsed_data *parsed_data, t_command *command)
+void		fn_unset(t_parsed_data *parsed_data, t_command *command)
 {
 	t_env	*prev;
 	t_env	*root;

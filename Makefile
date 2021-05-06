@@ -28,6 +28,7 @@ SRC = main.c \
 	build_in/command_utils.c \
 	build_in/command_utils2.c \
 	build_in/command_utils3.c \
+	build_in/command_utils4.c \
 	build_in/fn_cd.c \
 	build_in/fn_pipe.c \
 	build_in/level.c \

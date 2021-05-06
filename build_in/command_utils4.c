@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_utils3.c                                   :+:      :+:    :+:   */
+/*   command_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,12 @@
 
 #include "../minishell.h"
 
-char	*create_str_ex(char *str)
+void		fn_redir_helper(t_command *command,
+				t_parsed_data *parsed_data, int *error)
 {
-	char		*rez;
-	size_t		i;
-	size_t		j;
-	size_t		len;
-
-	i = 1;
-	j = 0;
-	len = ft_strlen(str);
-	rez = (char *)malloc(sizeof(char) * (len + 3));
-	rez[0] = '"';
-	while (j < len)
-	{
-		rez[i++] = str[j++];
-	}
-	rez[i++] = '"';
-	rez[i] = '\0';
-	return (rez);
-}
-
-char	**fn_arr(t_env *env)
-{
-	int		kol;
-	char	**res;
-	int		i;
-
-	kol = ft_count_lst(env);
-	res = (char **)malloc(sizeof(char *) * (kol + 1));
-	ft_bzero(res, sizeof(char *) * (kol + 1));
-	i = 0;
-	while (env)
-	{
-		if (env->equal == NULL)
-			res[i++] = fn_strjoin3(env->key, "=", env->value);
-		env = env->next;
-	}
-	res[i] = NULL;
-	return (res);
+	if (command->fd[1] > 1)
+		dup2(command->fd[1], 1);
+	if (command->fd[0] > 0)
+		dup2(command->fd[0], 0);
+	fn_path(parsed_data, command, error);
 }

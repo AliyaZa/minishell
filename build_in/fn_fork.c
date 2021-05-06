@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static int	ft_count_lst(t_env *env)
+int			ft_count_lst(t_env *env)
 {
 	int		count;
 
@@ -44,7 +44,8 @@ static int	ret_er(char **places, int kol, struct stat buf)
 	return (er);
 }
 
-char		*fn_path(t_parsed_data *parsed_data, t_command *command, int *error)
+char		*fn_path(t_parsed_data *parsed_data,
+				t_command *command, int *error)
 {
 	t_env		*path;
 	char		**places;
@@ -81,16 +82,14 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 {
 	char	*path_to;
 	int		error;
+	int		save1;
+	int		save0;
 
-	int save1 = dup(1);
-	int save0 = dup(0);
+	save1 = dup(1);
+	save0 = dup(0);
 	error = 0;
 	path_to = NULL;
-	if (command->fd[1] > 1)
-		dup2(command->fd[1], 1);
-	if (command->fd[0] > 0)
-		dup2(command->fd[0], 0);
-	fn_path(parsed_data, command, &error);
+	fn_redir_helper(command, parsed_data, &error);
 	if (error == 0)
 	{
 		if (command->fd[1] > 1)
@@ -100,7 +99,7 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 		return (0);
 	}
 	else
-		return(error);
+		return (error);
 	dup2(save1, 1);
 	dup2(save0, 0);
 	return (COMMAND_NOT_FOUND);
@@ -111,7 +110,7 @@ void		fn_fork(t_parsed_data *parsed_data, t_command *command)
 	int		error;
 
 	error = 0;
-		error = fn_redir(parsed_data, command);
+	error = fn_redir(parsed_data, command);
 	if (error != 0)
 	{
 		if (error == COMMAND_NOT_FOUND)
@@ -119,5 +118,5 @@ void		fn_fork(t_parsed_data *parsed_data, t_command *command)
 		else
 			fn_errors(command, NOT_AN_EXECUTABLE_FILE);
 	}
-	exit (0);
+	exit(0);
 }
