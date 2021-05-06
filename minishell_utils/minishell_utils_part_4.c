@@ -57,10 +57,8 @@ void	print_array3(char ***array)
 	}
 }
 
-void	free_four(char **str1, char **str2, char **str3, char **str4)
+void	free_four(char **str1, char **str2)
 {
 	free_str(str1);
 	free_str(str2);
-	free_str(str3);
-	free_str(str4);
 }
