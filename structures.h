@@ -36,6 +36,7 @@ typedef struct	s_command
 	char		*rest_string;
 	char		quotes_type;
 	char		*queue;
+	char		**splitted;
 	char		***pipes;
 	size_t		pipes_quantity;
 	int			fd[2];
