@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 20:19:54 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/06 21:15:16 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 21:34:22 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_count_lst(t_env *env)
+int		ft_count_lst(t_env *env)
 {
 	int		count;
 
