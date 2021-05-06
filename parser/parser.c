@@ -25,6 +25,16 @@ static void	determine_command_struct(t_command *command, t_env *env)
 		command->raw_string = validate_raw_string(command->raw_string);
 }
 
+size_t		three_dim_size(char ***array)
+{
+	size_t	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}
+
 void		parser(t_command *command, t_env *env)
 {
 	char	*tmp;
@@ -38,6 +48,7 @@ void		parser(t_command *command, t_env *env)
 	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
 	command->pipes = get_pipes(command);
+	command->pipes_quantity = three_dim_size(command->pipes);
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);
 	if (command->flags->is_bin)

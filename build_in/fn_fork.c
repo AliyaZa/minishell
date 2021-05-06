@@ -12,22 +12,6 @@
 
 #include "../minishell.h"
 
-<<<<<<< HEAD
-int			ft_count_lst(t_env *env)
-{
-	int		count;
-
-	count = 0;
-	while (env)
-	{
-		env = env->next;
-		count++;
-	}
-	return (count);
-}
-
-=======
->>>>>>> c8bbfda8e9f3cb26767c7d5286bf9ca240734b77
 static int	ret_er(char **places, int kol, struct stat buf)
 {
 	int		er;
@@ -93,16 +77,11 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 	save0 = dup(0);
 	error = 0;
 	path_to = NULL;
-<<<<<<< HEAD
-	fn_redir_helper(command, parsed_data, &error);
-=======
 	if (command->fd[1] > 1)
 		dup2(command->fd[1], 1);
 	if (command->fd[0] > 0)
 		dup2(command->fd[0], 0);
 	path_to = fn_path(parsed_data, command, &error);
-	printf("%s\n", path_to);
->>>>>>> c8bbfda8e9f3cb26767c7d5286bf9ca240734b77
 	if (error == 0)
 	{
 		execve(path_to, command->splitted, fn_arr(parsed_data->env_data));
@@ -123,10 +102,6 @@ void		fn_fork(t_parsed_data *parsed_data, t_command *command)
 {
 	int		error;
 
-<<<<<<< HEAD
-	error = 0;
-=======
->>>>>>> c8bbfda8e9f3cb26767c7d5286bf9ca240734b77
 	error = fn_redir(parsed_data, command);
 	if (error != 0)
 	{
