@@ -12,14 +12,17 @@
 
 #include "../minishell.h"
 
-// void	replace_word()
-// {
-// 	if (ft_strlen(buf))
-// 	{
-// 		*argument = ft_strjoin(*argument, buf);
-// 		ft_delete_word(&p, index - 1, ft_strlen(buf));
-// 	}
-// }
+void	replace_word(size_t index, char **p, char **argument)
+{
+	char	*buf;
+
+	buf = ft_substr(*p, 0, ft_strlen_c(*p, '>'));
+	if (ft_strlen(buf))
+	{
+		*argument = ft_strjoin(*argument, buf);
+		ft_delete_word(p, index - 1, ft_strlen(buf));
+	}
+}
 
 int		redirect(char **string, char type, size_t i, char **argument)
 {
@@ -27,24 +30,16 @@ int		redirect(char **string, char type, size_t i, char **argument)
 	char	*filename;
 	size_t	index;
 	int		r_type;
-	char	*buf;
 	char	*p;
 
 	p = &(*string)[i];
-	buf = NULL;
 	index = 0;
 	filename = NULL;
 	while (p[index])
 	{
 		index = 0;
 		filename = determine_filename(&p, &index, type, &r_type);
-		buf = ft_substr(p, 0, ft_strlen_c(p, '>'));
-		// replace_word();
-		if (ft_strlen(buf))
-		{
-			*argument = ft_strjoin(*argument, buf);
-			ft_delete_word(&p, index - 1, ft_strlen(buf));
-		}
+		replace_word(index, &p, argument);
 		move_pointer_to(&p, '>');
 		fd = open_file(type, r_type, &filename);
 		if ((!p || ft_strlen(p) == 0) && !is_next_redirect(p, type))
@@ -83,20 +78,19 @@ void	validator(char **string, t_env *env, t_command *command)
 	char	*p;
 	size_t	index;
 	char	quote;
-	char	*tmp;
 
 	index = 0;
-	p = ft_strdup(*string); // leak
+	p = ft_strdup(*string);
 	quote = '\0';
-	tmp = NULL;
 	while (p[index] && ft_strlen(p))
 	{
 		if (p[index] == '"' || p[index] == '\'')
 			p = validate_quote(&quote, p, index--);
 		else if ((p[index] == '$' && (quote == 0 || quote == '"'))
-		&& (p[index + 1] != ' ' || p[index+ 1] != '\0'))
+		&& (p[index + 1] != ' ' || p[index + 1] != '\0'))
 			p = validate_env_sub(quote, p, index--, env);
-		else if ((!ft_strncmp(&p[index], "<", 1) || !ft_strncmp(&p[index], ">", 1)) && !quote)
+		else if ((!ft_strncmp(&p[index], "<", 1)
+			|| !ft_strncmp(&p[index], ">", 1)) && !quote)
 			redirect_logic(&p, index, command, string);
 		else if (p[index] == '\\')
 			p = mirroring(p, quote);
@@ -104,6 +98,5 @@ void	validator(char **string, t_env *env, t_command *command)
 	}
 	if (quote)
 		fn_errors(command, SYNTAX_ERROR);
-	tmp = *string;
 	*string = ft_strdup(p);
 }
