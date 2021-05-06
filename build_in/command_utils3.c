@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_count_lst(t_env *env)
+int		ft_count_lst(t_env *env)
 {
 	int		count;
 

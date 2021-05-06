@@ -46,7 +46,8 @@ char	*validate_env_sub(char quote, char *p, size_t index, t_env *env)
 	char	*free;
 
 	tmp = ft_substr(p, 0, index);
-	tmp1 = ft_substr(p, (ft_strlen_cc(&p[index], ' ', '"')) + index, ft_strlen(p));
+	tmp1 = ft_substr(p, (ft_strlen_cc(&p[index],
+		' ', '"')) + index, ft_strlen(p));
 	i = index;
 	kc = 0;
 	free = NULL;
@@ -69,7 +70,7 @@ char	*validate_env_sub(char quote, char *p, size_t index, t_env *env)
 	return (tmp);
 }
 
-char	*mirroring(char *p,char quote)
+char	*mirroring(char *p, char quote)
 {
 	if (!quote)
 		ft_delete_char(&p, 0);
