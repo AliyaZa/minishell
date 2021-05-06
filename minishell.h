@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mismene <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:20:48 by mismene           #+#    #+#             */
-/*   Updated: 2021/05/06 17:20:49 by mismene          ###   ########.fr       */
+/*   Updated: 2021/05/06 20:21:38 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ char			*fn_path(t_parsed_data *parsed_data,
 int				fn_redir(t_parsed_data *parsed_data, t_command *command);
 void			level(t_parsed_data *parsed_data, t_command *command);
 void			fn_pipe(t_parsed_data *parsed_data, t_command *command);
+char			*create_str_ex(char *str);
 
 #endif
