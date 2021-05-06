@@ -6,11 +6,24 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 20:19:54 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/06 20:37:59 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:45:36 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static int	ft_count_lst(t_env *env)
+{
+	int		count;
+
+	count = 0;
+	while (env)
+	{
+		env = env->next;
+		count++;
+	}
+	return (count);
+}
 
 char	*create_str_ex(char *str)
 {

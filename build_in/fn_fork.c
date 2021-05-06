@@ -6,24 +6,11 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:57:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/05/06 20:39:32 by nhill            ###   ########.fr       */
+/*   Updated: 2021/05/06 20:45:39 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	ft_count_lst(t_env *env)
-{
-	int		count;
-
-	count = 0;
-	while (env)
-	{
-		env = env->next;
-		count++;
-	}
-	return (count);
-}
 
 static int	ret_er(char **places, int kol, struct stat buf)
 {
