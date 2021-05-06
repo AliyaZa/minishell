@@ -38,7 +38,7 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
-void			free_four(char **str1, char **str2, char **str3, char **str4);
+void			free_four(char **str1, char **str2);
 char			***get_pipes(t_command *command);
 void			replace_symbol3(char ****array, char old, char new);
 void			validate_spaces(char **string);
