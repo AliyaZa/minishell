@@ -26,8 +26,7 @@ static int	check_digit(char *str)
 	return (1);
 }
 
-
-void	level(t_parsed_data *parsed_data, t_command *command)
+void		level(t_parsed_data *parsed_data, t_command *command)
 {
 	t_env	*mini;
 	int		level;

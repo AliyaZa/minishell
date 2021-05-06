@@ -31,7 +31,8 @@ static int	ret_er(char **places, int kol, struct stat buf)
 	return (er);
 }
 
-char		*fn_path(t_parsed_data *parsed_data, t_command *command, int *error)
+char		*fn_path(t_parsed_data *parsed_data,
+				t_command *command, int *error)
 {
 	t_env		*path;
 	char		**places;
@@ -69,9 +70,11 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 {
 	char	*path_to;
 	int		error;
+	int		save1;
+	int		save0;
 
-	int save1 = dup(1);
-	int save0 = dup(0);
+	save1 = dup(1);
+	save0 = dup(0);
 	error = 0;
 	path_to = NULL;
 	if (command->fd[1] > 1)
@@ -89,7 +92,7 @@ int			fn_redir(t_parsed_data *parsed_data, t_command *command)
 		return (0);
 	}
 	else
-		return(error);
+		return (error);
 	dup2(save1, 1);
 	dup2(save0, 0);
 	return (COMMAND_NOT_FOUND);
@@ -107,5 +110,5 @@ void		fn_fork(t_parsed_data *parsed_data, t_command *command)
 		else
 			fn_errors(command, NOT_AN_EXECUTABLE_FILE);
 	}
-	exit (0);
+	exit(0);
 }

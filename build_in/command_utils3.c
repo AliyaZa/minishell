@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static int	ft_count_lst(t_env *env)
+int	ft_count_lst(t_env *env)
 {
 	int		count;
 
@@ -45,7 +45,6 @@ char	*create_str_ex(char *str)
 	rez[i] = '\0';
 	return (rez);
 }
-
 
 char	**fn_arr(t_env *env)
 {

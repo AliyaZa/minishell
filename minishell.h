@@ -38,6 +38,9 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+void			fn_redir_helper(t_command *command,
+					t_parsed_data *parsed_data, int *error);
+int				ft_count_lst(t_env *env);
 void			free_four(char **str1, char **str2);
 char			***get_pipes(t_command *command);
 void			replace_symbol3(char ****array, char old, char new);
