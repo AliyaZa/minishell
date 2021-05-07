@@ -88,7 +88,7 @@ char		***get_pipes(t_command *command)
 	validate_pipe(&p);
 	matrix = ft_split(p, '|');
 	replace_symbol_array(&matrix, -1, '|');
-	pipes = (char ***)malloc(sizeof(char **) * array_size(matrix));
+	pipes = (char ***)ft_calloc(array_size(matrix) + 1, sizeof(char **));
 	while (matrix[i])
 	{
 		validate_spaces(&matrix[i]);

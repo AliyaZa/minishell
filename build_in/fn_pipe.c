@@ -60,6 +60,8 @@ int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
 	char	*path;
 	int		error;
 	int		j;
+	int		pid[command->pipes_quantity];
+	int		status;
 
 	i = 0;
 	while (i++ < (int)command->pipes_quantity)
@@ -69,8 +71,9 @@ int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
 	{
 		if ((path = fn_path(parsed_data, command, &error)) != NULL)
 		{
-			fork() == 0 ? ft_success_fork(parsed_data,
-				command, i, fd, path) : 0;
+			pid[i] = fork();
+			if (pid[i] == 0)
+				ft_success_fork(parsed_data, command, i, fd, path);
 			path = NULL;
 		}
 		i++;
@@ -78,6 +81,7 @@ int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
 	j = -1;
 	while (++j < (int)command->pipes_quantity - 1)
 	{
+		waitpid(pid[j], &status, 0);
 		close(fd[i][0]);
 		close(fd[i][1]);
 	}
@@ -92,5 +96,4 @@ void		fn_pipe(t_parsed_data *parsed_data, t_command *command)
 	error = fn_make_pipe(parsed_data, command);
 	if (error != 0)
 		fn_errors(command, error);
-	exit(0);
 }

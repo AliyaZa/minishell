@@ -26,7 +26,7 @@ void	router(t_parsed_data *parsed_data, t_command *command)
 	{
 		if (command->flags->pipe)
 			fn_pipe(parsed_data, command);
-		if (fn_search(command->command, "echo"))
+		else if (fn_search(command->command, "echo"))
 			fn_echo(command);
 		else if (fn_search(command->command, "pwd") && *command->command)
 			pwd(command);

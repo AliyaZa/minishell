@@ -26,7 +26,7 @@ int		main_cycle(char **env)
 		reset_(command, flag);
 		if (!command->queue)
 		{
-			write(1, "minishell> ", 11);
+			ft_putstr_fd("minishell> ", 1);
 			tputs(save_cursor, 1, ft_putchar);
 			fn_termcap(command, parsed_data->history);
 			if (command->raw_string[0] != '\n')
