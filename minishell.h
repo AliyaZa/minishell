@@ -38,6 +38,8 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+char			*determine_command_path(t_command *command,
+					t_parsed_data *parsed_data, size_t j);
 void			fn_redir_helper(t_command *command,
 					t_parsed_data *parsed_data, int *error);
 int				ft_count_lst(t_env *env);
