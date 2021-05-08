@@ -12,8 +12,8 @@
 
 #include "../minishell.h"
 
-static void	ft_success_fork(t_parsed_data *parsed_data, t_command *command,
-	size_t i, int fd[command->pipes_quantity][2], char *path)
+static void	ft_success_fork(t_command *command,
+	size_t i, int fd[command->pipes_quantity][2])
 {
 	if (i == 0)
 	{
@@ -35,7 +35,6 @@ static void	ft_success_fork(t_parsed_data *parsed_data, t_command *command,
 		close(fd[i][0]);
 		close(fd[i][1]);
 	}
-	execve(path, command->pipes[i], fn_arr(parsed_data->env_data));
 }
 
 int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
@@ -59,7 +58,10 @@ int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
 		{
 			pid = fork();
 			if (pid == 0)
-				ft_success_fork(parsed_data, command, i, fd, path);
+			{
+				ft_success_fork(command, i, fd);
+				execve(path, command->pipes[i], fn_arr(parsed_data->env_data));
+			}
 			path = NULL;
 		}
 		j = i;

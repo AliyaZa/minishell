@@ -41,7 +41,6 @@ void	fork_proccess(t_parsed_data *parsed_data, t_command *command)
 
 	child = pid[0];
 	parent = pid[1];
-
 	child = fork();
 	signal(SIGINT, (void *)proc_signal_handler);
 	if (child == 0)
