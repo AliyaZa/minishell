@@ -96,11 +96,6 @@ char		***get_pipes(t_command *command)
 	replace_symbol_array(&matrix, -1, '|');
 	pipes = (char ***)ft_calloc(array_size(matrix) + 1, sizeof(char **));
 	while (matrix[i])
-	{
-		validate_spaces(&matrix[i]);
-		pipes[i] = ft_split(matrix[i], ' ');
-		replace_symbol3(&pipes, -1, ' ');
-		i++;
-	}
+		copy_to_matrix(matrix, pipes, &i);
 	return (pipes);
 }

@@ -13,6 +13,14 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+typedef struct	s_termcap
+{
+	int			l;
+	char		*str;
+	int	current;
+	size_t		cursor_position;
+}				t_termcap;
+
 typedef struct	s_parsed_data
 {
 	char		**history;

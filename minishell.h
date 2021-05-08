@@ -38,6 +38,7 @@
 # define PERM_DEN 13
 # define TOO_HIGH 14
 
+void			copy_to_matrix(char **matrix, char ***pipes, size_t *i);
 char			*determine_command_path(t_command *command,
 					t_parsed_data *parsed_data, size_t j);
 void			fn_redir_helper(t_command *command,

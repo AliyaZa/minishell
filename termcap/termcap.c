@@ -23,35 +23,52 @@ int			read_user_input(char **str)
 	return (l);
 }
 
+t_termcap	*termcap_ini(void)
+{
+	t_termcap	*term;
+
+	term = malloc(sizeof(term));
+	term->current = -1;
+	term->str = ft_calloc(2000, sizeof(char));
+	term->str[0] = 0;
+	term->cursor_position = 1;
+	return (term);
+}
+
+void		termcap_conditions(t_termcap *term, t_command *command)
+{
+	if (termcap_check(term->str))
+		;
+	else if (is_backspace_allowed(term->str, term->cursor_position))
+		backspace(&command->raw_string, &term->cursor_position);
+	else if (term->l > 0 && ft_strncmp(term->str, "\x04", 1))
+		new_symbol(&term->str,
+			command, &term->current, &term->cursor_position);
+}
+
 void		fn_termcap(t_command *command, char **history)
 {
-	int			l;
-	char		*str;
-	static int	current;
-	size_t		cursor_position;
+	t_termcap	*term;
 
-	current = -1;
-	str = ft_calloc(2000, sizeof(char));
-	str[0] = 0;
-	cursor_position = 1;
-	while (str[0] != '\n')
+	term = termcap_ini();
+	while (term->str[0] != '\n')
 	{
-		l = read_user_input(&str);
-		if (is_ctrd_allowed(str, cursor_position))
+		term->l = read_user_input(&term->str);
+		if (is_ctrd_allowed(term->str, term->cursor_position))
 			ctr_d();
-		else if (!ft_strncmp(str, "\x03", 1))
+		else if (!ft_strncmp(term->str, "\x03", 1))
 			ctr_c(command);
-		else if (!ft_strncmp(str, "\e[A", 3) || !ft_strncmp(str, "\e[B", 3))
+		else if (!ft_strncmp(term->str, "\e[A", 3)
+			|| !ft_strncmp(term->str, "\e[B", 3))
 		{
 			free(command->raw_string);
-			command->raw_string = navigate_history(history, str, &current);
-			cursor_position += ft_strlen(command->raw_string);
+			command->raw_string = navigate_history(history,
+				term->str, &term->current);
+			term->cursor_position += ft_strlen(command->raw_string);
 		}
-		else if (termcap_check(str))
-			;
-		else if (is_backspace_allowed(str, cursor_position))
-			backspace(&command->raw_string, &cursor_position);
-		else if (l > 0 && ft_strncmp(str, "\x04", 1))
-			new_symbol(&str, command, &current, &cursor_position);
+		else
+			termcap_conditions(term, command);
 	}
+	free(term->str);
+	free(term);
 }

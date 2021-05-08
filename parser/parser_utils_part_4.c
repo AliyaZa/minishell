@@ -61,3 +61,11 @@ char		**get_splitted(char *raw_string)
 	}
 	return (ft_split(p, ' '));
 }
+
+void		copy_to_matrix(char **matrix, char ***pipes, size_t *i)
+{
+	validate_spaces(&matrix[*i]);
+	pipes[*i] = ft_split(matrix[*i], ' ');
+	replace_symbol3(&pipes, -1, ' ');
+	*i += 1;
+}

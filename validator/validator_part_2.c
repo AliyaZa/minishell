@@ -12,6 +12,13 @@
 
 #include "../minishell.h"
 
+void	validate_command_freeing(char **command, char **p)
+{
+	free(*command);
+	*command = ft_strdup(*p);
+	free(*p);
+}
+
 int		validate_command(char **command)
 {
 	size_t	index;
@@ -36,9 +43,7 @@ int		validate_command(char **command)
 	}
 	if (flag)
 		return (1);
-	free(*command);
-	*command = ft_strdup(p);
-	free(p);
+	validate_command_freeing(command, &p);
 	return (0);
 }
 

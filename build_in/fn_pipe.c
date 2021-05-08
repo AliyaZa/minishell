@@ -35,7 +35,7 @@ static void	ft_success_fork(t_parsed_data *parsed_data, t_command *command,
 		close(fd[i][0]);
 		close(fd[i][1]);
 	}
-	execve(path, command->pipes[i], fn_arr(parsed_data->env_data))
+	execve(path, command->pipes[i], fn_arr(parsed_data->env_data));
 }
 
 int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
