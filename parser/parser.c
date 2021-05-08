@@ -47,10 +47,12 @@ void		parser(t_command *command, t_env *env)
 	semicolon(command);
 	determine_command_struct(command, env);
 	command->splitted = get_splitted(command->raw_string);
-	command->pipes = get_pipes(command);
-	command->pipes_quantity = three_dim_size(command->pipes);
+	if ((command->pipes = get_pipes(command)))
+		command->pipes_quantity = three_dim_size(command->pipes) -1;
 	replace_symbol_array(&command->splitted, -1, ' ');
 	delete_quotes(&command->splitted);
+	// print_array3(command->pipes);
+	// printf("%zu\n", command->pipes_quantity);
 	if (command->flags->is_bin)
 	{
 		tmp = ft_strdup(command->command);

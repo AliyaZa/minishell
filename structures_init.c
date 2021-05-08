@@ -55,6 +55,7 @@ void			reset_(t_command *command, size_t flag)
 		free_str(&command->argument);
 		command->flags->is_bin = 0;
 		command->flags->error = 0;
+		command->flags->pipe = 0;
 		command->fd[0] = 0;
 		command->fd[1] = 1;
 		command->raw_string = ft_strnew(0);

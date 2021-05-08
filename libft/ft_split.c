@@ -94,7 +94,7 @@ char			**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	words = how_many_words(s, c);
-	if (!(matrix = (char**)malloc(sizeof(char*) * (words + 1))))
+	if (!(matrix = (char**)ft_calloc(words + 1, sizeof(char*))))
 		return (NULL);
 	i = 0;
 	while (*s)

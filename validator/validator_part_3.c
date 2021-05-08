@@ -14,26 +14,29 @@
 
 char	*validate_quote(char *quote, char *p, size_t index)
 {
-	char	*tmp;
-	char	*tmp1;
 	char	*validated;
 
-	tmp = NULL;
-	tmp1 = NULL;
 	if (!(*quote) || p[index] == *quote)
 	{
 		if (!(*quote))
 			*quote = p[index];
 		else if (p[index] == *quote)
 			*quote = '\0';
-		tmp = ft_substr(p, 0, index);
-		tmp1 = ft_substr(p, index + 1, ft_strlen(p));
+		ft_delete_char(&p, index);
 	}
-	validated = ft_strjoin(tmp, tmp1);
-	free_str(&tmp);
-	free_str(&tmp1);
+	validated = ft_strdup(p);
 	free(p);
 	return (validated);
+}
+
+void	insert_value(char *value, char **tmp, char *tmp1)
+{
+	if (value)
+	{
+		*tmp = ft_strjoin(*tmp, value);
+		*tmp = ft_strjoin(*tmp, tmp1);
+		free(tmp1);
+	}
 }
 
 char	*validate_env_sub(char quote, char *p, size_t index, t_env *env)
@@ -43,30 +46,19 @@ char	*validate_env_sub(char quote, char *p, size_t index, t_env *env)
 	int		kc;
 	char	*tmp;
 	char	*tmp1;
-	char	*free;
 
 	tmp = ft_substr(p, 0, index);
 	tmp1 = ft_substr(p, (ft_strlen_cc(&p[index],
 		' ', '"')) + index, ft_strlen(p));
 	i = index;
 	kc = 0;
-	free = NULL;
 	while (p[i] != ' ' && p[i] != '"' && p[i] != '\'' && p[i] != quote)
 	{
 		kc++;
 		i++;
 	}
 	value = get_value_by_key(env, ft_substr(p, index + 1, kc - 1));
-	if (value)
-	{
-		free = tmp;
-		tmp = ft_strjoin(tmp, value);
-		free_str(&free);
-	}
-	free = tmp;
-	tmp = ft_strjoin(tmp, tmp1);
-	free_str(&free);
-	free_str(&tmp1);
+	insert_value(value, &tmp, tmp1);
 	return (tmp);
 }
 

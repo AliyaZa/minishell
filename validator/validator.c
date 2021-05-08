@@ -99,4 +99,5 @@ void	validator(char **string, t_env *env, t_command *command)
 	if (quote)
 		fn_errors(command, SYNTAX_ERROR);
 	*string = ft_strdup(p);
+	free(p);
 }

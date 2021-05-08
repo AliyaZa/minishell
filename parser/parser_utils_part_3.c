@@ -86,7 +86,13 @@ char		***get_pipes(t_command *command)
 	if (ft_strchr(command->raw_string, '|'))
 		command->flags->pipe = 1;
 	validate_pipe(&p);
-	matrix = ft_split(p, '|');
+	if (command->flags->pipe)
+		matrix = ft_split(p, '|');
+	else
+	{
+		free(p);
+		return (NULL);
+	}
 	replace_symbol_array(&matrix, -1, '|');
 	pipes = (char ***)ft_calloc(array_size(matrix) + 1, sizeof(char **));
 	while (matrix[i])
