@@ -37,14 +37,25 @@ static void	ft_success_fork(t_command *command,
 	}
 }
 
+int			pipe_end(size_t i, size_t pq, t_command *command,
+				int fd[command->pipes_quantity][2])
+{
+	int 	status;
+
+	close(fd[i - 2][STDIN_FILENO]);
+	close(fd[i - 2][STDOUT_FILENO]);
+	i = -1;
+	while (++i < pq + 1)
+		wait(&status);
+	return (status);
+}
+
 int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
 {
 	size_t	i;
 	int		fd[command->pipes_quantity][2];
 	char	*path;
 	int		error;
-	int		j;
-	int		status;
 	int		pid;
 
 	i = -1;
@@ -64,16 +75,9 @@ int			fn_make_pipe(t_parsed_data *parsed_data, t_command *command)
 			}
 			path = NULL;
 		}
-		j = i;
 		i++;
 	}
-	close(fd[j - 1][STDIN_FILENO]);
-	close(fd[j - 1][STDOUT_FILENO]);
-	j = -1;
-	while (++j < (int)command->pipes_quantity + 1)
-	{
-		wait(&status);
-	}
+	pipe_end(i, command->pipes_quantity, command, fd);
 	return (error);
 }
 
