@@ -4,8 +4,8 @@ The goal of the project was to write its own command shell.
 
 The project was made by students of school 21.
 </br>
-[**Roman Emelin**](https://github.com/RomanEmelin) and
-[**krl4k**](https://github.com/krl4k).
+[**Aliya Zainullina**](https://github.com/AliyaZa) and
+[**Shamil**](https://github.com/ShamilSE).
 
 ### How to start a project
     make && ./minishell
